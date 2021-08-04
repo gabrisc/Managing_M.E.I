@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "896360916945",
+    "project_id": "managingmei",
+    "storage_bucket": "managingmei.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896360916945:android:12684e1099bd5d2c1ee2f0",
+        "android_client_info": {
+          "package_name": "com.example.managing_mei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896360916945-4a42ir27r3b2i3pvs9h7gh16a70l668p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.managing_mei",
+            "certificate_hash": "8c520dd47d75e6df3d7ca25053adc3883904cf70"
+          }
+        },
+        {
+          "client_id": "896360916945-skfitesmdops61lppgo44ogrukleeomu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARivnWY29zf381hH9lP5A7cwmyrrUTpWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896360916945-skfitesmdops61lppgo44ogrukleeomu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/total_investment_calculation_fragment">
+
+    <fragment
+        android:id="@+id/total_investment_calculation_fragment"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.totalInvestmentCalculation.TotalInvestmentCalculationFragment"
+        android:label="@string/title_total_investment_calculation"
+        tools:layout="@layout/fragment_total_investment_calculation" />
+
+    <fragment
+        android:id="@+id/profitability_fragment"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.profitability.ProfitabilityFragment"
+        android:label="@string/profitability"
+        tools:layout="@layout/fragment_profitability" />
+
+    <fragment
+        android:id="@+id/floating_capital_fragment"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.floatingCapital.FloatingCapitalFragment"
+        android:label="@string/title_floating_capital"
+        tools:layout="@layout/fragment_floating_capital" />
+
+    <fragment
+        android:id="@+id/check_list_activity"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.cashFlow.CashFlowFragment"
+        android:label="@string/title_check_list"
+        tools:layout="@layout/fragment_check_list" />
+
+    <fragment
+        android:id="@+id/cash_flow_activity"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.cashFlow.CashFlowFragment"
+        android:label="@string/cash_flow_activity"
+        tools:layout="@layout/fragment_cash_flow" />
+
+</navigation>
