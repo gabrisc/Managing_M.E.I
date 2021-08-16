@@ -1,4 +1,9 @@
 package com.example.managing_mei.model.enuns;
 
-public class TypeOfProduct {
+public enum TypeOfProduct {
+    PRODUTO("Produto"),
+    SERVIÇO("Serviço");
+
+    TypeOfProduct(String type) {
+    }
 }

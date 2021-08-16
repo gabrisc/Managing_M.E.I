@@ -6,4 +6,155 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.product.EditProduct.EditProductActivity">
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCancelProductEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAddProductEdit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonAddProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddProductEdit" />
+
+    <Button
+        android:id="@+id/buttonAddProductEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <Spinner
+        android:id="@+id/spinnerProviderProduct"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextExpenseValueProductEdit"
+        app:layout_constraintStart_toStartOf="@+id/editTextExpenseValueProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseValueProductEdit" />
+
+    <TextView
+        android:id="@+id/textViewTitleQuantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProduct"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/spinnerProviderProduct"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerProviderProduct" />
+
+    <TextView
+        android:id="@+id/textViewCounterProductEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarProduct"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/seekBarProduct"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarProduct" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeOfQuantityProductEdit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarProduct"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintTop_toTopOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextSealValueProductEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNameProductEdit"
+        app:layout_constraintStart_toStartOf="@+id/editTextNameProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNameProductEdit" />
+
+    <EditText
+        android:id="@+id/editTextExpenseValueProductEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSealValueProductEdit"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextSealValueProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSealValueProductEdit" />
+
+    <EditText
+        android:id="@+id/editTextNameProductEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="@+id/TextViewTypeProduct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TextViewTypeProduct"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTypeProduct" />
+
+    <SeekBar
+        android:id="@+id/seekBarProduct"
+        style="@android:style/Widget.Material.SeekBar"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:max="500"
+        android:progress="1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTitleQuantity"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitleQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleQuantity" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="159dp"
+        android:layout_height="23dp"
+        android:gravity="center"
+        android:text="Sem fornecedor"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProduct"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerProviderProduct" />
+
+    <TextView
+        android:id="@+id/TextViewTypeProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

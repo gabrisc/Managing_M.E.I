@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.managing_mei.R;
 import com.example.managing_mei.view.ui.company_health.CompanyHealthActivity;
 import com.example.managing_mei.view.ui.main.ui.ecmei.config.ConfigForAppActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class EcMeiFragment extends Fragment {
     private ImageButton openHealthCompany,logoutButton,configButton;
@@ -41,7 +42,7 @@ public class EcMeiFragment extends Fragment {
         configButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FirebaseAuth.getInstance().signOut();
             }
         });
     }

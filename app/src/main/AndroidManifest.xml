@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Managing_MEI">
-        <activity android:name=".view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity"></activity>
+        <activity android:name=".view.ui.main.ui.ecmei.config.productQuantity.ProductConfigActivity"></activity>
+        <activity android:name=".view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity" />
+        <activity android:name=".view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity" />
         <activity android:name=".view.ui.main.ui.client.addClient.AddClientActivity" />
         <activity android:name=".view.ui.main.ui.client.editClient.EditClientActivity" />
         <activity android:name=".view.ui.main.ui.ecmei.config.ConfigForAppActivity" />

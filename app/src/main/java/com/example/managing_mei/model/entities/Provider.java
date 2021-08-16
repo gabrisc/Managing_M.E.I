@@ -35,6 +35,20 @@ public class Provider {
         this.evaluation = evaluation;
     }
 
+    public Provider(String id, String fantasyName, String CNPJ, String phoneNumber, String email, String address, Float evaluation, Date data) {
+        this.id = id;
+        this.fantasyName = fantasyName;
+        this.CNPJ = CNPJ;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.evaluation = evaluation;
+        this.data = data;
+    }
+
+    public Provider() {
+    }
+
     public String save(){
         firebaseInstance.getReference()
                 .child(getIdUser())

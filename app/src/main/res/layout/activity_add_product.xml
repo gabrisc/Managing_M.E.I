@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextExpenseValueProduct" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textViewTitleQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -148,10 +148,10 @@
         android:layout_marginTop="16dp"
         android:max="500"
         android:progress="1"
-        app:layout_constraintEnd_toEndOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTitleQuantity"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintStart_toStartOf="@+id/textViewTitleQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleQuantity" />
 
     <ImageButton
         android:id="@+id/imageButtonHelpToCalc"

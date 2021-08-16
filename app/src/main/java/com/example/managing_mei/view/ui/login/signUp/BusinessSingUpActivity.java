@@ -12,10 +12,18 @@ import android.widget.Toast;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Business;
+import com.example.managing_mei.model.entities.PaymentType;
+import com.example.managing_mei.model.entities.PaymentsTypes;
+import com.example.managing_mei.model.entities.QuantitiesTypes;
+import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.login.PresentationFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseAuth;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
@@ -98,6 +106,8 @@ public class BusinessSingUpActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     business.setUid(firebaseAuth.getUid());
                     business.save();
+                    createBasicPayments();
+                    createBasicQuantities();
                     startActivity(new Intent(getApplicationContext(), PresentationFragment.class));
                 }else{
                     try {
@@ -110,6 +120,28 @@ public class BusinessSingUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void createBasicPayments() {
+        Set<PaymentType> paymentTypeSet = new HashSet<>();
+        paymentTypeSet.add(new PaymentType("À vista",true));
+        paymentTypeSet.add(new PaymentType("Debito",true));
+        paymentTypeSet.add(new PaymentType("Credito",true));
+        paymentTypeSet.add(new PaymentType("PIX",true));
+        PaymentsTypes paymentsTypes = new PaymentsTypes(paymentTypeSet);
+        paymentsTypes.save();
+    }
+
+    private void createBasicQuantities() {
+        Set<QuantityType> quantityTypes = new HashSet<>();
+        quantityTypes.add(new QuantityType("UND",true));
+        quantityTypes.add(new QuantityType("CXS",true));
+        quantityTypes.add(new QuantityType("m²",true));
+        quantityTypes.add(new QuantityType("Metros",true));
+        quantityTypes.add(new QuantityType("Grama",true));
+        quantityTypes.add(new QuantityType("Kg",true));
+        QuantitiesTypes quantitiesTypes = new QuantitiesTypes(quantityTypes);
+        quantitiesTypes.save();
     }
 
 }

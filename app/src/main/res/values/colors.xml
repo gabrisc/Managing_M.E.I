@@ -15,4 +15,6 @@
     <color name="lightBlue">#0FFFF8</color>
     <color name="MorelightBlue">#84F6F3</color>
     <color name="Buttomcolor">#10F580</color>
+    <color name="PrimaryColor">#25D016</color>
+
 </resources>

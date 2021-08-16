@@ -33,7 +33,7 @@ public class Client {
     public String delete(){
         firebaseInstance.getReference()
                         .child(getIdUser())
-                        .child("Clients")
+                        .child("clients")
                         .child(String.valueOf(this.getId()))
                         .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
