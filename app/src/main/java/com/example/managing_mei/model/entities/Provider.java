@@ -22,8 +22,8 @@ public class Provider {
     private String email;
     private String address;
     private Float evaluation;
-    private Date data;
     protected String mensage;
+
 
     public Provider(String id, String fantasyName, String CNPJ, String phoneNumber, String email, String address, Float evaluation) {
         this.id = id;
@@ -33,17 +33,6 @@ public class Provider {
         this.email = email;
         this.address = address;
         this.evaluation = evaluation;
-    }
-
-    public Provider(String id, String fantasyName, String CNPJ, String phoneNumber, String email, String address, Float evaluation, Date data) {
-        this.id = id;
-        this.fantasyName = fantasyName;
-        this.CNPJ = CNPJ;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.evaluation = evaluation;
-        this.data = data;
     }
 
     public Provider() {
@@ -134,11 +123,4 @@ public class Provider {
         this.evaluation = evaluation;
     }
 
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
 }

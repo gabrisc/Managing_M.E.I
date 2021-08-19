@@ -46,7 +46,6 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
     private ImageButton imageButtonAddNewExpense;
     private Button SaveValuesButton,CancelCalcButton;
     private ChipGroup chipGroupForCalc;
-    private List<ExpenseFromProducts> expenseFromProductsArrayList;
     private Set<Chip> chipsToShow= new HashSet<>();
     private Set<ExpenseFromProducts> mainListOfQuantityTypes = new HashSet<>();
 
@@ -62,17 +61,31 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
         imageButtonAddNewExpense = findViewById(R.id.imageButtonAddNewExpense);
         SaveValuesButton = findViewById(R.id.SaveValuesButton);
         CancelCalcButton = findViewById(R.id.CancelCalcButton);
-        expenseFromProductsArrayList = new ArrayList<>();
         mainListOfQuantityTypes.clear();
 
+
+        SaveValuesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(calcTotalExpenses().isNaN() || calcTotalExpenses().equals(0.0)){
+                   Toast.makeText(getApplicationContext(),"Adicione as suas despesas",Toast. LENGTH_SHORT).show();
+               }else{
+                   Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
+                   Bundle bundle = new Bundle();
+                   bundle.putDouble("expenses",calcTotalExpenses());
+                   bundle.putDouble("SealValue",Double.parseDouble(valueWithGain.getText().toString()));
+                   intent.putExtras(bundle);
+                   startActivity(intent);
+               }
+            }
+        });
+
         setActionForSeekBar();
-        transfierValue();
         cancelCalcValue();
         AddNewExpense();
     }
 
     private void setActionForSeekBar() {
-        gainSeekBar.setProgress(5,true);
         gainSeekBar.setMin(1);
         gainSeekBar.setMax(300);
         gainSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -117,20 +130,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
         valueWithGain.setText(String.format(Locale.UK, "%,.2f", value));
     }
 
-    private void transfierValue(){
-        SaveValuesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =  new Intent(getApplicationContext(), AddProductActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putDouble("expenses",calcTotalExpenses());
-                bundle.putDouble("SealValue",Double.parseDouble(valueWithGain.getText().toString()));
-                intent.putExtras(bundle);
-                AddProductActivity.status=true;
-                startActivity(intent);
-            }
-        });
-    }
+
     private Double calcTotalExpenses(){
         return mainListOfQuantityTypes.stream().mapToDouble(ExpenseFromProducts::getExpenseValue).sum();
     }

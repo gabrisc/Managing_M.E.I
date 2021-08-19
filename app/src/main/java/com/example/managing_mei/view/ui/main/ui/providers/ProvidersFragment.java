@@ -14,11 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.managing_mei.R;
-import com.example.managing_mei.adapters.AdapterClient;
 import com.example.managing_mei.adapters.AdapterProvider;
-import com.example.managing_mei.model.entities.Client;
 import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.providers.addProviders.AddProvidersActivity;
+import com.example.managing_mei.view.ui.main.ui.providers.editProviders.EditProvidersActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -32,7 +31,7 @@ import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 public class ProvidersFragment extends Fragment implements AdapterProvider.OnProviderListener{
 
     private ImageButton imageButtonAddProvider;
-    private List<Provider> clientList= new ArrayList<>();
+    private List<Provider> providerList = new ArrayList<>();
     private RecyclerView recyclerView;
     private AdapterProvider adapterClient;
 
@@ -67,7 +66,7 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
     }
 
     private void loadList(){
-        clientList.clear();
+        providerList.clear();
         firebaseInstance.getReference()
                 .child(getIdUser())
                 .child("providers")
@@ -76,7 +75,7 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds: snapshot.getChildren()){
                             Provider provider = ds.getValue(Provider.class);
-                            clientList.add(provider);
+                            providerList.add(provider);
                         }
                         adapterClient.notifyDataSetChanged();
                     }
@@ -90,13 +89,26 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
     private void reloadRecyclerClient(){
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext().getApplicationContext()));
-        adapterClient = new AdapterProvider(clientList,this.getContext().getApplicationContext(),this);
+        adapterClient = new AdapterProvider(providerList,this.getContext().getApplicationContext(),this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterClient);
     }
 
     @Override
     public void onProviderClick(int position) {
+        Provider provider = providerList.get(position);
+        Intent intent = new Intent(getContext().getApplicationContext(), EditProvidersActivity.class);
+        Bundle bundle = new Bundle();
 
+        bundle.putString("id",provider.getId());
+        bundle.putString("fantasyName",provider.getFantasyName());
+        bundle.putString("Address",provider.getAddress());
+        bundle.putString("CNPJ",provider.getCNPJ());
+        bundle.putString("email",provider.getEmail());
+        bundle.putString("evaluation",provider.getEvaluation().toString());
+        bundle.putString("phone",provider.getPhoneNumber());
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

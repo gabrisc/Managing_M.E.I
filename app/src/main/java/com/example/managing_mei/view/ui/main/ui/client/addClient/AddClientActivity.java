@@ -80,8 +80,8 @@ public class AddClientActivity extends AppCompatActivity {
             saveClient(new Client(firebaseDbReference.push().getKey(),
                                   name.getText().toString(),
                                   email.getText().toString(),
-                                  telefone.getText().toString(),
-                                  Date.from(Instant.now())));
+                                  telefone.getText().toString()
+            ));
         }
     }
 

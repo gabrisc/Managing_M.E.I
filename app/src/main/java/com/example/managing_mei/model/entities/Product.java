@@ -8,8 +8,6 @@ import com.google.android.gms.tasks.Task;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
-
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 
@@ -21,23 +19,19 @@ public class Product {
     private Double expenseValue;
     private String type;
     private Integer quantity;
-    private Date date;
-    private Double contributionValue;
     private String typeQuantity;
-    private Provider provider;
+    private String providerId;
     protected String mensage;
 
-    public Product(String id, String name, Double sealValue, Double expenseValue, String type, Integer quantity, Date date, Double contributionValue, String typeQuantity, Provider provider) {
+    public Product(String id, String name, Double sealValue, Double expenseValue, String type, Integer quantity, String typeQuantity, String provider) {
         this.id = id;
         this.name = name;
         this.sealValue = sealValue;
         this.expenseValue = expenseValue;
         this.type = type;
         this.quantity = quantity;
-        this.date = date;
-        this.contributionValue = contributionValue;
         this.typeQuantity = typeQuantity;
-        this.provider = provider;
+        this.providerId = provider;
     }
 
     public Product() {
@@ -143,21 +137,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Double getContributionValue() {
-        return contributionValue;
-    }
-
-    public void setContributionValue(Double contributionValue) {
-        this.contributionValue = contributionValue;
-    }
 
     public String getTypeQuantity() {
         return typeQuantity;
@@ -167,11 +146,11 @@ public class Product {
         this.typeQuantity = typeQuantity;
     }
 
-    public Provider getProvider() {
-        return provider;
+    public String getProviderId() {
+        return providerId;
     }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
 }

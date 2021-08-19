@@ -1,57 +1,267 @@
 package com.example.managing_mei.view.ui.main.ui.product.EditProduct;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Product;
+import com.example.managing_mei.model.entities.Provider;
+import com.example.managing_mei.model.entities.QuantitiesTypes;
+import com.example.managing_mei.model.entities.QuantityType;
+import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
+import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
+import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 
 public class EditProductActivity extends AppCompatActivity {
 
-    private Product economicOperation;
-    private TextView counter,titleOfQuantity;
-    private EditText name,expense,seal;
-    private Spinner spinnerTypeOfQuantity;
+    private Product productRecuperado = new Product();
+    private Product productEditado = new Product();
+    private TextView contadorDoSeekBar, tituloTipoQuantidade,titleSeek;
+    private EditText nomeProduto, despesasProduto, valorDeVendaProduto;
+    private Spinner spinnerTipoDeQuantidade, spinnerFornecedor;
     private SeekBar seekBar;
+    private Button buttonAtualizar, buttonCancelar,buttonDeletar;
+    private final LinkedList<Provider> listaDeFornecedoresRecuperada = new LinkedList<>();
+    private Integer fornecedorEscolhido;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
 
+        recuperarProduto();
 
-        economicOperation = findEconomicOperationSelected();
-        name = findViewById(R.id.editTextNameProductUpdate);
-        seekBar = findViewById(R.id.seekBarForQuantityUpdate);
-        expense = findViewById(R.id.editTextBuyValueUpdate);
-        seal = findViewById(R.id.editTextSellValueUpdate);
-        counter = findViewById(R.id.textViewQuantidadeUpdate);
-        spinnerTypeOfQuantity = findViewById(R.id.spinnerUnidadeDeMedidaUpdateEO);
-        titleOfQuantity=findViewById(R.id.textViewQuantidadeUpdateTitle);
+        tituloTipoQuantidade = findViewById(R.id.TextViewTypeProduct);
+        nomeProduto = findViewById(R.id.editTextNameProductEdit);
+        valorDeVendaProduto = findViewById(R.id.editTextSealValueProductEdit);
+        despesasProduto = findViewById(R.id.editTextExpenseValueProductEdit);
+        spinnerFornecedor = findViewById(R.id.spinnerProviderProduct);
+        titleSeek = findViewById(R.id.textViewTitleQuantity);
+        seekBar = findViewById(R.id.seekBarProduct);
+        spinnerTipoDeQuantidade = findViewById(R.id.spinnerTypeOfQuantityProductEdit);
+        contadorDoSeekBar = findViewById(R.id.textViewCounterProductEdit);
+        buttonAtualizar = findViewById(R.id.buttonAddProductEdit);
+        buttonCancelar = findViewById(R.id.buttonCancelProductEdit);
+        buttonDeletar = findViewById(R.id.buttonDeleteProduct);
 
+        tituloTipoQuantidade.setText(productRecuperado.getType().toUpperCase());
+        nomeProduto.setText(productRecuperado.getName().toUpperCase());
+        despesasProduto.setText(productRecuperado.getExpenseValue().toString());
+        contadorDoSeekBar.setText(productRecuperado.getQuantity().toString());
+        valorDeVendaProduto.setText(productRecuperado.getSealValue().toString());
 
-        setSpinners();
-        setValues();
+        setSpinnerQuantitiesType();
+        setValuesInSpinnerProviders();
         setButtonActions();
+        setSeekBar();
     }
 
-    private EconomicOperation findEconomicOperationSelected() {
-        EconomicOperation economicOperationSelect = new EconomicOperation();
+    private void recuperarProduto() {
         Bundle bundle = getIntent().getExtras();
-        economicOperationSelect.setId(bundle.getString("id"));
-        economicOperationSelect.setName(bundle.getString("Name"));
-        economicOperationSelect.setType(bundle.getString("type"));
-        economicOperationSelect.setSealValue(bundle.getDouble("SealValue"));
-        economicOperationSelect.setExpenseValue(bundle.getDouble("ExpenseValue"));
-        economicOperationSelect.setContributionValue(bundle.getDouble("ContributionValue"));
-        economicOperationSelect.setQuantity(bundle.getInt("Quantity"));
-        economicOperationSelect.setDate(bundle.getString("Date"));
-        economicOperationSelect.setTypeQuantity("typeQuantity");
-        return economicOperationSelect;
+        productRecuperado.setId(bundle.getString("id"));
+        productRecuperado.setType(bundle.getString("type"));
+        productRecuperado.setExpenseValue(Double.valueOf(bundle.getString("ExpenseValue")));
+        productRecuperado.setName(bundle.getString("Name"));
+        productRecuperado.setQuantity(Integer.valueOf(bundle.getString("Quantity")));
+        productRecuperado.setSealValue(Double.valueOf(bundle.getString("SealValue")));
+        productRecuperado.setTypeQuantity(bundle.getString("typeQuantity"));
+        productRecuperado.setProviderId(bundle.getString("ProviderId"));
     }
+
+    private boolean validarCampos() {
+        if (nomeProduto.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Preencha o nome",Toast. LENGTH_SHORT).show();
+            return false;
+        } else if (valorDeVendaProduto.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
+            return false;
+        } else if (despesasProduto.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
+            return false;
+        } else {
+            productRecuperado.setName(nomeProduto.getText().toString());
+            productRecuperado.setExpenseValue(Double.valueOf(despesasProduto.getText().toString()));
+            productRecuperado.setSealValue(Double.valueOf(valorDeVendaProduto.getText().toString()));
+        }
+        productRecuperado.setTypeQuantity(spinnerTipoDeQuantidade.getSelectedItem().toString());
+        productRecuperado.setType(spinnerTipoDeQuantidade.getSelectedItem().toString());
+        productRecuperado.setProviderId(listaDeFornecedoresRecuperada.get(fornecedorEscolhido).getId());
+        productRecuperado.setQuantity(Integer.parseInt(contadorDoSeekBar.getText().toString()));
+        return true;
+    }
+
+
+
+    private void setValuesInSpinnerProviders() {
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("providers")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        listaDeFornecedoresRecuperada.clear();
+                        for (DataSnapshot ds:snapshot.getChildren()){
+                            Provider provider = ds.getValue(Provider.class);
+                            listaDeFornecedoresRecuperada.add(provider);
+                        }
+                        Provider providerToMove = listaDeFornecedoresRecuperada.stream().filter(provider -> provider.getId().equals(productRecuperado.getProviderId())).findAny().orElse(null);
+                        listaDeFornecedoresRecuperada.remove(providerToMove);
+                        listaDeFornecedoresRecuperada.addFirst(providerToMove);
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, listaDeFornecedoresRecuperada.stream().map(Provider::getFantasyName).collect(Collectors.toList()));
+                        spinnerFornecedor.setAdapter(adapter);
+                        spinnerFornecedor.setSelection(listaDeFornecedoresRecuperada.indexOf(providerToMove));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        String x =String.valueOf(error);
+                    }
+                });
+
+        spinnerFornecedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listaDeFornecedoresRecuperada.stream().forEach(p -> {
+                    if (p.getFantasyName().equals(spinnerFornecedor.getSelectedItem().toString())){
+                        fornecedorEscolhido = listaDeFornecedoresRecuperada.indexOf(p);
+                    }
+                });
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}});
+    }
+
+    private void setSeekBar() {
+        seekBar.setMax(1000);
+        seekBar.setMin(1);
+        seekBar.setProgress(productRecuperado.getQuantity());
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                contadorDoSeekBar.setText(""+i);
+                contadorDoSeekBar.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        productRecuperado.setQuantity(Integer.parseInt(editable.toString()));}
+                });
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar){
+
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }});
+    }
+
+    private void setSpinnerQuantitiesType() {
+        List<QuantityType> quantitiesTypes = new ArrayList<>();
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(getIdUser()+"/QuantitiesTypes");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuantitiesTypes post = dataSnapshot.getValue(QuantitiesTypes.class);
+                System.out.println(post);
+                quantitiesTypes.addAll(post.getQuantityTypeArrayList());
+
+                List<String> listOfQuantitiesNames = new ArrayList<>();
+                quantitiesTypes.stream().forEach(quantityType ->{
+                    listOfQuantitiesNames.add(quantityType.getNome().toUpperCase());
+                });
+                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_spinner,listOfQuantitiesNames);
+                spinnerTipoDeQuantidade.setAdapter(arrayAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
+        spinnerTipoDeQuantidade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void setButtonActions() {
+        buttonAtualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validarCampos()){
+                    productRecuperado.save();
+                    startActivity(new Intent(getApplicationContext(),ManagementActivity.class));
+                }
+            }
+        });
+
+        buttonCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
+            }
+        });
+
+        buttonDeletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteProduct();
+            }
+        });
+    }
+
+    private void deleteProduct(){
+        productRecuperado.delete();
+        Toast toast=Toast. makeText(getApplicationContext(),"Deletado",Toast. LENGTH_SHORT);
+        toast.show();
+        this.finish();
+    }
+
 }

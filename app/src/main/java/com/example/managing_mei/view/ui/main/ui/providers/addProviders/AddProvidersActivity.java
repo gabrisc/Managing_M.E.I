@@ -91,7 +91,7 @@ public class AddProvidersActivity extends AppCompatActivity {
     }
 
     private void saveProvider(Provider provider) {
-        provider.setData(Date.from(Instant.now()));
+
         Toast toast=Toast. makeText(getApplicationContext(),provider.save(),Toast. LENGTH_SHORT);
         toast. show();
     }

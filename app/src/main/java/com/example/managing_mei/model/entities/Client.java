@@ -17,15 +17,13 @@ public class Client {
     private String nome;
     private String email;
     private String telefone;
-    private Date date;
     protected String mensagem;
 
-    public Client(String id, String nome, String email, String telefone, Date date) {
+    public Client(String id, String nome, String email, String telefone) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-        this.date = date;
     }
 
     public Client(){}
@@ -103,11 +101,4 @@ public class Client {
         this.telefone = telefone;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

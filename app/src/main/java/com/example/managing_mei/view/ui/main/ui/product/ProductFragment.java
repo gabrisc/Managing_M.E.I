@@ -20,6 +20,7 @@ import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.product.EditProduct.EditProductActivity;
 import com.example.managing_mei.view.ui.main.ui.product.addProduct.AddProductActivity;
+import com.example.managing_mei.view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity;
 import com.example.managing_mei.view.ui.main.ui.providers.addProviders.AddProvidersActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,12 +62,11 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
         imageButtonAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), AddProductActivity.class));
+                startActivity(new Intent(getContext(), HelpToCalcSealValueActivity.class));
             }
         });
 
     }
-
 
     private void loadList(){
         clientList.clear();
@@ -90,7 +90,6 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
     }
 
     private void reloadRecyclerClient(){
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext().getApplicationContext()));
         adapterClient = new AdapterProduct(clientList,this.getContext().getApplicationContext(),this);
         recyclerView.setHasFixedSize(true);
@@ -100,19 +99,19 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
     @Override
     public void onProductListenerClick(int position) {
         Product operation = clientList.get(position);
-        positionEconomicOperationSelect =position;
+        positionEconomicOperationSelect = position;
 
         Intent intent= new Intent(getContext().getApplicationContext(), EditProductActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("id",operation.getId());
         bundle.putString("type",operation.getType());
-        bundle.putDouble("ContributionValue",operation.getContributionValue());
-        bundle.putDouble("ExpenseValue",operation.getExpenseValue());
-        bundle.putString("Date",operation.getDate().toString());
+        bundle.putString("ExpenseValue",operation.getExpenseValue().toString());
         bundle.putString("Name",operation.getName());
-        bundle.putInt("Quantity",operation.getQuantity());
-        bundle.putDouble("SealValue",operation.getSealValue());
+        bundle.putString("Quantity",operation.getQuantity().toString());
+        bundle.putString("SealValue",operation.getSealValue().toString());
         bundle.putString("typeQuantity",operation.getTypeQuantity());
+        bundle.putString("ProviderId",operation.getProviderId());
+
         intent.putExtras(bundle);
         startActivity(intent);
     }

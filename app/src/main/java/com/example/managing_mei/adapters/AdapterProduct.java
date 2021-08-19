@@ -40,16 +40,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull AdapterProduct.MyViewHolder holder, int position) {
         Product economicOperation = saleList.get(position);
-        if (economicOperation.getType().equals(TypeOfProduct.PRODUTO.toString())){
-            holder.name.setText(economicOperation.getName());
-            holder.quantity.setText(String.format("%d %s", economicOperation.getQuantity(), economicOperation.getTypeQuantity()));
-            holder.sealValue.setText("R$: "+String.valueOf(economicOperation.getSealValue()));holder.name.setText(economicOperation.getName().toUpperCase());
-        }
-
         if (economicOperation.getType().equals(TypeOfProduct.SERVIÇO.toString())){
             holder.name.setText(economicOperation.getName().toUpperCase());
-            holder.sealValue.setText("Venda: "+String.valueOf(economicOperation.getSealValue())+"R$");holder.name.setText(economicOperation.getName().toUpperCase());
+            holder.sealValue.setText("Venda: "+String.valueOf(economicOperation.getSealValue())+"R$");
             holder.quantity.setText("Custo: " +String.valueOf(economicOperation.getExpenseValue())+" R$");
+        } else {
+            holder.name.setText(economicOperation.getName());
+            holder.quantity.setText(String.format("%d %s", economicOperation.getQuantity(), economicOperation.getTypeQuantity()));
+            holder.sealValue.setText("R$: "+String.valueOf(economicOperation.getSealValue()));
         }
     }
 
@@ -62,8 +60,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         TextView name;
         TextView sealValue;
         TextView quantity;
-
         OnProductListerner onProductListerner;
+
         public MyViewHolder(@NonNull View itemView, AdapterProduct.OnProductListerner onSaleListerner) {
             super(itemView);
 
@@ -77,7 +75,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
 
         @Override
         public void onClick(View v) {
-
+            this.onProductListerner.onProductListenerClick(getAdapterPosition());
         }
     }
     public interface OnProductListerner {

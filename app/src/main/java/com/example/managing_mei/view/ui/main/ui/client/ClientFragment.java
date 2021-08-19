@@ -17,7 +17,10 @@ import android.widget.TextView;
 import com.example.managing_mei.R;
 import com.example.managing_mei.adapters.AdapterClient;
 import com.example.managing_mei.model.entities.Client;
+import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.view.ui.main.ui.client.addClient.AddClientActivity;
+import com.example.managing_mei.view.ui.main.ui.client.editClient.EditClientActivity;
+import com.example.managing_mei.view.ui.main.ui.product.EditProduct.EditProductActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -87,7 +90,6 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
     }
 
     private void reloadRecyclerClient(){
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext().getApplicationContext()));
         adapterClient = new AdapterClient(clientList,this.getContext().getApplicationContext(),this);
         recyclerView.setHasFixedSize(true);
@@ -96,6 +98,17 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
 
     @Override
     public void onClientOperationClick(int position) {
+        Client operationSelect = clientList.get(position);
 
+        Intent intent= new Intent(getContext().getApplicationContext(), EditClientActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("id",operationSelect.getId());
+        bundle.putString("email",operationSelect.getEmail());
+        bundle.putString("nome",operationSelect.getNome());
+        bundle.putString("Telefone",operationSelect.getTelefone());
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

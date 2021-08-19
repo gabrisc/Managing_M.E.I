@@ -112,7 +112,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonHelpToCalc"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNameProduct"
         app:layout_constraintStart_toStartOf="@+id/editTextNameProduct"
         app:layout_constraintTop_toBottomOf="@+id/editTextNameProduct" />
 
@@ -123,7 +123,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="@+id/imageButtonHelpToCalc"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSealValueProduct"
         app:layout_constraintStart_toStartOf="@+id/editTextSealValueProduct"
         app:layout_constraintTop_toBottomOf="@+id/editTextSealValueProduct" />
 
@@ -152,16 +152,6 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/textViewTitleQuantity"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitleQuantity" />
-
-    <ImageButton
-        android:id="@+id/imageButtonHelpToCalc"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextSealValueProduct"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNameProduct"
-        app:layout_constraintTop_toTopOf="@+id/editTextSealValueProduct"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_calculate_24" />
 
     <Switch
         android:id="@+id/switch1"
