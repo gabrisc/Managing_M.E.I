@@ -43,7 +43,6 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.managing_mei.R;
+import com.example.managing_mei.model.entities.CashFlowItem;
 import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.model.entities.QuantitiesTypes;
@@ -97,6 +98,8 @@ public class AddProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (validarCampos()){
                     nomeDoProduto.setText("0");
+                    CashFlowItem cashFlowItem = new CashFlowItem(0,produtoDefinitivo.getQuantity()*produtoDefinitivo.getExpenseValue(),"Compra de produtos");
+                    cashFlowItem.save();
                     produtoDefinitivo.save();
                     startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
                 }

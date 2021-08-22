@@ -17,4 +17,7 @@
     <color name="Buttomcolor">#10F580</color>
     <color name="PrimaryColor">#25D016</color>
 
+    <color name="vermelho">#A70000</color>
+    <color name="verdeClaro">#0EAB00</color>
+
 </resources>

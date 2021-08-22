@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.adapters.AdapterProductForSaleVo;
+import com.example.managing_mei.model.entities.CashFlowItem;
 import com.example.managing_mei.model.entities.ProductForSaleVo;
 import com.example.managing_mei.model.entities.Sale;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
@@ -137,7 +138,7 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
     private void closeSeal(Sale sale){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("Deseja concluir a venda?\n Total: R$ "+ sale.getTotalValueFromProducts());
+        alertDialog.setMessage("Deseja concluir a venda?\n Total: R$ "+ sale.getTotalValueFromProductsAndDiscount());
         alertDialog.setPositiveButton("sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -167,6 +168,8 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
     private void saveSale(Sale sale) {
         addListToSale();
+        CashFlowItem cashFlowItem = new CashFlowItem(1,sale.getTotalValueFromProductsAndDiscount(),"Compra de produtos");
+        cashFlowItem.save();
         sale.save();
         Toast.makeText(CalcSellValueActivity.this, "Adicionado", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), SealsFragment.class));
@@ -233,8 +236,8 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
     private void applyDiscount(Sale sale){
         View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_discount,null);
 
-        ImageButton butttonCancel = mDialogView.findViewById(R.id.buttonDeleteDiscountClosingSale);
-        ImageButton buttonAddDiscount = mDialogView.findViewById(R.id.buttonAddDiscountClosingSale);
+        Button butttonCancel = mDialogView.findViewById(R.id.buttonDeleteDiscountClosingSale);
+        Button buttonAddDiscount = mDialogView.findViewById(R.id.buttonAddDiscountClosingSale);
         EditText editText = mDialogView.findViewById(R.id.editTextDiscountClosingSale);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("DESCONTO");
@@ -253,6 +256,7 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
                     Toast.makeText(CalcSellValueActivity.this, "O desconto esta iqual ao total", Toast.LENGTH_SHORT).show();
 
                 }else{
+                    sale.setTotalDiscountFromSeal(Double.parseDouble(editText.getText().toString()));
                     closeSeal(sale);
                 }
 

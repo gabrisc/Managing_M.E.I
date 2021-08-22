@@ -4,26 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.managing_mei.databinding.FragmentHomeBinding;
-import com.example.managing_mei.databinding.FragmentTotalInvestmentCalculationBinding;
+import com.example.managing_mei.R;
+
 
 public class TotalInvestmentCalculationFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentTotalInvestmentCalculationBinding binding;
+
+    public TotalInvestmentCalculationFragment() {
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
-    binding = FragmentTotalInvestmentCalculationBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        View root = inflater.inflate(R.layout.fragment_total_investment_calculation, container, false);
 
         return root;
     }
@@ -31,6 +25,5 @@ public class TotalInvestmentCalculationFragment extends Fragment {
 @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }
