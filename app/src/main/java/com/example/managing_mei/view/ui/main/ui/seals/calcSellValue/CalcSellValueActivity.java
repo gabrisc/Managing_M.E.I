@@ -27,6 +27,7 @@ import com.example.managing_mei.model.entities.ProductForSaleVo;
 import com.example.managing_mei.model.entities.Sale;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.example.managing_mei.view.ui.main.ui.seals.SealsFragment;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -238,16 +239,16 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
         Button butttonCancel = mDialogView.findViewById(R.id.buttonDeleteDiscountClosingSale);
         Button buttonAddDiscount = mDialogView.findViewById(R.id.buttonAddDiscountClosingSale);
-        EditText editText = mDialogView.findViewById(R.id.editTextDiscountClosingSale);
+        TextInputLayout editText = mDialogView.findViewById(R.id.editTextDiscountClosingSale);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("DESCONTO");
         alertDialog=builder.create();
-        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        editText.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
 
         buttonAddDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sale.setTotalDiscountFromSeal(Double.valueOf(editText.getText().toString()));
+                sale.setTotalDiscountFromSeal(Double.valueOf(editText.getEditText().getText().toString()));
 
                 if (sale.getTotalDiscountFromSeal().equals(0)){
                     Toast.makeText(CalcSellValueActivity.this, "Adicione um valor", Toast.LENGTH_SHORT).show();
@@ -256,7 +257,7 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
                     Toast.makeText(CalcSellValueActivity.this, "O desconto esta iqual ao total", Toast.LENGTH_SHORT).show();
 
                 }else{
-                    sale.setTotalDiscountFromSeal(Double.parseDouble(editText.getText().toString()));
+                    sale.setTotalDiscountFromSeal(Double.parseDouble(editText.getEditText().getText().toString()));
                     closeSeal(sale);
                 }
 

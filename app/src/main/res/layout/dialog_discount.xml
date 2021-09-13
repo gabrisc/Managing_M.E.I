@@ -3,55 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="@font/advent_pro_light"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@color/IntermediateDMBlue"
+        android:textColor="@color/Azul_mais_claro"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <EditText
         android:id="@+id/editTextDiscountClosingSale"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="408dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
         android:background="#00BA4E4E"
         android:ems="10"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/advent_pro_light"
         android:gravity="center"
         android:inputType="textPersonName"
         android:text="Name"
-        android:textColor="@color/IntermediateDMBlue"
+        android:textColor="@color/Azul_mais_claro"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddDiscountClosingSale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="PROXIMO"
+        app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDiscountClosingSale" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDeleteDiscountClosingSale"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="CANCELAR"
+        android:textColor="#FF0000"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDiscountClosingSale" />
 
-    <Button
-        android:id="@+id/buttonDeleteDiscountClosingSale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Button"
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDiscountClosingSale" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

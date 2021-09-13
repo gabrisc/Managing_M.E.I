@@ -59,13 +59,10 @@ public class CashFlowItem {
     }
 
     public void delete(){
-        this.setId(firebaseDbReference.push().getKey());
+        //this.setId(firebaseDbReference.push().getKey());
         firebaseInstance.getReference()
                         .child(getIdUser())
                         .child("CashFlowItens")
-                        .child(String.valueOf(this.getYear()))
-                        .child(String.valueOf(this.getMonth()))
-                        .child(String.valueOf(this.getDayOfMonth()))
                         .child(this.getId())
                         .removeValue()
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

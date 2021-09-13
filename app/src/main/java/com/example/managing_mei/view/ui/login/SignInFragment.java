@@ -17,11 +17,12 @@ import com.example.managing_mei.utils.FireBaseConfig;
 import com.example.managing_mei.view.ui.login.signUp.SingUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 
 public class SignInFragment extends Fragment {
 
-    private EditText textEmail,textPassword;
+    private TextInputLayout textEmail,textPassword;
     private Button buttonRegister,buttonCancel, buttonIrParaCadastrar;
 
     public static SignInFragment newInstance() {
@@ -39,7 +40,6 @@ public class SignInFragment extends Fragment {
         textEmail=view.findViewById(R.id.editTextEmailLogin);
         textPassword=view.findViewById(R.id.editTextSenhaLogin);
         buttonRegister = view.findViewById(R.id.buttonLogin);
-        buttonCancel = view.findViewById(R.id.buttonCancelarLogin);
         buttonIrParaCadastrar = view.findViewById(R.id.buttonIrParaCadastrar);
 
         buttonIrParaCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -53,14 +53,14 @@ public class SignInFragment extends Fragment {
     }
 
     public void login(View view){
-        if (textEmail.getText() == null){
+        if (textEmail.getEditText().getText() == null){
             Toast toast=Toast. makeText(getContext(),"O E-mail está vazio",Toast. LENGTH_LONG);
             toast. show();
-        }else if (textPassword.getText() == null) {
+        }else if (textPassword.getEditText().getText() == null) {
             Toast toast=Toast. makeText(getContext(),"A senha está vazia", Toast. LENGTH_LONG);
             toast. show();
         }else {
-            SingUpUser(textEmail.getText().toString(),textPassword.getText().toString());
+            SingUpUser(textEmail.getEditText().getText().toString(),textPassword.getEditText().getText().toString());
         }
     }
 

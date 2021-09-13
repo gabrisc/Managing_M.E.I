@@ -19,6 +19,7 @@ import com.example.managing_mei.model.entities.PaymentsTypes;
 import com.example.managing_mei.model.entities.Provider;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +46,7 @@ public class PaymentsConfigActivity extends AppCompatActivity {
     private Set<Chip> chipsToSave = new HashSet<Chip>();
     private TextView groupTitle;
     private ImageButton imageButtonAddPaymentType;
-    private EditText editTextAddNewPaymentType;
+    private TextInputLayout editTextAddNewPaymentType;
     private Button buttonSaveNewPaymentsTypes,buttonCancelPaymentsTypes;
 
     @Override
@@ -82,7 +83,7 @@ public class PaymentsConfigActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 PaymentType newPaymentType = new PaymentType();
-                newPaymentType.setNome(editTextAddNewPaymentType.getText().toString());
+                newPaymentType.setNome(editTextAddNewPaymentType.getEditText().getText().toString());
                 newPaymentType.setStatus(false);
                 paymentTypeList.add(newPaymentType);
                 reloadChipGroup();
@@ -99,7 +100,7 @@ public class PaymentsConfigActivity extends AppCompatActivity {
                 chipsToSave.add(chip);
             }
         });
-        editTextAddNewPaymentType.setText("");
+        editTextAddNewPaymentType.getEditText().setText("");
         chipGroup.removeAllViews();
         chipsToSave.stream().forEach(chip -> chipGroup.addView(chip));
     }

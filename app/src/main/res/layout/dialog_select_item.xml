@@ -3,35 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/imageButtonCancelAddQuantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarQuantityForAddInSale" />
-
-    <Button
-        android:id="@+id/imageButtonConclusionAddQuantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarQuantityForAddInSale" />
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/TextViewTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_medium"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,14 +21,16 @@
         android:id="@+id/textViewCounterAddQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/advent_pro_light"
         android:gravity="center"
         android:text="1"
-        android:textSize="16sp"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/divider9" />
 
     <SeekBar
         android:id="@+id/seekBarQuantityForAddInSale"
@@ -60,4 +43,45 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textViewCounterAddQuantity"
         app:layout_constraintTop_toBottomOf="@+id/textViewCounterAddQuantity" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/imageButtonConclusionAddQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Salvar"
+        app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarQuantityForAddInSale" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/imageButtonCancelAddQuantity"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Cancelar"
+        android:textColor="@color/vermelho"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarQuantityForAddInSale" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

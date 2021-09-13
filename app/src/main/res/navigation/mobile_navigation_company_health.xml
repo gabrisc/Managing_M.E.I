@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/check_list_activity"
-        android:name="com.example.managing_mei.view.ui.company_health.ui.cashFlow.CashFlowFragment"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.checkList.CheckListFragment"
         android:label="@string/title_check_list"
         tools:layout="@layout/fragment_check_list" />
 

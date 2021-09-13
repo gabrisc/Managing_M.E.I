@@ -25,6 +25,7 @@ import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.example.managing_mei.view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +46,7 @@ public class AddProductActivity extends AppCompatActivity {
     private Spinner spinnerTipoDoProduto,spinnerUnidadeDeMedida, spinnerFornecedores;
     private TextView contatorDaSeekBar, tituloDaQuantidade;
     private SeekBar seekBar;
-    private EditText valorDeVenda,despensas,nomeDoProduto;
+    private TextInputLayout valorDeVenda,despensas,nomeDoProduto;
     private Button botaoAdicionarProduto,botaoCancelarCadastroDeProduto;
     private Product produtoDefinitivo = new Product();
 
@@ -74,8 +75,8 @@ public class AddProductActivity extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        valorDeVenda.setText(""+bundle.getDouble("SealValue"));
-        despensas.setText(""+bundle.getDouble("expenses"));
+        valorDeVenda.getEditText().setText(""+bundle.getDouble("SealValue"));
+        despensas.getEditText().setText(""+bundle.getDouble("expenses"));
 
         listenerForSeekBar(1000,1);
         setValuesInSpinnerProductType();
@@ -97,7 +98,7 @@ public class AddProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validarCampos()){
-                    nomeDoProduto.setText("0");
+                    nomeDoProduto.getEditText().setText("0");
                     CashFlowItem cashFlowItem = new CashFlowItem(0,produtoDefinitivo.getQuantity()*produtoDefinitivo.getExpenseValue(),"Compra de produtos");
                     cashFlowItem.save();
                     produtoDefinitivo.save();
@@ -110,19 +111,19 @@ public class AddProductActivity extends AppCompatActivity {
     private boolean validarCampos() {
         produtoDefinitivo.setId(firebaseDbReference.push().getKey());
 
-        if (nomeDoProduto.getText().toString().isEmpty()){
+        if (nomeDoProduto.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o nome",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (valorDeVenda.getText().toString().isEmpty()){
+        } else if (valorDeVenda.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (despensas.getText().toString().isEmpty()){
+        } else if (despensas.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
             return false;
         } else {
-            produtoDefinitivo.setName(nomeDoProduto.getText().toString());
-            produtoDefinitivo.setExpenseValue(Double.valueOf(despensas.getText().toString()));
-            produtoDefinitivo.setSealValue(Double.valueOf(valorDeVenda.getText().toString()));
+            produtoDefinitivo.setName(nomeDoProduto.getEditText().getText().toString());
+            produtoDefinitivo.setExpenseValue(Double.valueOf(despensas.getEditText().getText().toString()));
+            produtoDefinitivo.setSealValue(Double.valueOf(valorDeVenda.getEditText().getText().toString()));
         }
 
         produtoDefinitivo.setTypeQuantity(spinnerUnidadeDeMedida.getSelectedItem().toString());

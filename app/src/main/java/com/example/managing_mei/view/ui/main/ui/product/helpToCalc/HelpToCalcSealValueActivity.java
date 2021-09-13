@@ -23,6 +23,7 @@ import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.main.ui.product.addProduct.AddProductActivity;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,7 +43,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
 
     private TextView valueWithGain,countOfGainPercent;
     private SeekBar gainSeekBar;
-    private EditText editTextExpense;
+    private TextInputLayout editTextExpense;
     private ImageButton imageButtonAddNewExpense;
     private Button SaveValuesButton,CancelCalcButton;
     private ChipGroup chipGroupForCalc;
@@ -53,6 +54,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_to_calc_seal_value);
+
         chipGroupForCalc = findViewById(R.id.chipGroupForCal);
         valueWithGain = findViewById(R.id.textViewValueWithGain);
         countOfGainPercent = findViewById(R.id.textViewCountValue);
@@ -112,13 +114,13 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ExpenseFromProducts expenseFromProducts = new ExpenseFromProducts();
-                if (editTextExpense.getText().toString().equals("") || editTextExpense.getText().toString().equals(null)){
+                if (editTextExpense.getEditText().getText().toString().equals("") || editTextExpense.getEditText().getText().toString().equals(null)){
                     expenseFromProducts.setExpenseValue(0.0);
                 }else{
-                    expenseFromProducts.setExpenseValue(Double.valueOf(editTextExpense.getText().toString()));
+                    expenseFromProducts.setExpenseValue(Double.valueOf(editTextExpense.getEditText().getText().toString()));
                 }
                 expenseFromProducts.setExpenseId(firebaseDbReference.push().getKey());
-                editTextExpense.setText("");
+                editTextExpense.getEditText().setText("");
                 mainListOfQuantityTypes.add(expenseFromProducts);
                 reloadChipGroup();
             }
@@ -151,7 +153,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
                 chipsToShow.add(chip);
             }
         });
-        editTextExpense.setText("");
+        editTextExpense.getEditText().setText("");
         chipGroupForCalc.removeAllViews();
         chipsToShow.stream().forEach(chip -> chipGroupForCalc.addView(chip));
         calcValue();

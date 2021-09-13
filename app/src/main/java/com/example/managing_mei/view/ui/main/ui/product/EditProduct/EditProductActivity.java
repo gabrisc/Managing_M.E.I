@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,25 +16,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 
@@ -44,7 +40,7 @@ public class EditProductActivity extends AppCompatActivity {
     private Product productRecuperado = new Product();
     private Product productEditado = new Product();
     private TextView contadorDoSeekBar, tituloTipoQuantidade,titleSeek;
-    private EditText nomeProduto, despesasProduto, valorDeVendaProduto;
+    private TextInputLayout nomeProduto, despesasProduto, valorDeVendaProduto;
     private Spinner spinnerTipoDeQuantidade, spinnerFornecedor;
     private SeekBar seekBar;
     private Button buttonAtualizar, buttonCancelar,buttonDeletar;
@@ -73,10 +69,10 @@ public class EditProductActivity extends AppCompatActivity {
         buttonDeletar = findViewById(R.id.buttonDeleteProduct);
 
         tituloTipoQuantidade.setText(productRecuperado.getType().toUpperCase());
-        nomeProduto.setText(productRecuperado.getName().toUpperCase());
-        despesasProduto.setText(productRecuperado.getExpenseValue().toString());
+        nomeProduto.getEditText().setText(productRecuperado.getName().toUpperCase());
+        despesasProduto.getEditText().setText(productRecuperado.getExpenseValue().toString());
         contadorDoSeekBar.setText(productRecuperado.getQuantity().toString());
-        valorDeVendaProduto.setText(productRecuperado.getSealValue().toString());
+        valorDeVendaProduto.getEditText().setText(productRecuperado.getSealValue().toString());
 
         setSpinnerQuantitiesType();
         setValuesInSpinnerProviders();
@@ -97,19 +93,19 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private boolean validarCampos() {
-        if (nomeProduto.getText().toString().isEmpty()){
+        if (nomeProduto.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o nome",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (valorDeVendaProduto.getText().toString().isEmpty()){
+        } else if (valorDeVendaProduto.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (despesasProduto.getText().toString().isEmpty()){
+        } else if (despesasProduto.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
             return false;
         } else {
-            productRecuperado.setName(nomeProduto.getText().toString());
-            productRecuperado.setExpenseValue(Double.valueOf(despesasProduto.getText().toString()));
-            productRecuperado.setSealValue(Double.valueOf(valorDeVendaProduto.getText().toString()));
+            productRecuperado.setName(nomeProduto.getEditText().getText().toString());
+            productRecuperado.setExpenseValue(Double.valueOf(despesasProduto.getEditText().getText().toString()));
+            productRecuperado.setSealValue(Double.valueOf(valorDeVendaProduto.getEditText().getText().toString()));
         }
         productRecuperado.setTypeQuantity(spinnerTipoDeQuantidade.getSelectedItem().toString());
         productRecuperado.setType(spinnerTipoDeQuantidade.getSelectedItem().toString());

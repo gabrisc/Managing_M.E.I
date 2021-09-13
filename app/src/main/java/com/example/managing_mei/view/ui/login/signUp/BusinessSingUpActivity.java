@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Business;
+import com.example.managing_mei.model.entities.CheckListItem;
 import com.example.managing_mei.model.entities.PaymentType;
 import com.example.managing_mei.model.entities.PaymentsTypes;
 import com.example.managing_mei.model.entities.QuantitiesTypes;
@@ -19,6 +20,7 @@ import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.login.PresentationFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 
 import java.util.Arrays;
@@ -30,7 +32,7 @@ import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 
 public class BusinessSingUpActivity extends AppCompatActivity {
 
-    private EditText textFantasyName,textAdress,textCNPJ,phoneNumber,businessBranch;
+    private TextInputLayout textFantasyName,textAdress,textCNPJ,phoneNumber,businessBranch;
     private String personName, email, password;
     private Button buttonRegister,buttonCancel;
 
@@ -63,22 +65,22 @@ public class BusinessSingUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (businessBranch.getText() == null){
+                if (businessBranch.getEditText().getText() == null){
                     Toast toast=Toast. makeText(getApplicationContext(),"O ramo nao pode estar vazio",Toast. LENGTH_LONG);
                     toast. show();
                 }
 
-                if (phoneNumber.getText() == null){
+                if (phoneNumber.getEditText().getText() == null){
                     Toast toast=Toast. makeText(getApplicationContext(),"O telefone está vazio",Toast. LENGTH_LONG);
                     toast. show();
                 }
 
-                if (textFantasyName.getText() == null){
+                if (textFantasyName.getEditText().getText() == null){
                     Toast toast=Toast. makeText(getApplicationContext(),"O nome fantasia está vazio",Toast. LENGTH_LONG);
                     toast. show();
                 }
 
-                if (textCNPJ.getText() == null){
+                if (textCNPJ.getEditText().getText() == null){
                     Toast toast=Toast. makeText(getApplicationContext(),"O CNPJ ou CPF nao pode ficar vazio",Toast. LENGTH_LONG);
                     toast. show();
                 } else {
@@ -86,11 +88,11 @@ public class BusinessSingUpActivity extends AppCompatActivity {
                             firebaseDbReference.push().getKey(),
                             email,
                             password,
-                            textFantasyName.getText().toString().toUpperCase(),
-                            textCNPJ.getText().toString(),
-                            textAdress.getText().toString(),
-                            phoneNumber.getText().toString(),
-                            businessBranch.getText().toString(),
+                            textFantasyName.getEditText().getText().toString().toUpperCase(),
+                            textCNPJ.getEditText().getText().toString(),
+                            textAdress.getEditText().getText().toString(),
+                            phoneNumber.getEditText().getText().toString(),
+                            businessBranch.getEditText().getText().toString(),
                             personName);
 
                     SingUpUser(business);
@@ -107,6 +109,7 @@ public class BusinessSingUpActivity extends AppCompatActivity {
                     business.setUid(firebaseAuth.getUid());
                     business.save();
                     createBasicPayments();
+                    createBasicCheckListItem();
                     createBasicQuantities();
                     startActivity(new Intent(getApplicationContext(), PresentationFragment.class));
                 }else{
@@ -120,6 +123,11 @@ public class BusinessSingUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void createBasicCheckListItem() {
+        CheckListItem checkListItem= new CheckListItem("Limpar Ponto de venda",true);
+        checkListItem.save();
     }
 
     private void createBasicPayments() {

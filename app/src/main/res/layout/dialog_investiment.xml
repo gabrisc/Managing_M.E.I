@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="411dp"
+        android:layout_height="32dp"
+        android:fontFamily="@font/advent_pro_medium"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextNumberDecimalValueFromInvestiment"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="VALOR DO INVESTIMENTO"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNomeDoInvestimento"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextNomeDoInvestimento"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeDoInvestimento">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/Pagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_bold"
+        android:text="Pagamento"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnertipoPagamento"
+        app:layout_constraintEnd_toEndOf="@+id/spinnertipoPagamento"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/spinnertipoPagamento" />
+
+    <Spinner
+        android:id="@+id/spinnertipoPagamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNumberDecimalValueFromInvestiment"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimalValueFromInvestiment"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimalValueFromInvestiment" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextNomeDoInvestimento"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="24dp"
+        android:hint="INVESTIMENTO"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView47">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinnertimeOfInvestiment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/spinnertipoPagamento"
+        app:layout_constraintStart_toStartOf="@+id/spinnertipoPagamento"
+        app:layout_constraintTop_toBottomOf="@+id/spinnertipoPagamento" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_bold"
+        android:text="Tipo de investimento"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnertimeOfInvestiment"
+        app:layout_constraintEnd_toEndOf="@+id/spinnertimeOfInvestiment"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/spinnertimeOfInvestiment" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonConfirmInvestiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Salvar"
+        app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnertimeOfInvestiment" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonCancelInvestiment"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Cancelar"
+        android:textColor="@color/vermelho"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnertimeOfInvestiment" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.providers.ProvidersFragment;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -24,7 +25,7 @@ import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 public class AddProvidersActivity extends AppCompatActivity {
 
 
-    private EditText fantasyName,address, cnpj, phoneNumber, email;
+    private TextInputLayout fantasyName,address, cnpj, phoneNumber, email;
     private RatingBar evaluation;
     private TextView data;
     private Button buttonAdd,buttonCancel;
@@ -55,37 +56,37 @@ public class AddProvidersActivity extends AppCompatActivity {
     }
     private void validateFields(){
 
-        if (fantasyName.getText().toString().isEmpty()){
+        if (fantasyName.getEditText().getText().toString().isEmpty()){
             Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome do ",Toast. LENGTH_SHORT);
             toast. show();
         }
 
-        if (address.getText().toString().isEmpty()){
+        if (address.getEditText().getText().toString().isEmpty()){
             Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
             toast. show();
         }
 
-        if (cnpj.getText().toString().isEmpty()){
+        if (cnpj.getEditText().getText().toString().isEmpty()){
             Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
             toast. show();
         }
 
-        if (phoneNumber.getText().toString().isEmpty()){
+        if (phoneNumber.getEditText().getText().toString().isEmpty()){
             Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
             toast. show();
         }
 
-        if (email.getText().toString().isEmpty()) {
+        if (email.getEditText().getText().toString().isEmpty()) {
             Toast toast = Toast.makeText(getApplicationContext(), "Entre com o nome", Toast.LENGTH_SHORT);
             toast.show();
         } else {
             saveProvider(new Provider(
                             firebaseDbReference.push().getKey(),
-                            fantasyName.getText().toString(),
-                            cnpj.getText().toString(),
-                            phoneNumber.getText().toString(),
-                            email.getText().toString(),
-                            address.getText().toString(),
+                            fantasyName.getEditText().getText().toString(),
+                            cnpj.getEditText().getText().toString(),
+                            phoneNumber.getEditText().getText().toString(),
+                            email.getEditText().getText().toString(),
+                            address.getEditText().getText().toString(),
                             evaluation.getRating()));
         }
     }

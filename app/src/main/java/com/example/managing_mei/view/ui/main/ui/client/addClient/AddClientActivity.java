@@ -16,6 +16,7 @@ import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Client;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.example.managing_mei.view.ui.main.ui.client.ClientFragment;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -27,7 +28,7 @@ public class AddClientActivity extends AppCompatActivity {
 
     private TextView date;
     private Button buttonCancelAddClient,buttonAddClient;
-    private EditText name,email,telefone;
+    private TextInputLayout name,email,telefone;
     private SimpleDateFormat simpleDateFormat;
 
     @Override
@@ -68,19 +69,19 @@ public class AddClientActivity extends AppCompatActivity {
     }
 
     private void validFields(){
-        if (name.getText().toString().isEmpty()){
+        if (name.getEditText().getText().toString().isEmpty()){
             Toast toast=Toast. makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
             toast. show();
-        }else if (email.getText().toString().isEmpty() ){
+        }else if (email.getEditText().getText().toString().isEmpty() ){
             Toast toast=Toast. makeText(getApplicationContext(),"Entre com o email ou telefone",Toast. LENGTH_SHORT);
             toast. show();
-        }else if(telefone.getText().toString().isEmpty()){
+        }else if(telefone.getEditText().getText().toString().isEmpty()){
 
         } else {
             saveClient(new Client(firebaseDbReference.push().getKey(),
-                                  name.getText().toString(),
-                                  email.getText().toString(),
-                                  telefone.getText().toString()
+                                  name.getEditText().getText().toString(),
+                                  email.getEditText().getText().toString(),
+                                  telefone.getEditText().getText().toString()
             ));
         }
     }

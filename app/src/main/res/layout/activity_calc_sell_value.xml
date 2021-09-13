@@ -6,66 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.seals.calcSellValue.CalcSellValueActivity">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageButtonConclusionSaleAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Continuar"
+        app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/imageButtonConclusionSaleCancelButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:text="Cancelar"
+        android:textColor="@color/vermelho"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/imageButtonConclusionSaleCancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewFinalValueClosingSale"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/advent_pro_medium"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonConclusionSaleAddButton"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/RecyclerViewEconomicOperationClosingSale"
         app:layout_constraintStart_toStartOf="@+id/RecyclerViewEconomicOperationClosingSale"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TextViewDateOfBuyClosingSale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/advent_pro_light"
         android:text="TextView"
+        android:textColor="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFinalValueClosingSale" />
 
     <TextView
         android:id="@+id/textViewClientNameClosingSale"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/advent_pro_medium"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/Azul_mais_claro"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextViewDateOfBuyClosingSale" />
 
@@ -74,8 +82,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewFinalValueClosingSale"
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="3dp"
+        android:paddingTop="8dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonConclusionSaleCancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listOfPaymentsTypeClosingSale" />
@@ -91,4 +103,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewClientNameClosingSale" />
+
+    <View
+        android:id="@+id/divider20"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFinalValueClosingSale" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

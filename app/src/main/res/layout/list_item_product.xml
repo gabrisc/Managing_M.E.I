@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:background="@drawable/rounded_element_for_list"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp">
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,10 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
 
+            android:fontFamily="@font/advent_pro_light"
             android:gravity="center"
-            android:textColor="@color/IntermediateDMBlue"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:text="5.50"
+            android:textColor="@color/Azul_mais_claro"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,19 +40,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/advent_pro_light"
                 android:gravity="center"
-                android:text="TextView"
-                android:textColor="@color/IntermediateDMBlue" />
+                android:text="5.40"
+                android:textColor="@color/Azul_mais_claro" />
 
             <TextView
                 android:id="@+id/textViewQuantityEconomicOperation"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/advent_pro_medium"
                 android:gravity="center"
-                android:textColor="@color/IntermediateDMBlue" />
+                android:textColor="@color/Azul_mais_claro" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider26"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

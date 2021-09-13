@@ -6,123 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.providers.editProviders.EditProvidersActivity">
 
+
     <TextView
         android:id="@+id/textView34"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_medium"
+        android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonUpdateProvider"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextFantasyNameProvider"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="NOME FANTASIA"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView34">
 
-    <Button
-        android:id="@+id/buttonCancelUpdateProvider"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextDocumentProvider"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="16dp"
+        android:hint="CNPJ"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmailProvider"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailProvider"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailProvider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextTelefoneProvider"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="TELEFONE"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/editTextFantasyNameProvider"
+        app:layout_constraintStart_toStartOf="@+id/editTextFantasyNameProvider"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFantasyNameProvider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextAdressProvider"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="ENDEREÇO"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDocumentProvider"
+        app:layout_constraintStart_toStartOf="@+id/editTextDocumentProvider"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDocumentProvider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextEmailProvider"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="EMAIL"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTelefoneProvider"
+        app:layout_constraintStart_toStartOf="@+id/editTextTelefoneProvider"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelefoneProvider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RatingBar
         android:id="@+id/ratingBarForProvider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView35"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/textView35"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAdressProvider"
+        app:layout_constraintVertical_bias="0.19999999" />
 
     <TextView
         android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/advent_pro_bold"
+        android:text="QUALIDADE"
+        android:textColor="@color/Azul_mais_claro"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBarForProvider"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBarForProvider"
+        app:layout_constraintStart_toStartOf="@+id/ratingBarForProvider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonUpdateProvider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="ATUALIZAR"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonCancelUpdateProvider"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Cancelar"
+        android:textColor="#FF0000"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailProvider" />
+        android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/editTextFantasyNameProvider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDeleteProvider" />
-
-    <EditText
-        android:id="@+id/editTextAdressProvider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="@+id/editTextFantasyNameProvider"
-        app:layout_constraintStart_toStartOf="@+id/editTextFantasyNameProvider"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFantasyNameProvider" />
-
-    <EditText
-        android:id="@+id/editTextDocumentProvider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/editTextAdressProvider"
-        app:layout_constraintStart_toStartOf="@+id/editTextAdressProvider"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAdressProvider" />
-
-    <EditText
-        android:id="@+id/editTextTelefoneProvider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/editTextDocumentProvider"
-        app:layout_constraintStart_toStartOf="@+id/editTextDocumentProvider"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDocumentProvider" />
-
-    <EditText
-        android:id="@+id/editTextEmailProvider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTelefoneProvider"
-        app:layout_constraintStart_toStartOf="@+id/editTextTelefoneProvider"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefoneProvider" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonDeleteProvider"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Button"
+        android:text="APAGAR"
+        android:textColor="#FF0000"
+        app:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBarForProvider"
+        app:layout_constraintStart_toStartOf="@+id/ratingBarForProvider"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarForProvider" />
+
+    <View
+        android:id="@+id/divider22"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

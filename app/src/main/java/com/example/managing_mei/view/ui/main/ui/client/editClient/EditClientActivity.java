@@ -13,11 +13,12 @@ import android.widget.Toast;
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Client;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class EditClientActivity extends AppCompatActivity {
 
     private Client client = new Client();
-    private EditText nomeClient,emailClient,telefoneClient;
+    private TextInputLayout nomeClient,emailClient,telefoneClient;
     private Button atualizarButton, deleteButton, cancelarButton;
 
     @Override
@@ -33,9 +34,9 @@ public class EditClientActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.buttonDeleteClient);
         cancelarButton = findViewById(R.id.buttonCancelEditClient);
 
-        nomeClient.setText(client.getNome().toUpperCase());
-        emailClient.setText(client.getEmail());
-        telefoneClient.setText(client.getTelefone().toString());
+        nomeClient.getEditText().setText(client.getNome().toUpperCase());
+        emailClient.getEditText().setText(client.getEmail());
+        telefoneClient.getEditText().setText(client.getTelefone().toString());
 
         setButtonActions();
     }
@@ -75,19 +76,19 @@ public class EditClientActivity extends AppCompatActivity {
     }
 
     private boolean validarCampos(){
-        if (nomeClient.getText().toString().isEmpty()){
+        if (nomeClient.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o nome",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (emailClient.getText().toString().isEmpty()){
+        } else if (emailClient.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (telefoneClient.getText().toString().isEmpty()){
+        } else if (telefoneClient.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
             return false;
         } else {
-            client.setNome(nomeClient.getText().toString());
-            client.setEmail(emailClient.getText().toString());
-            client.setTelefone(telefoneClient.getText().toString());
+            client.setNome(nomeClient.getEditText().getText().toString());
+            client.setEmail(emailClient.getEditText().getText().toString());
+            client.setTelefone(telefoneClient.getEditText().getText().toString());
         }
         return true;
     }

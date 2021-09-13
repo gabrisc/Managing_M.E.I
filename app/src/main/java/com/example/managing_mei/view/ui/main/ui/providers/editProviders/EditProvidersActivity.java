@@ -13,11 +13,12 @@ import android.widget.Toast;
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class EditProvidersActivity extends AppCompatActivity {
 
     private Provider provider = new Provider();
-    private EditText fantasyNameProvider, emailProvider, telefoneProvider,addressProvider,cnpjProvider;
+    private TextInputLayout fantasyNameProvider, emailProvider, telefoneProvider,addressProvider,cnpjProvider;
     private RatingBar evaluationProvider;
     private Button atualizarButton, deleteButton, cancelarButton;
 
@@ -38,12 +39,12 @@ public class EditProvidersActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.buttonDeleteProvider);
         cancelarButton = findViewById(R.id.buttonCancelUpdateProvider);
 
-        fantasyNameProvider.setText(provider.getFantasyName());
-        emailProvider.setText(provider.getEmail());
-        telefoneProvider.setText(provider.getPhoneNumber());
-        addressProvider.setText(provider.getAddress());
+        fantasyNameProvider.getEditText().setText(provider.getFantasyName());
+        emailProvider.getEditText().setText(provider.getEmail());
+        telefoneProvider.getEditText().setText(provider.getPhoneNumber());
+        addressProvider.getEditText().setText(provider.getAddress());
         evaluationProvider.setRating(provider.getEvaluation());
-        cnpjProvider.setText(provider.getCNPJ());
+        cnpjProvider.getEditText().setText(provider.getCNPJ());
 
         setButtonActions();
     }
@@ -74,28 +75,28 @@ public class EditProvidersActivity extends AppCompatActivity {
     }
 
     private boolean validarCampos(){
-        if (fantasyNameProvider.getText().toString().isEmpty()){
+        if (fantasyNameProvider.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o nome",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (emailProvider.getText().toString().isEmpty()){
+        } else if (emailProvider.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (telefoneProvider.getText().toString().isEmpty()){
+        } else if (telefoneProvider.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
             return false;
-        } else if(addressProvider.getText().toString().isEmpty()){
+        } else if(addressProvider.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
             return false;
-        } else if(cnpjProvider.getText().toString().isEmpty()){
+        } else if(cnpjProvider.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
             return false;
         } else {
-            provider.setFantasyName(fantasyNameProvider.getText().toString());
-            provider.setEmail(emailProvider.getText().toString());
-            provider.setPhoneNumber(telefoneProvider.getText().toString());
-            provider.setAddress(addressProvider.getText().toString());
+            provider.setFantasyName(fantasyNameProvider.getEditText().getText().toString());
+            provider.setEmail(emailProvider.getEditText().getText().toString());
+            provider.setPhoneNumber(telefoneProvider.getEditText().getText().toString());
+            provider.setAddress(addressProvider.getEditText().getText().toString());
             provider.setEvaluation(evaluationProvider.getRating());
-            provider.setCNPJ(cnpjProvider.getText().toString());
+            provider.setCNPJ(cnpjProvider.getEditText().getText().toString());
 
         }
         return true;

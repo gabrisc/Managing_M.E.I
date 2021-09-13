@@ -49,7 +49,7 @@ public class ProductConfigActivity extends AppCompatActivity {
         buttonSaveProductConfig = findViewById(R.id.buttonSaveProductConfig);
         buttonCancelProductConfiig = findViewById(R.id.buttonCancelProductConfiig);
         imageButtonAddNewType = findViewById(R.id.imageButtonAddNewType);
-        switchHoursOnly = findViewById(R.id.switchHoursOnly);
+        //switchHoursOnly = findViewById(R.id.switchHoursOnly);
         chipGroupForProductConfig = findViewById(R.id.chipGroupForProductConfig);
         editTextNewTypeForProductConfig = findViewById(R.id.editTextNewTypeForProductConfig);
 
