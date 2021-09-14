@@ -3,8 +3,13 @@ package com.example.managing_mei.view.ui.login.signUp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +22,7 @@ import com.example.managing_mei.model.entities.PaymentType;
 import com.example.managing_mei.model.entities.PaymentsTypes;
 import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
+import com.example.managing_mei.view.ui.login.MainActivity;
 import com.example.managing_mei.view.ui.login.PresentationFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +54,61 @@ public class BusinessSingUpActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.editTextTelefone);
         buttonRegister = findViewById(R.id.buttonCadastrar_se);
         buttonCancel = findViewById(R.id.buttonCancelar);
+
+
+        phoneNumber.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        phoneNumber.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            //(61) 98592-4198
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                phoneNumber.getEditText().setText(phoneNumber.getEditText().getText().toString().replaceAll("\\W",""));
+                phoneNumber.getEditText().setText(phoneNumber.getEditText().getText().toString().replaceAll("[a-zA-Z\\s]",""));
+                String phone =phoneNumber.getEditText().getText().toString();
+                    if (!(phone.length() == 0) && phone.length()>=11){
+                        phoneNumber.getEditText().setText("("+phone.substring(0,2)+") "+phone.substring(2,7)+"-"+phone.substring(7,11));
+                    }
+            }
+        });
+
+        textCNPJ.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String document = textCNPJ.getEditText().getText().toString();
+                if (!(document.length()==0) && document.length()<=14){
+                    document.replaceAll("\\W","");
+                    if(document.length()==14){
+                        //is CNPJ
+                        //XX.XXX.XXX/0001-XX
+                        textCNPJ.getEditText().setText(document.substring(0,2)+"."+document.substring(2,5)+"."+document.substring(5,8)+"/"+document.substring(8,12)+"-"+document.substring(12,14));
+                    }
+
+                    if (document.length()==11){
+                        //is CPF
+                        //050.743.901-50
+                        textCNPJ.getEditText().setText(document.substring(0,3)+"."+document.substring(3,6)+"."+document.substring(6,9)+"-"+document.substring(9,11));
+                    }
+                } else {
+                    textCNPJ.getEditText().setText(textCNPJ.getEditText().getText().toString().replaceAll("\\W",""));
+                }
+            }
+        });
 
         recoverClientData();
         verefyFields();
@@ -111,7 +172,9 @@ public class BusinessSingUpActivity extends AppCompatActivity {
                     createBasicPayments();
                     createBasicCheckListItem();
                     createBasicQuantities();
-                    startActivity(new Intent(getApplicationContext(), PresentationFragment.class));
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }else{
                     try {
                         throw task.getException();
@@ -144,10 +207,9 @@ public class BusinessSingUpActivity extends AppCompatActivity {
         Set<QuantityType> quantityTypes = new HashSet<>();
         quantityTypes.add(new QuantityType("UND",true));
         quantityTypes.add(new QuantityType("CXS",true));
-        quantityTypes.add(new QuantityType("m²",true));
-        quantityTypes.add(new QuantityType("Metros",true));
-        quantityTypes.add(new QuantityType("Grama",true));
-        quantityTypes.add(new QuantityType("Kg",true));
+        quantityTypes.add(new QuantityType("M²",true));
+        quantityTypes.add(new QuantityType("METROS",true));
+        quantityTypes.add(new QuantityType("KG",true));
         QuantitiesTypes quantitiesTypes = new QuantitiesTypes(quantityTypes);
         quantitiesTypes.save();
     }

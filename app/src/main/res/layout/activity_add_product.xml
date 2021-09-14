@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_medium"
         android:gravity="center"
-        android:text="Cadastro de Produtos"
+        android:text="CADASTRO DE PRODUTOS"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

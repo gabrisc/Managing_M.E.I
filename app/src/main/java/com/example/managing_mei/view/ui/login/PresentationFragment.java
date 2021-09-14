@@ -15,8 +15,6 @@ import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 
 public class PresentationFragment extends Fragment {
 
-    private static final String ARG_PARAM2 = "param2";
-
     public static PresentationFragment newInstance() {
         return new PresentationFragment();
     }

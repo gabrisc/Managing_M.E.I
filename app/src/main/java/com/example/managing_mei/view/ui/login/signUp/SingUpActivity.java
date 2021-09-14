@@ -14,6 +14,7 @@ import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Business;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseAuth;
@@ -22,7 +23,7 @@ import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 
 public class SingUpActivity extends AppCompatActivity {
 
-    private EditText textEmail,textPassword,textPersonName;
+    private TextInputLayout textEmail,textPassword,textPersonName;
     private Button buttonCadastrar,buttonCancel;
 
     @Override
@@ -40,24 +41,24 @@ public class SingUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!(textEmail.getText() == null)){
+                if (!(textEmail.getEditText().getText() == null)){
                     Toast toast=Toast. makeText(getApplicationContext(),"O E-mail está vazio",Toast. LENGTH_LONG);
                     toast. show();
                 }
 
-                if (!(textPersonName.getText() == null)){
+                if (!(textPersonName.getEditText().getText() == null)){
                     Toast toast=Toast. makeText(getApplicationContext(),"O nome fantasia está vazio",Toast. LENGTH_LONG);
                     toast. show();
                 }
 
-                if (textPassword.getText().toString().length()<7 || textPassword.getText().toString().isEmpty()) {
+                if (textPassword.getEditText().getText().toString().length()<7 || textPassword.getEditText().getText().toString().isEmpty()) {
                     Toast toast=Toast. makeText(getApplicationContext(),"A senha está vazia",Toast. LENGTH_LONG);
                     toast. show();
                 } else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("email",textEmail.getText().toString());
-                    bundle.putString("senha",textPassword.getText().toString());
-                    bundle.putString("name",textPersonName.getText().toString());
+                    bundle.putString("email",textEmail.getEditText().getText().toString());
+                    bundle.putString("senha",textPassword.getEditText().getText().toString());
+                    bundle.putString("name",textPersonName.getEditText().getText().toString());
 
                     Intent intent = new Intent(getApplicationContext(),BusinessSingUpActivity.class);
                     intent.putExtra("bundle",bundle);

@@ -22,59 +22,65 @@
         android:id="@+id/imageButtonConfig"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rouded_edit_text"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00000000"
         android:src="@drawable/ic_baseline_settings_24"
-        android:tint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:tint="#5B5B5B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonLogout"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rouded_edit_text"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#009E7070"
         android:src="@drawable/ic_baseline_exit_to_app_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:tint="#FF0000" />
 
     <TextView
         android:id="@+id/textView62"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/advent_pro_medium"
+        android:gravity="center"
         android:text="NOME DA EMPRESA"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rouded_edit_text"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#00000000"
         android:src="@drawable/ic_baseline_share_24"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonConfig"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonLogout"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:tint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <View
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:background="@color/Azul_mais_claro"
+        android:layout_marginEnd="24dp"
+        android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPersonName" />
 
     <View
         android:id="@+id/divider3"
@@ -83,14 +89,14 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/Azul_mais_claro"
+        android:background="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView62" />
 
     <TextView
-        android:id="@+id/textView63"
+        android:id="@+id/textViewFantasyName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -110,29 +116,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
-        android:text="TextView"
+        android:text="NOME FANTASIA"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView63"
-        app:layout_constraintEnd_toEndOf="@+id/textView63"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFantasyName"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFantasyName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView63" />
+        app:layout_constraintStart_toStartOf="@+id/textViewFantasyName" />
 
     <TextView
         android:id="@+id/textView65"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
-        android:text="TextView"
+        android:text="EMAIL"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView66"
-        app:layout_constraintEnd_toEndOf="@+id/textView66"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEmailBussines"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEmailBussines"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView66" />
+        app:layout_constraintStart_toStartOf="@+id/textViewEmailBussines" />
 
     <TextView
-        android:id="@+id/textView66"
+        android:id="@+id/textViewEmailBussines"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -145,10 +151,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView63" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFantasyName" />
 
     <TextView
-        android:id="@+id/textView67"
+        android:id="@+id/textViewCNPJBussines"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -161,48 +167,120 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView66" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailBussines" />
 
     <TextView
         android:id="@+id/textView68"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
-        android:text="TextView"
+        android:text="CNPJ OU CPF"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView67"
-        app:layout_constraintEnd_toEndOf="@+id/textView67"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCNPJBussines"
+        app:layout_constraintEnd_toEndOf="@+id/textViewCNPJBussines"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView67" />
+        app:layout_constraintStart_toStartOf="@+id/textViewCNPJBussines" />
 
     <TextView
-        android:id="@+id/textView69"
+        android:id="@+id/textViewEnderecoBussines"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
         android:fontFamily="@font/advent_pro_medium"
         android:text="TextView"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewCNPJBussines"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView67" />
+        app:layout_constraintStart_toStartOf="@+id/textViewCNPJBussines"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCNPJBussines" />
 
     <TextView
         android:id="@+id/textView70"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
-        android:text="TextView"
+        android:text="ENDEREÇO"
         android:textColor="@color/Azul_mais_claro"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView69"
-        app:layout_constraintEnd_toEndOf="@+id/textView69"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEnderecoBussines"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEnderecoBussines"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView69" />
+        app:layout_constraintStart_toStartOf="@+id/textViewEnderecoBussines" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_bold"
+        android:text="TELEFONE"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPhoneNumber"
+        app:layout_constraintEnd_toEndOf="@+id/textViewPhoneNumber"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewPhoneNumber" />
+
+    <TextView
+        android:id="@+id/textViewPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/advent_pro_medium"
+        android:text="TextView"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEnderecoBussines"
+        app:layout_constraintStart_toStartOf="@+id/textViewEnderecoBussines"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnderecoBussines" />
+
+    <TextView
+        android:id="@+id/textView66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_bold"
+        android:text="RESPONSÁVEL"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/textViewPersonName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewPersonName" />
+
+    <TextView
+        android:id="@+id/textViewPersonName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/advent_pro_medium"
+        android:text="TextView"
+        android:textColor="@color/Azul_mais_claro"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/textViewPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPhoneNumber" />
+
+    <TextView
+        android:id="@+id/textView69"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="COMPARTILHAR"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+    <TextView
+        android:id="@+id/textView74"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="deslogar"
+        android:textColor="@color/vermelho"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonLogout"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonLogout"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonLogout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

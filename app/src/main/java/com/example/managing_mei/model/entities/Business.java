@@ -108,7 +108,7 @@ public class Business {
     }
 
     public void setFantasyName(String fantasyName) {
-        fantasyName = fantasyName;
+        this.fantasyName = fantasyName;
     }
 
     public String getCNPJ() {
@@ -143,6 +143,13 @@ public class Business {
         this.businessBranch = businessBranch;
     }
 
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
 
     public String getUid() {
         return uid;
@@ -151,4 +158,5 @@ public class Business {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
 }
