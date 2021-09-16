@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_width="409dp"
+        android:layout_height="51dp"
+        android:background="#0A4159"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="CADASTRO DE PRODUTOS"
-        android:textColor="@color/Azul_mais_claro"
+        android:text="Cadastro de Produtos"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
         android:fontFamily="@font/advent_pro_bold"
         android:gravity="center"
         android:text="Quantidade"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/seekBarProduct"
         app:layout_constraintEnd_toEndOf="@+id/seekBarProduct"
@@ -35,8 +36,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="127dp"
+        android:layout_height="51dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
@@ -63,11 +64,11 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginEnd="24dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerProviderProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinnerProviderProduct" />
+        app:layout_constraintTop_toTopOf="@+id/spinnerProviderProduct"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/spinnerTypeOfQuantityProduct"
@@ -75,7 +76,8 @@
         android:layout_height="29dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCounterProduct"
         app:layout_constraintStart_toEndOf="@+id/textViewCounterProduct"
-        app:layout_constraintTop_toTopOf="@+id/textViewCounterProduct" />
+        app:layout_constraintTop_toTopOf="@+id/textViewCounterProduct"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewCounterProduct"
@@ -84,7 +86,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/advent_pro_bold"
         android:text="0"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,16 +114,18 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toStartOf="@+id/switch1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseValueProduct" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseValueProduct"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinnerTypeProduct"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="41dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider17" />
@@ -133,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Valor de Venda"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextNameProduct"
         app:layout_constraintStart_toStartOf="@+id/editTextNameProduct"
         app:layout_constraintTop_toBottomOf="@+id/editTextNameProduct">
@@ -151,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Total de Custos"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextSealValueProduct"
         app:layout_constraintStart_toStartOf="@+id/editTextSealValueProduct"
         app:layout_constraintTop_toBottomOf="@+id/editTextSealValueProduct">
@@ -171,7 +175,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:hint="Nome"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTypeProduct">
@@ -188,7 +192,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
         android:text="Fornecedor"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerProviderProduct"
         app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProduct"

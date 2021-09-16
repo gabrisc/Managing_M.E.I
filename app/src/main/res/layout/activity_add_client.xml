@@ -6,19 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.client.addClient.AddClientActivity">
 
+
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_width="410dp"
+        android:layout_height="51dp"
+        android:background="#0A4159"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="NOVO CLIENTE"
-        android:textColor="@color/Azul_mais_claro"
+        android:text="Novo Cliente"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/textViewDataAddClient"
@@ -41,7 +43,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:hint="NOME"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDataAddClient">
@@ -62,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:hint="EMAIL"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextNameClient"
         app:layout_constraintStart_toStartOf="@+id/editTextNameClient"
         app:layout_constraintTop_toBottomOf="@+id/editTextNameClient">
@@ -82,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:hint="TELEFONE"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextClientEmail"
         app:layout_constraintStart_toStartOf="@+id/editTextClientEmail"
         app:layout_constraintTop_toBottomOf="@+id/editTextClientEmail">
@@ -96,10 +98,10 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCancelAddClient"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="123dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,8 +109,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"

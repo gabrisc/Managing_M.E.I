@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="SENHA"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmailLogin"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailLogin"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin">
@@ -33,7 +33,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:hint="EMAIL"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -51,7 +51,7 @@
         android:id="@+id/view3"
         android:layout_width="411dp"
         android:layout_height="251dp"
-        android:background="@color/teal_200"
+        android:background="@color/IntermediateDMBlue"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -63,13 +63,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="5dp"
-        android:fontFamily="@font/advent_pro_medium"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:text="Managing  MEI"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -87,33 +88,36 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonIrParaCadastrar"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="368dp"
+        android:layout_height="47dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:text="Cadastrar-se"
+        android:textAlignment="center"
         android:textColor="@color/vermelho"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.811" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="365dp"
+        android:layout_height="59dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
         android:text="logar"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonIrParaCadastrar"
         app:layout_constraintEnd_toEndOf="@+id/buttonIrParaCadastrar"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="@+id/buttonIrParaCadastrar" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonIrParaCadastrar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
