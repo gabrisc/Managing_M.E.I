@@ -26,29 +26,26 @@
 
     <Spinner
         android:id="@+id/spinnerDateOfFlow"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_width="411dp"
+        android:layout_height="43dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="53dp" />
 
     <TextView
         android:id="@+id/textViewSaldoDoDia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/advent_pro_light"
         android:gravity="center"
         android:text="00,00"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDateOfFlow" />
+        tools:layout_editor_absoluteY="126dp" />
 
     <TextView
         android:id="@+id/textView45"
@@ -87,7 +84,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/advent_pro_light"
         android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView45"
         app:layout_constraintEnd_toEndOf="@+id/textViewSaldoDoDia"
@@ -100,7 +97,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/advent_pro_light"
         android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView45"
         app:layout_constraintStart_toStartOf="@+id/textViewSaldoDoDia"
@@ -126,7 +123,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
         android:text="SALDO DO DIA "
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewSaldoDoDia"
         app:layout_constraintEnd_toEndOf="@+id/textViewSaldoDoDia"
@@ -139,7 +136,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
         android:text="TOTAL PAGAMENTOS"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewTotalDePagamentos"
         app:layout_constraintEnd_toEndOf="@+id/textViewTotalDePagamentos"
@@ -152,7 +149,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_bold"
         android:text="TOTAL RECEBIMENTOS"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewTotalDeRecebimentos"
         app:layout_constraintEnd_toEndOf="@+id/textViewTotalDeRecebimentos"
@@ -160,21 +157,12 @@
         app:layout_constraintStart_toStartOf="@+id/textViewTotalDeRecebimentos" />
 
     <View
-        android:id="@+id/divider11"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDateOfFlow" />
-
-    <View
         android:id="@+id/divider12"
         android:layout_width="1dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:background="@color/Azul_mais_claro"
+        android:background="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textView45"
         app:layout_constraintEnd_toStartOf="@+id/textViewTotalDeRecebimentos"
         app:layout_constraintStart_toEndOf="@+id/textViewTotalDePagamentos"

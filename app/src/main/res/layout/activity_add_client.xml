@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="410dp"
-        android:layout_height="51dp"
+        android:layout_width="413dp"
+        android:layout_height="53dp"
         android:background="#0A4159"
         android:fontFamily="serif"
         android:gravity="center"
@@ -110,7 +110,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddClient"
         android:layout_width="130dp"
-        android:layout_height="56dp"
+        android:layout_height="52dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
@@ -126,6 +126,7 @@
         android:layout_height="1dp"
         android:background="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

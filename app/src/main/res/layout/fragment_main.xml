@@ -49,8 +49,8 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="411dp"
-        android:layout_height="251dp"
+        android:layout_width="413dp"
+        android:layout_height="263dp"
         android:background="@color/IntermediateDMBlue"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,30 +60,33 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="404dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="210dp"
+        android:background="#0A4159"
         android:elevation="5dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Managing  MEI"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="178dp"
-        android:layout_height="178dp"
+        android:layout_width="183dp"
+        android:layout_height="185dp"
         android:elevation="5dp"
         android:src="@drawable/technology_branco"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonIrParaCadastrar"
@@ -101,7 +104,7 @@
         app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811" />
+        app:layout_constraintVertical_bias="0.866" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogin"
@@ -117,7 +120,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/buttonIrParaCadastrar"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.973" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -105,7 +105,7 @@
         android:layout_height="49dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="#000000"
+        android:background="#0A4159"
         android:elevation="4dp"
         android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
