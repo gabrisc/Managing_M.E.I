@@ -6,33 +6,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.ui.company_health.ui.totalInvestmentCalculation.TotalInvestmentCalculationFragment">
 
+    <View
+        android:id="@+id/view8"
+        android:layout_width="426dp"
+        android:layout_height="173dp"
+        android:background="@color/IntermediateDMBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView44"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_marginTop="44dp"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="ITENS DO INVESTIMENTO TOTAL"
-        android:textColor="@color/Azul_mais_claro"
+        android:text="Itens do Investimento Total"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInvestiment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="411dp"
+        android:layout_height="541dp"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
 
     <ImageButton
         android:id="@+id/imageButtonAAddnewInvestiment"
@@ -44,20 +56,34 @@
         android:tint="@color/IntermediateDMBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewInvestiment"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView46"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/advent_pro_bold"
+        android:layout_width="361dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="Use  esse  ambiente para manter o controle sobre os investimentos  que  ainda vão ser feitos e os que foram realizados."
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="424dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view8"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

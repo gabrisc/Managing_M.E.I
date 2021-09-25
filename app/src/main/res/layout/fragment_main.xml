@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.login.SignInFragment">
 
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextSenhaLogin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -22,6 +32,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,6 +55,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +107,7 @@
         android:layout_height="47dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:fontFamily="serif"
         android:text="Cadastrar-se"
         android:textAlignment="center"
         android:textColor="@color/vermelho"
@@ -112,6 +125,7 @@
         android:layout_height="59dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:fontFamily="serif"
         android:text="logar"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"

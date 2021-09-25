@@ -6,21 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.client.editClient.EditClientActivity">
 
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
     <TextView
         android:id="@+id/textView29"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_height="67dp"
+        android:background="@color/IntermediateDMBlue"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:text="Editar Cliente"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextEmailEditClient"
@@ -28,21 +38,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="24dp"
         android:hint="EMAIL"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider18">
+        app:layout_constraintTop_toBottomOf="@+id/textView29">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextPhoneEditClient"
@@ -51,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="TELEFONE"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextNomeEditClient"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextNomeEditClient"
@@ -60,6 +70,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="NOME DO CLIENTE"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmailEditClient"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailEditClient"
@@ -79,6 +90,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,6 +102,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Continuar"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
@@ -103,6 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
         app:elevation="5dp"
@@ -115,22 +129,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:fontFamily="serif"
         android:text="APAGAR"
-        android:textColor="@color/vermelho"
+        android:textColor="@color/IntermediateDMBlue"
         app:elevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/editTextPhoneEditClient"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/editTextPhoneEditClient"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhoneEditClient" />
-
-    <View
-        android:id="@+id/divider18"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

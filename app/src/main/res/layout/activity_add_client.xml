@@ -7,9 +7,19 @@
     tools:context=".view.ui.main.ui.client.addClient.AddClientActivity">
 
 
+    <View
+        android:id="@+id/divider16"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="413dp"
+        android:layout_width="0dp"
         android:layout_height="53dp"
         android:background="#0A4159"
         android:fontFamily="serif"
@@ -28,9 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:fontFamily="@font/advent_pro_extralight"
+        android:fontFamily="serif"
         android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/IntermediateDMBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -51,6 +61,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
 
 
@@ -72,6 +83,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,16 +104,18 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCancelAddClient"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="123dp"
-        android:layout_height="53dp"
+        android:layout_width="138dp"
+        android:layout_height="40dp"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="24dp"
+        android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,25 +123,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddClient"
-        android:layout_width="130dp"
-        android:layout_height="52dp"
+        android:layout_width="135dp"
+        android:layout_height="47dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cadastrar"
         app:backgroundTint="@color/verdeClaro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:id="@+id/divider16"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,9 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.product.addProduct.AddProductActivity">
 
+    <View
+        android:id="@+id/divider29"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="51dp" />
+
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="415dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
         android:background="#0A4159"
         android:fontFamily="serif"
@@ -24,7 +34,7 @@
         android:id="@+id/textViewTitleQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="Quantidade"
         android:textColor="@color/gray"
@@ -36,12 +46,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddProduct"
-        android:layout_width="127dp"
-        android:layout_height="51dp"
+        android:layout_width="139dp"
+        android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cadastrar"
         android:textColor="@color/white"
         app:backgroundTint="@color/verdeClaro"
@@ -51,10 +62,11 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCancelProduct"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,8 +84,8 @@
 
     <Spinner
         android:id="@+id/spinnerTypeOfQuantityProduct"
-        android:layout_width="151dp"
-        android:layout_height="29dp"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCounterProduct"
         app:layout_constraintStart_toEndOf="@+id/textViewCounterProduct"
         app:layout_constraintTop_toTopOf="@+id/textViewCounterProduct"
@@ -84,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:text="0"
         android:textColor="@color/gray"
         android:textSize="24sp"
@@ -145,6 +157,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,6 +176,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -183,6 +197,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,7 +205,7 @@
         android:id="@+id/textView61"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:text="Fornecedor"
         android:textColor="@color/gray"
         android:textSize="12sp"
@@ -205,6 +220,7 @@
         android:layout_height="1dp"
         android:background="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 

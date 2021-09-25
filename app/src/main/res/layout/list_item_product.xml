@@ -22,12 +22,12 @@
 
             android:id="@+id/TextViewValueOfEconomicOperation"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="44dp"
 
-            android:fontFamily="@font/advent_pro_light"
+            android:fontFamily="serif"
             android:gravity="center"
             android:text="5.50"
-            android:textColor="@color/Azul_mais_claro"
+            android:textColor="@color/IntermediateDMBlue"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -40,19 +40,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/advent_pro_light"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:text="5.40"
-                android:textColor="@color/Azul_mais_claro" />
+                android:textColor="@color/IntermediateDMBlue" />
 
             <TextView
                 android:id="@+id/textViewQuantityEconomicOperation"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/advent_pro_medium"
+                android:fontFamily="serif"
                 android:gravity="center"
-                android:textColor="@color/Azul_mais_claro" />
+                android:textColor="@color/IntermediateDMBlue" />
         </LinearLayout>
 
     </LinearLayout>
@@ -61,7 +61,7 @@
         android:id="@+id/divider26"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
+        android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
         app:layout_constraintStart_toStartOf="@+id/linearLayout4"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />

@@ -7,11 +7,13 @@
 
     <TextView
         android:id="@+id/TextViewTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_width="419dp"
+        android:layout_height="50dp"
+        android:background="@color/IntermediateDMBlue"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,15 +24,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/advent_pro_light"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="1"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/IntermediateDMBlue"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider9" />
+        app:layout_constraintTop_toTopOf="@+id/divider9" />
 
     <SeekBar
         android:id="@+id/seekBarQuantityForAddInSale"
@@ -53,6 +55,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Salvar"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
@@ -68,6 +71,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
         app:elevation="5dp"
@@ -78,9 +82,10 @@
     <View
         android:id="@+id/divider9"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextViewTitle" />
 

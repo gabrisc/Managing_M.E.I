@@ -33,7 +33,7 @@
         android:id="@+id/divider25"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
+        android:background="@color/gray"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="8dp"

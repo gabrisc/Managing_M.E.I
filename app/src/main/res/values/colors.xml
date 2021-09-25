@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="azul_muito_escuro">#002473</color>
-    <color name="DarkBlue">#002473</color>
+    <color name="azul_muito_escuro">#0A4159</color>
+    <color name="DarkBlue">#0A4159</color>
 
     <color name="Azul_mais_claro">#0004DB</color>
     <color name="MiddleBlue">#00CFE0</color>

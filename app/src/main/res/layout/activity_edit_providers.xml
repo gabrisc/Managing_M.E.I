@@ -4,19 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.main.ui.providers.editProviders.EditProvidersActivity">
+    tools:context=".view.ui.main.ui.providers.editProviders.EditProvidersActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
 
+
+    <View
+        android:id="@+id/divider22"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <TextView
         android:id="@+id/textView34"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_width="411dp"
+        android:layout_height="40dp"
+        android:background="@color/IntermediateDMBlue"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +43,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:hint="NOME FANTASIA"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView34">
@@ -37,6 +51,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,14 +62,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="CNPJ"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmailProvider"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailProvider"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailProvider">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,14 +82,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="TELEFONE"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextFantasyNameProvider"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextFantasyNameProvider"
         app:layout_constraintTop_toBottomOf="@+id/editTextFantasyNameProvider">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,14 +102,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="ENDEREÇO"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextDocumentProvider"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextDocumentProvider"
         app:layout_constraintTop_toBottomOf="@+id/editTextDocumentProvider">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,14 +122,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="EMAIL"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextTelefoneProvider"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTelefoneProvider"
         app:layout_constraintTop_toBottomOf="@+id/editTextTelefoneProvider">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,9 +150,9 @@
         android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:text="QUALIDADE"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textColorHint="@color/Azul_mais_claro"
         app:layout_constraintBottom_toTopOf="@+id/ratingBarForProvider"
         app:layout_constraintEnd_toEndOf="@+id/ratingBarForProvider"
@@ -143,7 +166,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="ATUALIZAR"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -152,14 +178,15 @@
         android:id="@+id/buttonCancelUpdateProvider"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="#FF0000"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonDeleteProvider"
@@ -167,21 +194,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif"
         android:text="APAGAR"
-        android:textColor="#FF0000"
+        android:textColor="@color/IntermediateDMBlue"
         app:elevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/ratingBarForProvider"
         app:layout_constraintStart_toStartOf="@+id/ratingBarForProvider"
         app:layout_constraintTop_toBottomOf="@+id/ratingBarForProvider" />
-
-    <View
-        android:id="@+id/divider22"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

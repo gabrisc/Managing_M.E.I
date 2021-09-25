@@ -7,6 +7,16 @@
     tools:context=".view.ui.login.signUp.BusinessSingUpActivity">
 
 
+    <View
+        android:id="@+id/divider27"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextNomeFantasia"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -25,6 +35,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,6 +55,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,6 +74,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +93,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -99,13 +113,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="phone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="414dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
         android:background="#0A4159"
         android:fontFamily="serif"
@@ -120,15 +135,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCadastrar_se"
-        android:layout_width="151dp"
-        android:layout_height="61dp"
+        android:layout_width="138dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
+        android:fontFamily="serif"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="CADASTRAR-SE"
+        android:text="CADASTRAR"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -141,6 +157,7 @@
         android:layout_height="61dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
+        android:fontFamily="serif"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:text="Cancelar"

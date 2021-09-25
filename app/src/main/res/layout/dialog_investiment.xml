@@ -5,14 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
     <TextView
         android:id="@+id/textView47"
-        android:layout_width="411dp"
-        android:layout_height="32dp"
-        android:fontFamily="@font/advent_pro_medium"
+        android:layout_width="415dp"
+        android:layout_height="40dp"
+        android:background="@color/IntermediateDMBlue"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:text="Novo Investimento"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="VALOR DO INVESTIMENTO"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextNomeDoInvestimento"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextNomeDoInvestimento"
@@ -35,6 +46,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,9 +54,9 @@
         android:id="@+id/Pagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:text="Pagamento"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnertipoPagamento"
         app:layout_constraintEnd_toEndOf="@+id/spinnertipoPagamento"
@@ -69,7 +81,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
         android:hint="INVESTIMENTO"
-        android:textColorHint="@color/Azul_mais_claro"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +90,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,9 +107,9 @@
         android:id="@+id/textView49"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:text="Tipo de investimento"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/gray"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnertimeOfInvestiment"
         app:layout_constraintEnd_toEndOf="@+id/spinnertimeOfInvestiment"
@@ -113,6 +126,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Salvar"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
@@ -128,21 +142,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnertimeOfInvestiment" />
-
-    <View
-        android:id="@+id/divider6"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@color/Azul_mais_claro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

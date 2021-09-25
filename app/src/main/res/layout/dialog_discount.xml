@@ -5,14 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/purple_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
     <TextView
         android:id="@+id/textView11"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_light"
+        android:layout_height="40dp"
+        android:background="@color/IntermediateDMBlue"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,19 +34,19 @@
         android:id="@+id/editTextDiscountClosingSale"
         android:layout_width="408dp"
         android:layout_height="29dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="#00BA4E4E"
         android:ems="10"
-        android:fontFamily="@font/advent_pro_light"
+        android:fontFamily="serif"
         android:gravity="center"
         android:inputType="textPersonName"
         android:text="Name"
-        android:textColor="@color/Azul_mais_claro"
+        android:textColor="@color/IntermediateDMBlue"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddDiscountClosingSale"
@@ -46,6 +57,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="PROXIMO"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
@@ -61,21 +73,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="CANCELAR"
         android:textColor="#FF0000"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDiscountClosingSale" />
-
-    <View
-        android:id="@+id/divider7"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/Azul_mais_claro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
