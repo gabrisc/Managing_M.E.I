@@ -95,6 +95,13 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
         Button buttonDelete = dialog.findViewById(R.id.buttonCheckListDelete);
         TextInputLayout editTextCheckListItem = dialog.findViewById(R.id.editTextNameForCheckListItem);
 
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
         if(isEditAndDelete) {
             editTextCheckListItem.getEditText().setText(checkListItems.get(position).getName().toUpperCase());
             buttonDelete.setOnClickListener(new View.OnClickListener() {

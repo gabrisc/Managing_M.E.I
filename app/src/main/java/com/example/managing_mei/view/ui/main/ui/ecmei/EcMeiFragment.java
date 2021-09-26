@@ -13,26 +13,21 @@ import androidx.fragment.app.Fragment;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Business;
-import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.company_health.CompanyHealthActivity;
 import com.example.managing_mei.view.ui.login.MainActivity;
-import com.example.managing_mei.view.ui.main.ui.ecmei.config.ConfigForAppActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getFireBaseAutenticacao;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
+import static com.example.managing_mei.utils.FormatDataUtils.formatCpfOrCnpj;
+import static com.example.managing_mei.utils.FormatDataUtils.formatPhoneNumber;
 
 public class EcMeiFragment extends Fragment {
-    private ImageButton openHealthCompany,logoutButton,configButton;
+    private ImageButton openHealthCompany,logoutButton;
     private Business provider;
     private TextView email, fantasyName, CNPJ, adress, phoneNumber, personName;
 
@@ -40,7 +35,6 @@ public class EcMeiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         openHealthCompany = view.findViewById(R.id.imageButtonOpenHealthCompany);
         logoutButton = view.findViewById(R.id.imageButtonLogout);
-        configButton = view.findViewById(R.id.imageButtonConfig);
         fantasyName = view.findViewById(R.id.textViewFantasyName);
         email = view.findViewById(R.id.textViewEmailBussines);
         CNPJ = view.findViewById(R.id.textViewCNPJBussines);
@@ -59,9 +53,9 @@ public class EcMeiFragment extends Fragment {
                             provider = ds.getValue(Business.class);
                             fantasyName.setText(provider.getFantasyName());
                             email.setText(provider.getEmail());
-                            CNPJ.setText(provider.getCNPJ());
+                            CNPJ.setText(formatCpfOrCnpj(provider.getCNPJ()));
                             adress.setText(provider.getAdress());
-                            phoneNumber.setText(provider.getPhoneNumber());
+                            phoneNumber.setText(formatPhoneNumber(provider.getPhoneNumber()));
                             personName.setText(provider.getPersonName());
                         }
                     }
@@ -75,25 +69,16 @@ public class EcMeiFragment extends Fragment {
 
         OpenCompanyHealth();
         actionForLogoutButton();
-        actionForConfigButton();
         return view;
     }
 
-    private void actionForConfigButton() {
-        configButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ConfigForAppActivity.class));
-            }
-        });
-    }
+
 
     private void actionForLogoutButton() {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //FirebaseAuth.getInstance().signOut();
-
+                //FirebaseAuth.getInstance().signOut()
                 FirebaseAuth autenticacao = getFireBaseAutenticacao();
                 autenticacao.signOut();
                 startActivity(new Intent( getContext(), MainActivity.class));

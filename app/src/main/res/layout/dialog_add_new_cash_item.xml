@@ -28,33 +28,58 @@
         android:layout_marginBottom="24dp"
         android:fontFamily="serif"
         android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButtonTypeNewCashItem"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/editTextValueForAddnewCashItem"
-        app:layout_constraintTop_toBottomOf="@+id/editTextValueForAddnewCashItem" />
+        app:layout_constraintEnd_toEndOf="@+id/switchTypeNewCashItem"
+        app:layout_constraintStart_toStartOf="@+id/switchTypeNewCashItem"
+        app:layout_constraintTop_toBottomOf="@+id/switchTypeNewCashItem" />
 
-    <EditText
-        android:id="@+id/editTextValueForAddnewCashItem"
-        android:layout_width="289dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextValueForCashFlowItem"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButtonTypeNewCashItem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
-
-    <ToggleButton
-        android:id="@+id/toggleButtonTypeNewCashItem"
-        android:layout_width="108dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:text="ToggleButton"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextValueForAddnewCashItem"
+        android:layout_marginEnd="24dp"
+        android:hint="VALOR DO FLUXO"
+        android:textColorHint="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextValueForAddnewCashItem" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextValueForCashFlowNameItem"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="NOME"
+        android:textColorHint="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/editTextValueForCashFlowItem"
+        app:layout_constraintStart_toStartOf="@+id/editTextValueForCashFlowItem"
+        app:layout_constraintTop_toBottomOf="@+id/editTextValueForCashFlowItem">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Switch
+        android:id="@+id/switchTypeNewCashItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/editTextValueForCashFlowNameItem"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextValueForCashFlowNameItem"
+        app:layout_constraintTop_toBottomOf="@+id/editTextValueForCashFlowNameItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

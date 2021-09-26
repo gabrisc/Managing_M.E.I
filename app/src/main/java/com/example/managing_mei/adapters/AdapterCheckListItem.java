@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.CheckListItem;
+import com.example.managing_mei.utils.FormatDataUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +41,7 @@ public class AdapterCheckListItem extends RecyclerView.Adapter<AdapterCheckListI
     @Override
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         CheckListItem checkListItem = checkListItems.get(position);
-        holder.texto.setText(checkListItem.getName());
+        holder.texto.setText(FormatDataUtils.formatTextToUpperOrLowerCase(checkListItem.getName(),true));
         holder.checkBox.setChecked(checkListItem.getStatus());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -18,7 +18,7 @@
 
     <View
         android:id="@+id/view10"
-        android:layout_width="416dp"
+        android:layout_width="0dp"
         android:layout_height="129dp"
         android:background="@color/IntermediateDMBlue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,8 +29,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCheckList"
         android:layout_width="0dp"
-        android:layout_height="584dp"
-        android:layout_marginTop="18dp"
+        android:layout_height="0dp"
         android:paddingStart="8dp"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
@@ -39,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view10" />
+        app:layout_constraintTop_toBottomOf="@+id/divider30" />
 
     <ImageButton
         android:id="@+id/imageButtonAddNewCheckList"
@@ -70,9 +69,11 @@
 
     <TextView
         android:id="@+id/textView38"
-        android:layout_width="366dp"
+        android:layout_width="0dp"
         android:layout_height="68dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:background="@color/IntermediateDMBlue"
         android:fontFamily="serif"
         android:gravity="center"

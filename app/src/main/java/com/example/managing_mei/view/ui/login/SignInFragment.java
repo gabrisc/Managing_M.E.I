@@ -48,11 +48,17 @@ public class SignInFragment extends Fragment {
                 startActivity(new Intent(getContext(), SingUpActivity.class));
             }
         });
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                login();
+            }
+        });
 
         return view;
     }
 
-    public void login(View view){
+    public void login( ){
         if (textEmail.getEditText().getText() == null){
             Toast toast=Toast. makeText(getContext(),"O E-mail está vazio",Toast. LENGTH_LONG);
             toast. show();

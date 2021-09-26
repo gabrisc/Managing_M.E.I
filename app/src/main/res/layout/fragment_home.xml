@@ -23,10 +23,12 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rouded_edit_text"
+        android:elevation="5dp"
         android:src="@drawable/ic_baseline_add_24"
         android:tint="#051040"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="UseAppTint" />
 
     <View
         android:id="@+id/view6"
@@ -44,17 +46,20 @@
         android:layout_height="45dp"
         android:layout_marginEnd="367dp"
         android:background="#00000000"
+        android:elevation="5dp"
         android:src="@drawable/ic_baseline_settings_24"
         android:tint="#E8E0E0"
         app:layout_constraintEnd_toEndOf="@+id/view6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseAppTint" />
 
     <ImageButton
         android:id="@+id/imageButtonLogout"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#009E7070"
+        android:elevation="5dp"
         android:src="@drawable/ic_baseline_exit_to_app_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -63,47 +68,34 @@
         app:tint="#E8E0E0" />
 
     <TextView
-        android:id="@+id/textView62"
-        android:layout_width="409dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="124dp"
+        android:id="@+id/textViewFantasyName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="NOME DA EMPRESA"
         android:textColor="@color/white"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/view6" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="48dp"
         android:layout_height="45dp"
         android:background="#00000000"
+        android:elevation="5dp"
         android:src="@drawable/ic_baseline_share_24"
         android:tint="#E8E0E0"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonLogout"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageButtonConfig"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewFantasyName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="serif"
-        android:text="TextView"
-        android:textColor="@color/azul_muito_escuro"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/divider3" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseAppTint" />
 
     <TextView
         android:id="@+id/textView64"
@@ -114,7 +106,7 @@
         android:textColor="@color/gray"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewFantasyName"
-        app:layout_constraintEnd_toEndOf="@+id/textViewFantasyName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textViewFantasyName" />
 
@@ -136,16 +128,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="serif"
         android:text="TextView"
         android:textColor="@color/azul_muito_escuro"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFantasyName" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
         android:id="@+id/textViewCNPJBussines"

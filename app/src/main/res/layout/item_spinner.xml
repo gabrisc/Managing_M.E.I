@@ -19,7 +19,7 @@
     android:paddingRight="8dp"
     android:paddingBottom="8dp"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@color/Azul_mais_claro"
+    android:textColor="@color/IntermediateDMBlue"
     android:textColorHighlight="@color/Azul_mais_claro"
-    android:textSize="18sp"
+    android:textSize="20sp"
     android:textStyle="normal" />

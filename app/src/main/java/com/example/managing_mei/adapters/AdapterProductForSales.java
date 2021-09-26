@@ -15,6 +15,9 @@ import com.example.managing_mei.model.enuns.TypeOfProduct;
 
 import java.util.List;
 
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
+
 public class AdapterProductForSales extends RecyclerView.Adapter<AdapterProductForSales.MyViewholder>{
 
     private List<Product> economicOperationForSaleList;
@@ -38,13 +41,15 @@ public class AdapterProductForSales extends RecyclerView.Adapter<AdapterProductF
     public void onBindViewHolder(@NonNull MyViewholder holder, int position) {
         Product economicOperation = economicOperationForSaleList.get(position);
         if (economicOperation.getType().equals(TypeOfProduct.PRODUTO.toString())){
-            holder.name.setText(economicOperation.getName().toUpperCase());
+            holder.name.setText(formatTextToUpperOrLowerCase(economicOperation.getName(),true));
             holder.quantity.setText(String.format(" %d %s ", economicOperation.getQuantity(), economicOperation.getTypeQuantity()));
-            holder.sealValue.setText("R$: "+String.valueOf(economicOperation.getSealValue()));holder.name.setText(economicOperation.getName().toUpperCase());
+            holder.sealValue.setText(formatMonetaryValue(economicOperation.getSealValue()));
+            holder.name.setText(formatTextToUpperOrLowerCase(economicOperation.getName(),true));
         }else{
-            holder.name.setText(economicOperation.getName().toUpperCase());
-            holder.sealValue.setText(""+String.valueOf(economicOperation.getSealValue())+" R$");holder.name.setText(economicOperation.getName().toUpperCase());
-            holder.quantity.setText(""+String.valueOf(economicOperation.getExpenseValue())+" R$");
+            holder.name.setText(formatTextToUpperOrLowerCase(economicOperation.getName(),true));
+            holder.sealValue.setText(formatMonetaryValue(economicOperation.getSealValue()));
+            holder.name.setText(formatTextToUpperOrLowerCase(economicOperation.getName(),true));
+            holder.quantity.setText(formatMonetaryValue(economicOperation.getExpenseValue()));
         }
     }
 

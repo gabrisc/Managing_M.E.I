@@ -18,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
+
 public class AdapterInvestimentItem extends RecyclerView.Adapter<AdapterInvestimentItem.MyViewHolder> {
 
     private List<InvestimentItem> investimentItemList;
@@ -41,9 +44,9 @@ public class AdapterInvestimentItem extends RecyclerView.Adapter<AdapterInvestim
     public void onBindViewHolder(@NonNull @NotNull AdapterInvestimentItem.MyViewHolder holder, int position) {
         InvestimentItem investimentItem = investimentItemList.get(position);
 
-        holder.nameOfInvest.setText(investimentItem.getNameFromInvestiment());
+        holder.nameOfInvest.setText(formatTextToUpperOrLowerCase(investimentItem.getNameFromInvestiment(),true));
 
-        holder.valueOfInvest.setText(investimentItem.getValueFromInvestiment().toString());
+        holder.valueOfInvest.setText(formatMonetaryValue(investimentItem.getValueFromInvestiment()));
 /*
         holder.checkBox.setChecked(investimentItem.getIsSettled());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

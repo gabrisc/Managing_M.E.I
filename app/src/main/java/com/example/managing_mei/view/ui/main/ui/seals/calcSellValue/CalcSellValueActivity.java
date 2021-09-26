@@ -25,7 +25,9 @@ import com.example.managing_mei.adapters.AdapterProductForSaleVo;
 import com.example.managing_mei.model.entities.CashFlowItem;
 import com.example.managing_mei.model.entities.ProductForSaleVo;
 import com.example.managing_mei.model.entities.Sale;
+import com.example.managing_mei.utils.FormatDataUtils;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
+import com.example.managing_mei.view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity;
 import com.example.managing_mei.view.ui.main.ui.seals.SealsFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -37,6 +39,8 @@ import java.util.List;
 import java.util.Set;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
+import static com.example.managing_mei.utils.FormatDataUtils.formatDateToStringFormated;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
 import static com.example.managing_mei.view.ui.main.ui.seals.addSell.AddSellActivity.clientSelected;
 import static com.example.managing_mei.view.ui.main.ui.seals.addSell.AddSellActivity.economicOperationForSaleVoArrayList;
 
@@ -45,6 +49,7 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
     private Spinner spinnerPaymentstype;
     private RecyclerView recyclerView;
     private AlertDialog alertDialog;
+    private ImageButton imageButtonSealConfig;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private Set<ProductForSaleVo> set = new HashSet<>();
     private Sale sale;
@@ -55,15 +60,27 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc_sell_value);
 
-
         recyclerView = findViewById(R.id.RecyclerViewEconomicOperationClosingSale);
         TextView clientName = findViewById(R.id.textViewClientNameClosingSale);
         Button conclusion = findViewById(R.id.imageButtonConclusionSaleAddButton);
         Button cancel = findViewById(R.id.imageButtonConclusionSaleCancelButton);
         spinnerPaymentstype = findViewById(R.id.listOfPaymentsTypeClosingSale);
         TextView date = findViewById(R.id.TextViewDateOfBuyClosingSale);
+        imageButtonSealConfig = findViewById(R.id.imageButtonSealConfig);
 
-        sale = new Sale(firebaseDbReference.push().getKey(),simpleDateFormat.format(System.currentTimeMillis()),clientSelected);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    this.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        });
+
+        sale = new Sale(firebaseDbReference.push().getKey(), formatDateToStringFormated(System.currentTimeMillis()),clientSelected);
         set.addAll(economicOperationForSaleVoArrayList);
 
         addListToSale();
@@ -73,8 +90,14 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         setListPaymentsTypes(sale);
         clientName.setText(sale.getClient().getNome().toUpperCase());
 
-        date.setText(simpleDateFormat.format(System.currentTimeMillis()));
+        date.setText(formatDateToStringFormated(System.currentTimeMillis()));
 
+        imageButtonSealConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PaymentsConfigActivity.class));
+            }
+        });
 
         conclusion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,11 +121,11 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
     private void setFinalValue(){
         TextView finalText = findViewById(R.id.textViewFinalValueClosingSale);
-        finalText.setText("R$:"+sale.getTotalValueFromProductsAndDiscount());
+        finalText.setText(formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()));
     }
 
     public void loadList(){
-        AdapterProductForSaleVo adapterEconomicOperationForSaleVo = new AdapterProductForSaleVo(set,getApplicationContext(), this::onEconomicOperationForSaleVoClick);
+        AdapterProductForSaleVo adapterEconomicOperationForSaleVo = new AdapterProductForSaleVo(set,getApplicationContext(), this::onEconomicOperationForSaleVoClick,true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterEconomicOperationForSaleVo);
@@ -181,8 +204,8 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         ProductForSaleVo economicOperationForSaleVo = set.iterator().next();
         View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_select_item,null);
 
-        ImageButton buttonDeleteEconomicOperation=mDialogView.findViewById(R.id.imageButtonCancelAddQuantity);
-        ImageButton buttonAddQuantity=mDialogView.findViewById(R.id.imageButtonConclusionAddQuantity);
+        Button buttonDeleteEconomicOperation=mDialogView.findViewById(R.id.imageButtonCancelAddQuantity);
+        Button buttonAddQuantity=mDialogView.findViewById(R.id.imageButtonConclusionAddQuantity);
         SeekBar seekBar=mDialogView.findViewById(R.id.seekBarQuantityForAddInSale);
         TextView counter = mDialogView.findViewById(R.id.textViewCounterAddQuantity);
 
@@ -241,9 +264,18 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         Button buttonAddDiscount = mDialogView.findViewById(R.id.buttonAddDiscountClosingSale);
         TextInputLayout editText = mDialogView.findViewById(R.id.editTextDiscountClosingSale);
 
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("DESCONTO");
         alertDialog=builder.create();
         editText.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        butttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
 
         buttonAddDiscount.setOnClickListener(new View.OnClickListener() {
             @Override

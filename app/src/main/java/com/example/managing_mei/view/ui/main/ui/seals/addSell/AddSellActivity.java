@@ -49,7 +49,7 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
     private RecyclerView recyclerView;
     private AlertDialog alertDialog;
     private TextView textViewOrder;
-    private Button buttonConclusionSelect;
+    private Button buttonConclusionSelect,buttonCancel,buttonProsseguirNewSeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,30 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
         setContentView(R.layout.activity_add_sell);
         buttonConclusionSelect = findViewById(R.id.imageButtonConclusionSelect);
         textViewOrder= findViewById(R.id.textViewOrder);
+        buttonCancel = findViewById(R.id.buttonCancelarFromAddNewSell);
+        buttonProsseguirNewSeal = findViewById(R.id.buttonProsseguirNewSeal);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        buttonProsseguirNewSeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clientSelected = new Client(" ","SEM CLIENTE"," "," ");
+                clientList.clear();
+                findAllEconomicOperation();
+                reloadRecyclerEconomicOperation();
+                buttonProsseguirNewSeal.setVisibility(View.INVISIBLE);
+            }
+        });
+
 
         reloadRecyclerClient();
+
         buttonConclusionSelect.setVisibility(View.INVISIBLE);
         buttonConclusionSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +139,13 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
             counter.setVisibility(View.INVISIBLE);
             seekBar.setVisibility(View.INVISIBLE);
         }
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("Quantidade");
         alertDialog=builder.create();
@@ -216,6 +245,7 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
                 .child(getIdUser())
                 .child("product")
                 .addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         listProduct.clear();
@@ -224,6 +254,12 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
                             listProduct.add(product);
                         }
                         adapterProduct.notifyDataSetChanged();
+                        if (listProduct.isEmpty()){
+                            buttonProsseguirNewSeal.setVisibility(View.VISIBLE);
+                            buttonProsseguirNewSeal.setText("Não é possivel prosseguir");
+                            buttonProsseguirNewSeal.setClickable(false);
+                            buttonConclusionSelect.setVisibility(View.INVISIBLE);
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -263,5 +299,6 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
         clientList.clear();
         findAllEconomicOperation();
         reloadRecyclerEconomicOperation();
+        buttonProsseguirNewSeal.setVisibility(View.INVISIBLE);
     }
 }

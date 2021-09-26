@@ -15,6 +15,12 @@ import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormat;
+import static com.example.managing_mei.utils.FormatDataUtils.formatCpfOrCnpj;
+import static com.example.managing_mei.utils.FormatDataUtils.formatPhoneNumber;
+
 public class EditProvidersActivity extends AppCompatActivity {
 
     private Provider provider = new Provider();
@@ -34,17 +40,30 @@ public class EditProvidersActivity extends AppCompatActivity {
         addressProvider = findViewById(R.id.editTextAdressProvider);
         evaluationProvider = findViewById(R.id.ratingBarForProvider);
         cnpjProvider = findViewById(R.id.editTextDocumentProvider);
-
         atualizarButton = findViewById(R.id.buttonUpdateProvider);
         deleteButton = findViewById(R.id.buttonDeleteProvider);
         cancelarButton = findViewById(R.id.buttonCancelUpdateProvider);
 
         fantasyNameProvider.getEditText().setText(provider.getFantasyName());
         emailProvider.getEditText().setText(provider.getEmail());
-        telefoneProvider.getEditText().setText(provider.getPhoneNumber());
+        telefoneProvider.getEditText().setText(formatPhoneNumber(provider.getPhoneNumber()));
         addressProvider.getEditText().setText(provider.getAddress());
         evaluationProvider.setRating(provider.getEvaluation());
-        cnpjProvider.getEditText().setText(provider.getCNPJ());
+        cnpjProvider.getEditText().setText(formatCpfOrCnpj(provider.getCNPJ()));
+
+        telefoneProvider.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                telefoneProvider.getEditText().setText(formatPhoneNumber(telefoneProvider.getEditText().getText().toString()));
+            }
+        });
+
+        cnpjProvider.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                cnpjProvider.getEditText().setText(formatCpfOrCnpj(cnpjProvider.getEditText().getText().toString()));
+            }
+        });
 
         setButtonActions();
     }
@@ -62,7 +81,7 @@ public class EditProvidersActivity extends AppCompatActivity {
         cancelarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
+                finish();
             }
         });
 
@@ -81,14 +100,23 @@ public class EditProvidersActivity extends AppCompatActivity {
         } else if (emailProvider.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (telefoneProvider.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
+        } else if (!EmailValidator.getInstance().isValid(emailProvider.getEditText().getText().toString())) {
+            Toast.makeText(getApplicationContext(),"E-mail Invalido",Toast. LENGTH_SHORT).show();
             return false;
-        } else if(addressProvider.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
+        } else if (telefoneProvider.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha as despesas", Toast.LENGTH_SHORT).show();
             return false;
-        } else if(cnpjProvider.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
+        } else if (cleanFormat(telefoneProvider.getEditText().getText().toString()).length()<6) {
+            Toast.makeText(getApplicationContext(), "Telefone Invalido", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (addressProvider.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha as despesas", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (cleanFormat(cnpjProvider.getEditText().getText().toString()).length()<8) {
+            Toast.makeText(getApplicationContext(), "CPNJ/CPF Invalido", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (cnpjProvider.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha as despesas", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             provider.setFantasyName(fantasyNameProvider.getEditText().getText().toString());

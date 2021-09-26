@@ -1,34 +1,24 @@
 package com.example.managing_mei.view.ui.main.ui.product.helpToCalc;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.ExpenseFromProducts;
-import com.example.managing_mei.model.entities.QuantitiesTypes;
-import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.main.ui.product.addProduct.AddProductActivity;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,7 +27,9 @@ import java.util.Locale;
 import java.util.Set;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
-import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormatValues;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValuePositiveOrNegative;
 
 public class HelpToCalcSealValueActivity extends AppCompatActivity {
 
@@ -75,12 +67,24 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
                    Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
                    Bundle bundle = new Bundle();
                    bundle.putDouble("expenses",calcTotalExpenses());
-                   bundle.putDouble("SealValue",Double.parseDouble(valueWithGain.getText().toString()));
+                   bundle.putDouble("SealValue",Double.parseDouble(cleanFormatValues(valueWithGain.getText().toString())));
                    intent.putExtras(bundle);
                    startActivity(intent);
                }
             }
         });
+
+        editTextExpense.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    editTextExpense.getEditText().setText(cleanFormatValues(editTextExpense.getEditText().getText().toString()));
+                } else {
+                    editTextExpense.getEditText().setText(formatMonetaryValue(Double.valueOf(editTextExpense.getEditText().getText().toString())));
+                }
+            }
+        });
+
 
         setActionForSeekBar();
         cancelCalcValue();
@@ -129,7 +133,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
 
     private void calcValue() {
         Double value = calcTotalExpenses()+((Double.parseDouble(countOfGainPercent.getText().toString())/100)*calcTotalExpenses());
-        valueWithGain.setText(String.format(Locale.UK, "%,.2f", value));
+        valueWithGain.setText(formatMonetaryValue(value));
     }
 
 
@@ -141,7 +145,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
         CancelCalcButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finish();
             }
         });
     }
@@ -165,7 +169,7 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
         mainListOfQuantityTypes.stream().forEach(expenseFromProducts -> {
             Chip chip = new Chip(this);
             chip.setId(ViewCompat.generateViewId());
-            chip.setText(" - "+expenseFromProducts.getExpenseValue());
+            chip.setText(formatMonetaryValuePositiveOrNegative(expenseFromProducts.getExpenseValue(),false));
             chip.setTextColor(Color.parseColor("#FF0000"));
             chip.setCheckable(true);
             chip.setChipIconVisible(true);

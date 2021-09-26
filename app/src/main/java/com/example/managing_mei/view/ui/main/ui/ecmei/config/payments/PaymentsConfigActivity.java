@@ -58,6 +58,18 @@ public class PaymentsConfigActivity extends AppCompatActivity {
         chipGroup = findViewById(R.id.PaymentTypeChipGroup);
         imageButtonAddPaymentType = findViewById(R.id.imageButtonAddPaymentType);
         buttonSaveNewPaymentsTypes = findViewById(R.id.buttonSaveNewPaymentsTypes);
+        buttonCancelPaymentsTypes = findViewById(R.id.buttonCancelNewPaymentForm);
+
+        buttonCancelPaymentsTypes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    this.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        });
 
         paymentTypeList.clear();
 

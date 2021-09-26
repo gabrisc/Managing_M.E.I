@@ -9,11 +9,10 @@
 
     <View
         android:id="@+id/view5"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="134dp"
         android:background="@color/IntermediateDMBlue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,21 +25,83 @@
         android:text="Calculo do valor do\nProduto/Serviço"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/view5"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Porcentagem de Lucro"
+        android:textColor="@color/gray"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <TextView
+        android:id="@+id/textViewCountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/IntermediateDMBlue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="5dp"
+        android:foregroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCountValue" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAddNewExpense"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rouded_edit_text"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/chipGroupForCal"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextNumberDecimal"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="5dp"
         android:hint="VALOR AGREGADO"
+        app:layout_constraintBottom_toTopOf="@+id/CancelCalcButton"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonAddNewExpense"
-        app:layout_constraintStart_toStartOf="@+id/chipGroupForCal"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroupForCal">
+        app:layout_constraintStart_toStartOf="@+id/chipGroupForCal">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -49,40 +110,20 @@
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        style="@android:style/Widget.DeviceDefault.Light.SeekBar"
-        android:layout_width="0dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="32dp"
-        android:background="#FFFFFF"
-        android:backgroundTint="#FFFFFF"
-        android:foregroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/imageButtonAddNewExpense"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimal"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal" />
-
-    <ImageButton
-        android:id="@+id/imageButtonAddNewExpense"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/rouded_edit_text"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroupForCal"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupForCal"
-        android:layout_width="365dp"
-        android:layout_height="215dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/white_backgroud_rouded"
         android:elevation="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5">
+        app:layout_constraintTop_toBottomOf="@+id/divider37">
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -92,10 +133,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="#FF0000"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -106,19 +148,19 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="serif"
         android:text="Salvar"
         app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewValueWithGain"
-        android:layout_width="0dp"
+        android:layout_width="363dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:fontFamily="serif"
         android:gravity="center"
@@ -126,12 +168,9 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView22"
@@ -150,39 +189,6 @@
         app:layout_constraintStart_toStartOf="@+id/textViewValueWithGain" />
 
     <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:text="Porcentagem de Lucro"
-        android:textColor="@color/gray"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/seekBar" />
-
-    <TextView
-        android:id="@+id/textViewCountValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:text="1"
-        android:textColor="@color/IntermediateDMBlue"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/seekBar"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
-
-    <TextView
         android:id="@+id/textView73"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -190,8 +196,31 @@
         android:text="Despesas"
         app:layout_constraintBottom_toTopOf="@+id/chipGroupForCal"
         app:layout_constraintEnd_toEndOf="@+id/chipGroupForCal"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="@+id/chipGroupForCal" />
+
+    <View
+        android:id="@+id/divider37"
+        android:layout_width="409dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/IntermediateDMBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text=" %  "
+        android:textColor="@color/IntermediateDMBlue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCountValue"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCountValue"
+        app:layout_constraintTop_toTopOf="@+id/textViewCountValue" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

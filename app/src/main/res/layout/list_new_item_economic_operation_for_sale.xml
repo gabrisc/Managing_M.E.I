@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nameItemNew"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Nome do item"
+        android:textColor="@color/IntermediateDMBlue"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/qtdItemNew"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="1000 Kg"
+        android:textColor="@color/gray"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/divider39"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider39"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@color/IntermediateDMBlue"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewValueOfEconomicOperationNew"
+        app:layout_constraintEnd_toEndOf="@+id/nameItemNew"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/nameItemNew"
+        app:layout_constraintTop_toBottomOf="@+id/divider40"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewValueOfEconomicOperationNew"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:layout_weight="1"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="150 R$"
+        android:textColor="@color/verdeClaro"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/divider39"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/nameItemNew" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:tint="@color/DarkBlue"
+        app:layout_constraintBottom_toBottomOf="@+id/divider39"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameItemNew"
+        app:srcCompat="@drawable/ic_baseline_shopping_bag_24" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:tint="@color/DarkBlue"
+        app:layout_constraintBottom_toBottomOf="@+id/divider39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameItemNew"
+        app:srcCompat="@drawable/ic_baseline_attach_money_24" />
+
+    <View
+        android:id="@+id/divider40"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:background="@color/IntermediateDMBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nameItemNew"
+        app:layout_constraintTop_toBottomOf="@+id/nameItemNew" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

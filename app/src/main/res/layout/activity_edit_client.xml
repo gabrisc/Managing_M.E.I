@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.client.editClient.EditClientActivity">
 
+
     <View
         android:id="@+id/divider10"
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:background="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -27,25 +27,21 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextEmailEditClient"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:elevation="5dp"
         android:hint="EMAIL"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29">
+        app:layout_constraintEnd_toEndOf="@+id/editTextNomeEditClient"
+        app:layout_constraintStart_toStartOf="@+id/editTextNomeEditClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeEditClient">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -60,12 +56,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:elevation="5dp"
         android:hint="TELEFONE"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNomeEditClient"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNomeEditClient"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomeEditClient">
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmailEditClient"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailEditClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailEditClient">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -79,13 +75,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="NOME DO CLIENTE"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:elevation="5dp"
+        android:hint="NOME"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEmailEditClient"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextEmailEditClient"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailEditClient">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider10"
+        app:layout_constraintVertical_bias="0.100000024">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -101,7 +100,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="serif"
         android:text="Continuar"
         app:backgroundTint="@color/verdeClaro"
@@ -115,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
@@ -132,7 +131,7 @@
         android:fontFamily="serif"
         android:text="APAGAR"
         android:textColor="@color/IntermediateDMBlue"
-        app:elevation="5dp"
+        app:iconTint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/editTextPhoneEditClient"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/editTextPhoneEditClient"

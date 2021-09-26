@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Client;
+import com.example.managing_mei.utils.FormatDataUtils;
 
 import java.util.List;
+
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
 
 public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHolder>{
 
@@ -36,7 +39,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Client client = clientList.get(position);
-        holder.nome.setText(client.getNome().toUpperCase());
+        holder.nome.setText(formatTextToUpperOrLowerCase(client.getNome(),true));
     }
 
     @Override

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.CashFlowItem;
+import com.example.managing_mei.utils.FormatDataUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -42,13 +43,13 @@ public class AdapterCashFlowItem extends RecyclerView.Adapter<AdapterCashFlowIte
         CashFlowItem flowItem = cashFlowItemList.get(position);
         holder.primeiro.setText(""+flowItem.getDayOfMonth()+"/"+flowItem.getMonth());
         if (flowItem.getType().equals(0)){
-            holder.segundo.setText("- "+flowItem.getValue());
+            holder.segundo.setText(FormatDataUtils.formatMonetaryValuePositiveOrNegative(flowItem.getValue(),false));
             //holder.segundo.setTextColor(Color.parseColor(String.valueOf(R.color.vermelho)));
         }else{
-            holder.segundo.setText("+ "+flowItem.getValue());
+            holder.segundo.setText(FormatDataUtils.formatMonetaryValuePositiveOrNegative(flowItem.getValue(),true));
             //holder.segundo.setTextColor(Color.parseColor(String.valueOf(R.color.vermelho)));
         }
-        holder.terceiro.setText(flowItem.getDescription());
+        holder.terceiro.setText(FormatDataUtils.formatTextToUpperOrLowerCase(flowItem.getDescription(),true));
     }
 
     @Override

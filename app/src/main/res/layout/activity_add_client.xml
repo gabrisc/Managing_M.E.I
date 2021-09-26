@@ -41,7 +41,10 @@
         android:fontFamily="serif"
         android:text="TextView"
         android:textColor="@color/IntermediateDMBlue"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNameClient"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextNameClient"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,13 +53,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:elevation="5dp"
         android:hint="NOME"
         android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDataAddClient">
+        app:layout_constraintTop_toBottomOf="@+id/divider16"
+        app:layout_constraintVertical_bias="0.07999998">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -74,6 +79,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:elevation="5dp"
         android:hint="EMAIL"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextNameClient"
@@ -95,6 +101,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:elevation="5dp"
         android:hint="TELEFONE"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextClientEmail"
@@ -118,6 +125,7 @@
         android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -132,6 +140,7 @@
         android:fontFamily="serif"
         android:text="Cadastrar"
         app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

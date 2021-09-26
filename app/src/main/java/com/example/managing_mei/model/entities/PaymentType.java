@@ -1,5 +1,7 @@
 package com.example.managing_mei.model.entities;
 
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
+
 public class PaymentType {
 
     private String nome;
@@ -15,7 +17,7 @@ public class PaymentType {
 
 
     public String getNome() {
-        return nome;
+        return formatTextToUpperOrLowerCase(nome, true);
     }
 
     public void setNome(String nome) {

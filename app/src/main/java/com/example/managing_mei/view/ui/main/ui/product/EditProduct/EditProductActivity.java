@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormat;
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormatValues;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
 
 public class EditProductActivity extends AppCompatActivity {
 
@@ -46,6 +51,8 @@ public class EditProductActivity extends AppCompatActivity {
     private Button buttonAtualizar, buttonCancelar,buttonDeletar;
     private final LinkedList<Provider> listaDeFornecedoresRecuperada = new LinkedList<>();
     private Integer fornecedorEscolhido;
+    private Switch switchWhioutProvider;
+    private TextView textViewTitleProviderEditProduct;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -67,12 +74,60 @@ public class EditProductActivity extends AppCompatActivity {
         buttonAtualizar = findViewById(R.id.buttonAddProductEdit);
         buttonCancelar = findViewById(R.id.buttonCancelProductEdit);
         buttonDeletar = findViewById(R.id.buttonDeleteProduct);
+        switchWhioutProvider = findViewById(R.id.switchWhioutProvider);
+        textViewTitleProviderEditProduct = findViewById(R.id.textViewTitleProviderEditProduct);
+
+        buttonCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    this.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        });
+
+        switchWhioutProvider.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    spinnerFornecedor.setVisibility(View.INVISIBLE);
+                    textViewTitleProviderEditProduct.setVisibility(View.INVISIBLE);
+                } else {
+                    spinnerFornecedor.setVisibility(View.VISIBLE);
+                    textViewTitleProviderEditProduct.setVisibility(View.VISIBLE);
+                    setValuesInSpinnerProviders();
+                }
+            }
+        });
 
         tituloTipoQuantidade.setText(productRecuperado.getType().toUpperCase());
         nomeProduto.getEditText().setText(productRecuperado.getName().toUpperCase());
-        despesasProduto.getEditText().setText(productRecuperado.getExpenseValue().toString());
+        despesasProduto.getEditText().setText(formatMonetaryValue(productRecuperado.getExpenseValue()));
         contadorDoSeekBar.setText(productRecuperado.getQuantity().toString());
-        valorDeVendaProduto.getEditText().setText(productRecuperado.getSealValue().toString());
+        valorDeVendaProduto.getEditText().setText(formatMonetaryValue(productRecuperado.getSealValue()));
+
+        despesasProduto.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    despesasProduto.getEditText().setText(cleanFormatValues(despesasProduto.getEditText().getText().toString()));
+                } else {
+                    despesasProduto.getEditText().setText(formatMonetaryValue(Double.valueOf(despesasProduto.getEditText().getText().toString())));
+                }
+            }
+        });
+        valorDeVendaProduto.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    valorDeVendaProduto.getEditText().setText(cleanFormatValues(valorDeVendaProduto.getEditText().getText().toString()));
+                } else {
+                    valorDeVendaProduto.getEditText().setText(formatMonetaryValue(Double.valueOf(valorDeVendaProduto.getEditText().getText().toString())));
+                }
+            }
+        });
 
         setSpinnerQuantitiesType();
         setValuesInSpinnerProviders();
@@ -104,8 +159,8 @@ public class EditProductActivity extends AppCompatActivity {
             return false;
         } else {
             productRecuperado.setName(nomeProduto.getEditText().getText().toString());
-            productRecuperado.setExpenseValue(Double.valueOf(despesasProduto.getEditText().getText().toString()));
-            productRecuperado.setSealValue(Double.valueOf(valorDeVendaProduto.getEditText().getText().toString()));
+            productRecuperado.setExpenseValue(Double.valueOf(cleanFormatValues(despesasProduto.getEditText().getText().toString())));
+            productRecuperado.setSealValue(Double.valueOf(cleanFormatValues(valorDeVendaProduto.getEditText().getText().toString())));
         }
         productRecuperado.setTypeQuantity(spinnerTipoDeQuantidade.getSelectedItem().toString());
         productRecuperado.setType(spinnerTipoDeQuantidade.getSelectedItem().toString());
@@ -128,12 +183,18 @@ public class EditProductActivity extends AppCompatActivity {
                             Provider provider = ds.getValue(Provider.class);
                             listaDeFornecedoresRecuperada.add(provider);
                         }
-                        Provider providerToMove = listaDeFornecedoresRecuperada.stream().filter(provider -> provider.getId().equals(productRecuperado.getProviderId())).findAny().orElse(null);
-                        listaDeFornecedoresRecuperada.remove(providerToMove);
-                        listaDeFornecedoresRecuperada.addFirst(providerToMove);
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, listaDeFornecedoresRecuperada.stream().map(Provider::getFantasyName).collect(Collectors.toList()));
-                        spinnerFornecedor.setAdapter(adapter);
-                        spinnerFornecedor.setSelection(listaDeFornecedoresRecuperada.indexOf(providerToMove));
+                        if (productRecuperado.getProviderId().equals("SEM FORNECEDOR")){
+                            switchWhioutProvider.setChecked(true);
+                            switchWhioutProvider.setClickable(false);
+                        } else {
+                            Provider providerToMove = listaDeFornecedoresRecuperada.stream().filter(provider -> provider.getId().equals(productRecuperado.getProviderId())).findAny().orElse(null);
+                            listaDeFornecedoresRecuperada.remove(providerToMove);
+                            listaDeFornecedoresRecuperada.addFirst(providerToMove);
+                            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, listaDeFornecedoresRecuperada.stream().map(Provider::getFantasyName).collect(Collectors.toList()));
+                            spinnerFornecedor.setAdapter(adapter);
+                            spinnerFornecedor.setSelection(listaDeFornecedoresRecuperada.indexOf(providerToMove));
+                        }
+
                     }
 
                     @Override
@@ -145,6 +206,7 @@ public class EditProductActivity extends AppCompatActivity {
         spinnerFornecedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 listaDeFornecedoresRecuperada.stream().forEach(p -> {
                     if (p.getFantasyName().equals(spinnerFornecedor.getSelectedItem().toString())){
                         fornecedorEscolhido = listaDeFornecedoresRecuperada.indexOf(p);
@@ -241,7 +303,7 @@ public class EditProductActivity extends AppCompatActivity {
         buttonCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
+                finish();
             }
         });
 
@@ -255,9 +317,9 @@ public class EditProductActivity extends AppCompatActivity {
 
     private void deleteProduct(){
         productRecuperado.delete();
-        Toast toast=Toast. makeText(getApplicationContext(),"Deletado",Toast. LENGTH_SHORT);
+        Toast toast=Toast. makeText(getApplicationContext(),"Produto Deletado",Toast. LENGTH_LONG);
         toast.show();
-        this.finish();
+        finish();
     }
 
 }

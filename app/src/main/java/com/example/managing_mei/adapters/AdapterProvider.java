@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Client;
 import com.example.managing_mei.model.entities.Provider;
+import com.example.managing_mei.utils.FormatDataUtils;
 
 import java.util.List;
+
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
 
 public class AdapterProvider extends RecyclerView.Adapter<AdapterProvider.MyViewHolder>{
 
@@ -37,7 +40,7 @@ public class AdapterProvider extends RecyclerView.Adapter<AdapterProvider.MyView
     @Override
     public void onBindViewHolder(@NonNull AdapterProvider.MyViewHolder holder, int position) {
         Provider provider = providerList.get(position);
-        holder.nome.setText(provider.getFantasyName());
+        holder.nome.setText(formatTextToUpperOrLowerCase(provider.getFantasyName(),true));
     }
 
     @Override

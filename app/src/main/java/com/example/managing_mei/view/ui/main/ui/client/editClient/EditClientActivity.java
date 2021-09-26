@@ -2,6 +2,7 @@ package com.example.managing_mei.view.ui.main.ui.client.editClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,11 @@ import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.Client;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.apache.commons.validator.routines.EmailValidator;
+
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormat;
+import static com.example.managing_mei.utils.FormatDataUtils.formatPhoneNumber;
 
 public class EditClientActivity extends AppCompatActivity {
 
@@ -36,8 +42,22 @@ public class EditClientActivity extends AppCompatActivity {
 
         nomeClient.getEditText().setText(client.getNome().toUpperCase());
         emailClient.getEditText().setText(client.getEmail());
-        telefoneClient.getEditText().setText(client.getTelefone().toString());
+        telefoneClient.getEditText().setText(client.getTelefone());
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               deleteProduct();
+            }
+        });
+
+        telefoneClient.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                telefoneClient.getEditText().setText(formatPhoneNumber(telefoneClient.getEditText().getText().toString()));
+            }
+        });
         setButtonActions();
     }
 
@@ -55,14 +75,7 @@ public class EditClientActivity extends AppCompatActivity {
         cancelarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
-            }
-        });
-
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteProduct();
+                finish();
             }
         });
     }
@@ -72,7 +85,7 @@ public class EditClientActivity extends AppCompatActivity {
         client.setId(bundle.getString("id"));
         client.setNome(bundle.getString("nome"));
         client.setEmail(bundle.getString("email"));
-        client.setTelefone(bundle.getString("Telefone"));
+        client.setTelefone(formatPhoneNumber(bundle.getString("Telefone")));
     }
 
     private boolean validarCampos(){
@@ -82,20 +95,24 @@ public class EditClientActivity extends AppCompatActivity {
         } else if (emailClient.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
             return false;
-        } else if (telefoneClient.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
+        } else if (!EmailValidator.getInstance().isValid(emailClient.getEditText().getText().toString())) {
+            Toast.makeText(getApplicationContext(),"E-mail Invalido",Toast. LENGTH_SHORT).show();
             return false;
+        } else if (telefoneClient.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha as despesas", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (telefoneClient.getEditText().getText().toString().length()<6) {
         } else {
             client.setNome(nomeClient.getEditText().getText().toString());
             client.setEmail(emailClient.getEditText().getText().toString());
-            client.setTelefone(telefoneClient.getEditText().getText().toString());
+            cleanFormat(telefoneClient.getEditText().getText().toString());
         }
         return true;
     }
 
     private void deleteProduct(){
         client.delete();
-        Toast toast=Toast. makeText(getApplicationContext(),"Deletado",Toast. LENGTH_SHORT);
+        Toast toast=Toast. makeText(getApplicationContext(),"Cliente Deletado",Toast. LENGTH_SHORT);
         toast.show();
         this.finish();
     }

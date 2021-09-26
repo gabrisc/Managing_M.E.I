@@ -18,6 +18,7 @@ import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +40,7 @@ public class ProductConfigActivity extends AppCompatActivity {
     private ImageButton imageButtonAddNewType;
     private Switch switchHoursOnly;
     private ChipGroup chipGroupForProductConfig;
-    private EditText editTextNewTypeForProductConfig;
+    private TextInputLayout editTextNewTypeForProductConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,17 @@ public class ProductConfigActivity extends AppCompatActivity {
         editTextNewTypeForProductConfig = findViewById(R.id.editTextNewTypeForProductConfig);
 
         mainListOfQuantityTypes.clear();
+
+        buttonCancelProductConfiig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    this.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        });
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(getIdUser()+"/QuantitiesTypes");
@@ -76,7 +88,7 @@ public class ProductConfigActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuantityType quantityType = new QuantityType();
-                quantityType.setNome(editTextNewTypeForProductConfig.getText().toString());
+                quantityType.setNome(editTextNewTypeForProductConfig.getEditText().getText().toString());
                 quantityType.setStatus(false);
                 mainListOfQuantityTypes.add(quantityType);
                 reloadChipGroup();
@@ -92,7 +104,7 @@ public class ProductConfigActivity extends AppCompatActivity {
                 chipsToShow.add(chip);
             }
         });
-        editTextNewTypeForProductConfig.setText("");
+        editTextNewTypeForProductConfig.getEditText().setText("");
         chipGroupForProductConfig.removeAllViews();
         chipsToShow.stream().forEach(chip -> chipGroupForProductConfig.addView(chip));
     }

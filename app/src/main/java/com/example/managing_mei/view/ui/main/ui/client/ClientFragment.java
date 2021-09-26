@@ -58,6 +58,13 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadList();
+        reloadRecyclerClient();
+    }
+
     private void callAddFragment() {
         imageButtonAddClient.setOnClickListener(new View.OnClickListener() {
             @Override

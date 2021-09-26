@@ -17,6 +17,9 @@ import com.example.managing_mei.model.enuns.TypeOfProduct;
 
 import java.util.List;
 
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
+
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHolder>{
 
     private List<Product> saleList;
@@ -41,13 +44,15 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
     public void onBindViewHolder(@NonNull AdapterProduct.MyViewHolder holder, int position) {
         Product economicOperation = saleList.get(position);
         if (economicOperation.getType().equals(TypeOfProduct.SERVIÇO.toString())){
-            holder.name.setText(economicOperation.getName().toUpperCase());
-            holder.sealValue.setText("Venda: "+String.valueOf(economicOperation.getSealValue())+"R$");
-            holder.quantity.setText("Custo: " +String.valueOf(economicOperation.getExpenseValue())+" R$");
+
+            holder.name.setText(formatTextToUpperOrLowerCase(economicOperation.getName(),true));
+            holder.sealValue.setText("Venda: "+formatMonetaryValue(economicOperation.getSealValue()));
+            holder.quantity.setText("Custo: " +formatMonetaryValue(economicOperation.getExpenseValue()));
+
         } else {
             holder.name.setText(economicOperation.getName());
             holder.quantity.setText(String.format("%d %s", economicOperation.getQuantity(), economicOperation.getTypeQuantity()));
-            holder.sealValue.setText("R$: "+String.valueOf(economicOperation.getSealValue()));
+            holder.sealValue.setText(formatMonetaryValue(economicOperation.getSealValue()));
         }
     }
 

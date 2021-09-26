@@ -16,6 +16,9 @@ import com.example.managing_mei.model.entities.Sale;
 
 import java.util.List;
 
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatTextToUpperOrLowerCase;
+
 public class AdapterSales extends RecyclerView.Adapter<AdapterSales.MyViewHolder>{
 
 private List<Sale> saleList;
@@ -39,10 +42,10 @@ public AdapterSales(List<Sale> saleList, Context context, OnSaleListerner monSal
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
                 Sale sale = saleList.get(position);
-                holder.name.setText(sale.getClient().getNome().toUpperCase());
-                holder.totalValue.setText(sale.getTotalValueFromProductsAndDiscount().toString());
-                holder.gain.setText(sale.getGain().toString());
-                holder.paymentType.setText(sale.getPaymentType());
+                holder.name.setText(formatTextToUpperOrLowerCase(sale.getClient().getNome().toUpperCase(), true));
+                holder.totalValue.setText(formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()));
+                holder.gain.setText(formatMonetaryValue(sale.getGain()));
+                holder.paymentType.setText(formatTextToUpperOrLowerCase(sale.getPaymentType(),true));
         }
 
         @Override

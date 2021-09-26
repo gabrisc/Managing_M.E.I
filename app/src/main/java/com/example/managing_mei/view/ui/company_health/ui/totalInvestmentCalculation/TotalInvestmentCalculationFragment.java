@@ -34,6 +34,8 @@ import java.util.List;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormatValues;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
 
 
 public class TotalInvestmentCalculationFragment extends Fragment implements AdapterInvestimentItem.OnInvestimentItemListener {
@@ -99,8 +101,26 @@ public class TotalInvestmentCalculationFragment extends Fragment implements Adap
         Button buttonAdd = dialog.findViewById(R.id.buttonConfirmInvestiment);
         Button buttonDelete = dialog.findViewById(R.id.buttonCancelInvestiment);
 
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
         Spinner spinnerQuitado = dialog.findViewById(R.id.spinnertipoPagamento);
         Spinner spinnerTypeOfInvestiment = dialog.findViewById(R.id.spinnertimeOfInvestiment);
+
+        editTextValueFromInvestiment.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    editTextValueFromInvestiment.getEditText().setText(cleanFormatValues(editTextValueFromInvestiment.getEditText().getText().toString()));
+                } else {
+                    editTextValueFromInvestiment.getEditText().setText(formatMonetaryValue(Double.parseDouble(editTextValueFromInvestiment.getEditText().getText().toString())));
+                }
+            }
+        });
 
         List<String> arrayPagamentoQuitado = new ArrayList<>();
         arrayPagamentoQuitado.add("Pedente");
@@ -158,7 +178,7 @@ public class TotalInvestmentCalculationFragment extends Fragment implements Adap
                         InvestimentItem investimentItem =  new InvestimentItem(editTextNameFromInvestiment.getEditText().getText().toString(),
                                 spinnerQuitado.getSelectedItem().toString(),
                                 spinnerTypeOfInvestiment.getSelectedItem().toString(),
-                                Double.valueOf(editTextValueFromInvestiment.getEditText().getText().toString()));
+                                Double.valueOf(cleanFormatValues(editTextValueFromInvestiment.getEditText().getText().toString())));
 
                         investimentItem.save();
                         dialog.dismiss();

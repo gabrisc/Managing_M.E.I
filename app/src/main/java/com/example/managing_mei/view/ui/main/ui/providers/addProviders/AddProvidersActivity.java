@@ -16,11 +16,16 @@ import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.providers.ProvidersFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormat;
+import static com.example.managing_mei.utils.FormatDataUtils.formatCpfOrCnpj;
+import static com.example.managing_mei.utils.FormatDataUtils.formatPhoneNumber;
 
 public class AddProvidersActivity extends AppCompatActivity {
 
@@ -44,66 +49,82 @@ public class AddProvidersActivity extends AppCompatActivity {
         email = findViewById(R.id.editTextTextEmailAddressProvider);
         evaluation = findViewById(R.id.ratingBarProvider);
         data = findViewById(R.id.textViewDateProvider);
-
+        buttonAdd = findViewById(R.id.buttonAddProvider);
+        buttonCancel = findViewById(R.id.buttonCancelProvider);
 
         data.setText(simpleDateFormat.format(System.currentTimeMillis()).toString());
 
-        buttonAdd = findViewById(R.id.buttonAddProvider);
-        buttonCancel = findViewById(R.id.buttonCancelProvider);
+        phoneNumber.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                phoneNumber.getEditText().setText(formatPhoneNumber(phoneNumber.getEditText().getText().toString()));
+            }
+        });
+
+        cnpj.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                cnpj.getEditText().setText(formatCpfOrCnpj(cnpj.getEditText().getText().toString()));
+            }
+        });
 
         actionForButtonAdd();
         actionForButtonCancel();
     }
     private void validateFields(){
-
-        if (fantasyName.getEditText().getText().toString().isEmpty()){
-            Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome do ",Toast. LENGTH_SHORT);
-            toast. show();
-        }
-
-        if (address.getEditText().getText().toString().isEmpty()){
-            Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
-            toast. show();
-        }
-
-        if (cnpj.getEditText().getText().toString().isEmpty()){
-            Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
-            toast. show();
-        }
-
-        if (phoneNumber.getEditText().getText().toString().isEmpty()){
-            Toast toast=Toast.makeText(getApplicationContext(),"Entre com o nome",Toast. LENGTH_SHORT);
-            toast. show();
-        }
-
-        if (email.getEditText().getText().toString().isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Entre com o nome", Toast.LENGTH_SHORT);
+        if (!EmailValidator.getInstance().isValid(email.getEditText().getText().toString())) {
+            Toast toast = Toast.makeText(getApplicationContext(), "O E-mail não e valido", Toast.LENGTH_LONG);
             toast.show();
         } else {
-            saveProvider(new Provider(
-                            firebaseDbReference.push().getKey(),
-                            fantasyName.getEditText().getText().toString(),
-                            cnpj.getEditText().getText().toString(),
-                            phoneNumber.getEditText().getText().toString(),
-                            email.getEditText().getText().toString(),
-                            address.getEditText().getText().toString(),
-                            evaluation.getRating()));
+            if (fantasyName.getEditText().getText().toString().isEmpty()){
+                Toast toast=Toast.makeText(getApplicationContext(),"Preencha o Nome Fantasia",Toast. LENGTH_LONG);
+                toast. show();
+            }else if (address.getEditText().getText().toString().isEmpty()){
+                Toast toast=Toast.makeText(getApplicationContext(),"Preencha o Endereço",Toast. LENGTH_LONG);
+                toast. show();
+            }else if (cnpj.getEditText().getText().toString().isEmpty()){
+                Toast toast=Toast.makeText(getApplicationContext(),"Preencha o CPNJ",Toast. LENGTH_LONG);
+                toast. show();
+            }else if (phoneNumber.getEditText().getText().toString().isEmpty()){
+                Toast toast=Toast.makeText(getApplicationContext(),"Preencha o Telefone",Toast. LENGTH_LONG);
+                toast. show();
+            }else if (address.getEditText().getText().toString().isEmpty()){
+                Toast toast=Toast.makeText(getApplicationContext(),"Preencha o Endereço",Toast. LENGTH_LONG);
+                toast. show();
+            }else if (email.getEditText().getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Preencha o E-mail", Toast.LENGTH_LONG);
+                toast.show();
+            } if (cnpj.getEditText().getText().toString().length()<10) {
+                Toast toast = Toast.makeText(getApplicationContext(), "CNPJ invalido", Toast.LENGTH_LONG);
+                toast.show();
+            } else if (phoneNumber.getEditText().getText().toString().length()<6) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Telefone invalido", Toast.LENGTH_LONG);
+                toast.show();
+            } else {
+                saveProvider(new Provider(
+                        firebaseDbReference.push().getKey(),
+                        fantasyName.getEditText().getText().toString(),
+                        cleanFormat(cnpj.getEditText().getText().toString()),
+                        cleanFormat(phoneNumber.getEditText().getText().toString()),
+                        email.getEditText().getText().toString(),
+                        address.getEditText().getText().toString(),
+                        evaluation.getRating()));
+            }
         }
     }
 
     private void saveProvider(Provider provider) {
-
-        Toast toast=Toast. makeText(getApplicationContext(),provider.save(),Toast. LENGTH_SHORT);
+        provider.save();
+        Toast toast=Toast. makeText(getApplicationContext(),"Fornecedor Cadastrado",Toast. LENGTH_LONG);
         toast. show();
+        finish();
     }
 
     private void actionForButtonCancel() {
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ProvidersFragment.class));
                 finish();
-
             }
         });
     }
