@@ -45,7 +45,11 @@ public AdapterSales(List<Sale> saleList, Context context, OnSaleListerner monSal
                 holder.name.setText(formatTextToUpperOrLowerCase(sale.getClient().getNome().toUpperCase(), true));
                 holder.totalValue.setText(formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()));
                 holder.gain.setText(formatMonetaryValue(sale.getGain()));
-                holder.paymentType.setText(formatTextToUpperOrLowerCase(sale.getPaymentType(),true));
+                if (sale.getPaymentType()!= null) {
+                        holder.paymentType.setText(formatTextToUpperOrLowerCase(sale.getPaymentType(),true));
+                } else {
+                        holder.paymentType.setText("NÂO ESPECIFICADO");
+                }
         }
 
         @Override

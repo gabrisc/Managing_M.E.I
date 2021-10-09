@@ -15,13 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.adapters.AdapterProduct;
-import com.example.managing_mei.adapters.AdapterProvider;
 import com.example.managing_mei.model.entities.Product;
-import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.view.ui.main.ui.product.EditProduct.EditProductActivity;
-import com.example.managing_mei.view.ui.main.ui.product.addProduct.AddProductActivity;
 import com.example.managing_mei.view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity;
-import com.example.managing_mei.view.ui.main.ui.providers.addProviders.AddProvidersActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -41,7 +37,7 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
     private int positionEconomicOperationSelect;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         imageButtonAddProduct = view.findViewById(R.id.imageButtonAddProduct);
         recyclerView = view.findViewById(R.id.recyclerViewProduct);

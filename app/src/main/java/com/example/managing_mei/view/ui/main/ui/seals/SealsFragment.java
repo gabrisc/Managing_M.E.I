@@ -13,11 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managing_mei.R;
-import com.example.managing_mei.adapters.AdapterProvider;
 import com.example.managing_mei.adapters.AdapterSales;
-import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.model.entities.Sale;
-import com.example.managing_mei.view.ui.main.ui.providers.addProviders.AddProvidersActivity;
 import com.example.managing_mei.view.ui.main.ui.seals.addSell.AddSellActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +34,7 @@ public class SealsFragment extends Fragment implements AdapterSales.OnSaleLister
     private AdapterSales adapterClient;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View view = inflater.inflate(R.layout.fragment_sales, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerViewSales);
         imageButtonAddNewSells = view.findViewById(R.id.imageButtonAddNewSells);
@@ -55,6 +52,14 @@ public class SealsFragment extends Fragment implements AdapterSales.OnSaleLister
                 startActivity( new Intent(getContext(),AddSellActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        clientList.clear();
+        reloadRecyclerClient();
+
     }
 
     @Override

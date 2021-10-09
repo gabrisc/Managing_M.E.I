@@ -74,4 +74,8 @@ public class FormatDataUtils {
         return simpleDateFormat.format(currentTimeMillis);
     }
 
+    public static double formatMonetaryValueDouble(Double value) {
+        return Double.parseDouble(formatter.format(value));
+    }
+
 }

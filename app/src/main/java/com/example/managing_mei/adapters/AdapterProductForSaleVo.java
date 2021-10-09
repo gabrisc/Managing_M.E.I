@@ -51,7 +51,6 @@ public class AdapterProductForSaleVo extends RecyclerView.Adapter<AdapterProduct
     @Override
     public void onBindViewHolder(@NonNull MyViewholder holder, int position) {
         ProductForSaleVo economicOperationForSaleVo = economicOperationForSaleVos.get(position);
-
         holder.name.setText(formatTextToUpperOrLowerCase(economicOperationForSaleVo.getProduct().getName(),true));
         holder.quantity.setText(""+economicOperationForSaleVo.getQuantitySelect());
         holder.value.setText(formatMonetaryValue(economicOperationForSaleVo.getProduct().getSealValue()));

@@ -78,7 +78,6 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
             }
         });
 
-
         reloadRecyclerClient();
 
         buttonConclusionSelect.setVisibility(View.INVISIBLE);
@@ -147,7 +146,7 @@ public class AddSellActivity extends AppCompatActivity implements AdapterProduct
             }
         });
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("Quantidade");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView);
         alertDialog=builder.create();
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

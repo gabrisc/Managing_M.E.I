@@ -83,9 +83,10 @@
 
     <Spinner
         android:id="@+id/spinnerTypeOfQuantityProductEdit"
-        android:layout_width="131dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewCounterProductEdit"
         app:layout_constraintTop_toTopOf="@+id/textViewCounterProductEdit" />
 

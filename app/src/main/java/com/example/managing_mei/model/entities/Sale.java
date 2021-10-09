@@ -14,7 +14,9 @@ public class Sale {
     private List<ProductForSaleVo> economicOperationForSaleVoList;
     private String id,date,paymentType;
     private Client client;
-    private Double totalValueFromProducts,totalValueFromExpenseValue,totalDiscountFromSeal,gain;
+    private Double totalValueFromProducts,totalValueFromExpenseValue,totalDiscountFromSeal,gain,parcelValue;
+    private Integer dividedQuantity;
+    private boolean isDividedSale;
 
     public Sale(String id, String date, Client client) {
         this.id = id;
@@ -95,7 +97,7 @@ public class Sale {
         return totalValueFromProducts;
     }
     public Double getTotalValueFromProductsAndDiscount (){
-        Double total= (getTotalValueFromProducts()+totalDiscountFromSeal);
+        Double total= (getTotalValueFromProducts()-totalDiscountFromSeal);
         return total;
     }
 
@@ -109,5 +111,29 @@ public class Sale {
     public Double getGain() {
         gain=(getTotalValueFromProducts()+getTotalValueFromExpenseValue()) - getTotalDiscountFromSeal();
         return gain;
+    }
+
+    public Double getParcelValue() {
+        return parcelValue;
+    }
+
+    public void setParcelValue(Double parcelValue) {
+        this.parcelValue = parcelValue;
+    }
+
+    public Integer getDividedQuantity() {
+        return dividedQuantity;
+    }
+
+    public void setDividedQuantity(Integer dividedQuantity) {
+        this.dividedQuantity = dividedQuantity;
+    }
+
+    public boolean isDividedSale() {
+        return isDividedSale;
+    }
+
+    public void setDividedSale(boolean dividedSale) {
+        isDividedSale = dividedSale;
     }
 }

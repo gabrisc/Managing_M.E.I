@@ -15,24 +15,24 @@
         android:id="@+id/fragment_produto"
         android:name="com.example.managing_mei.view.ui.main.ui.product.ProductFragment"
         android:label="@string/title_fragment_produto"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_product" />
 
     <fragment
         android:id="@+id/fragment_seals"
         android:name="com.example.managing_mei.view.ui.main.ui.seals.SealsFragment"
         android:label="@string/title_fragment_seals"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_sales" />
 
     <fragment
         android:id="@+id/fragment_client"
         android:name="com.example.managing_mei.view.ui.main.ui.client.ClientFragment"
         android:label="@string/title_fragment_client"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_sales" />
 
     <fragment
         android:id="@+id/providers_activity"
         android:name="com.example.managing_mei.view.ui.main.ui.providers.ProvidersFragment"
         android:label="@string/title_providers_activity"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_sales" />
 
 </navigation>

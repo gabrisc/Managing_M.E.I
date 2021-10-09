@@ -48,6 +48,9 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
         recyclerView = view.findViewById(R.id.recyclerViewCheckList);
         imageButtonAddNewCheckList = view.findViewById(R.id.imageButtonAddNewCheckList);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext().getApplicationContext()));
+        adapterCashFlowItem = new AdapterCheckListItem(checkListItems,this.getContext().getApplicationContext(),this::OnCheckListItemClick);
+
         firebaseInstance.getReference()
                 .child(getIdUser())
                 .child("CheckListItem")
@@ -80,8 +83,6 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
     }
 
     private void reloadRecyclerClient(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext().getApplicationContext()));
-        adapterCashFlowItem = new AdapterCheckListItem(checkListItems,this.getContext().getApplicationContext(),this::OnCheckListItemClick);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterCashFlowItem);
     }
@@ -124,7 +125,6 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
 
         } else {
             buttonDelete.setVisibility(View.INVISIBLE);
-
             buttonAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

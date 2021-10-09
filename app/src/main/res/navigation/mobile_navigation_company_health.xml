@@ -15,7 +15,7 @@
         android:id="@+id/profitability_fragment"
         android:name="com.example.managing_mei.view.ui.company_health.ui.profitability.ProfitabilityFragment"
         android:label="@string/profitability"
-        tools:layout="@layout/fragment_profitability" />
+        tools:layout="@layout/fragment_debt" />
 
     <fragment
         android:id="@+id/floating_capital_fragment"

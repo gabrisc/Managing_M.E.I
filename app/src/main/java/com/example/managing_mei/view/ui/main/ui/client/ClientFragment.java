@@ -59,9 +59,9 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        loadList();
+    public void onPause() {
+        super.onPause();
+        clientList.clear();
         reloadRecyclerClient();
     }
 

@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Managing_MEI">
+        <activity android:name=".ActivityAddNewDebt"></activity>
         <activity android:name=".view.ui.main.ui.ecmei.config.productQuantity.ProductConfigActivity" />
         <activity android:name=".view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity" />
         <activity android:name=".view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity" />

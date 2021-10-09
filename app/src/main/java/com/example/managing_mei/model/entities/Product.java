@@ -23,7 +23,8 @@ public class Product {
     private String providerId;
     protected String mensage;
 
-    public Product(String id, String name, Double sealValue, Double expenseValue, String type, Integer quantity, String typeQuantity, String provider) {
+
+    public Product(Double expenseValue,String id, String name, String provider, Integer quantity, Double sealValue, String type, String typeQuantity) {
         this.id = id;
         this.name = name;
         this.sealValue = sealValue;
@@ -36,6 +37,7 @@ public class Product {
 
     public Product() {
     }
+
 
     public String save(){
         firebaseInstance.getReference()

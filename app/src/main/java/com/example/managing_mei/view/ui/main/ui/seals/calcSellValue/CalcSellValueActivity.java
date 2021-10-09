@@ -1,46 +1,66 @@
 package com.example.managing_mei.view.ui.main.ui.seals.calcSellValue;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.managing_mei.R;
 import com.example.managing_mei.adapters.AdapterProductForSaleVo;
 import com.example.managing_mei.model.entities.CashFlowItem;
+import com.example.managing_mei.model.entities.PaymentType;
+import com.example.managing_mei.model.entities.PaymentsTypes;
+import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.ProductForSaleVo;
 import com.example.managing_mei.model.entities.Sale;
-import com.example.managing_mei.utils.FormatDataUtils;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.example.managing_mei.view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity;
 import com.example.managing_mei.view.ui.main.ui.seals.SealsFragment;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import static com.example.managing_mei.utils.Contants.listOfParcelOptions;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
+import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
+import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
+import static com.example.managing_mei.utils.FormatDataUtils.cleanFormat;
 import static com.example.managing_mei.utils.FormatDataUtils.formatDateToStringFormated;
 import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValueDouble;
 import static com.example.managing_mei.view.ui.main.ui.seals.addSell.AddSellActivity.clientSelected;
 import static com.example.managing_mei.view.ui.main.ui.seals.addSell.AddSellActivity.economicOperationForSaleVoArrayList;
 
@@ -48,11 +68,12 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
     private Spinner spinnerPaymentstype;
     private RecyclerView recyclerView;
-    private AlertDialog alertDialog;
-    private ImageButton imageButtonSealConfig;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
     private Set<ProductForSaleVo> set = new HashSet<>();
+    private Set<PaymentType> paymentTypeList = new HashSet<>();
     private Sale sale;
+    private Double valuedivided;
+    private Switch switchIsDivided;
 
 
     @Override
@@ -61,62 +82,98 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         setContentView(R.layout.activity_calc_sell_value);
 
         recyclerView = findViewById(R.id.RecyclerViewEconomicOperationClosingSale);
-        TextView clientName = findViewById(R.id.textViewClientNameClosingSale);
-        Button conclusion = findViewById(R.id.imageButtonConclusionSaleAddButton);
-        Button cancel = findViewById(R.id.imageButtonConclusionSaleCancelButton);
         spinnerPaymentstype = findViewById(R.id.listOfPaymentsTypeClosingSale);
-        TextView date = findViewById(R.id.TextViewDateOfBuyClosingSale);
-        imageButtonSealConfig = findViewById(R.id.imageButtonSealConfig);
+        switchIsDivided = findViewById(R.id.switchIsDivided);
+        TextView clientNameTextView = findViewById(R.id.textViewClientNameClosingSale);
+        Button conclusionButton = findViewById(R.id.imageButtonConclusionSaleAddButton);
+        TextView dateTextView = findViewById(R.id.TextViewDateOfBuyClosingSale);
 
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    this.finalize();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
-            }
-        });
+        setActionForCancelButton();
 
         sale = new Sale(firebaseDbReference.push().getKey(), formatDateToStringFormated(System.currentTimeMillis()),clientSelected);
         set.addAll(economicOperationForSaleVoArrayList);
-
+        clientNameTextView.setText(sale.getClient().getNome().toUpperCase());
+        dateTextView.setText(formatDateToStringFormated(System.currentTimeMillis()));
         addListToSale();
         loadList();
         setFinalValue();
+        setActionForImageButtonSealConfig();
 
-        setListPaymentsTypes(sale);
-        clientName.setText(sale.getClient().getNome().toUpperCase());
-
-        date.setText(formatDateToStringFormated(System.currentTimeMillis()));
-
-        imageButtonSealConfig.setOnClickListener(new View.OnClickListener() {
+        conclusionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), PaymentsConfigActivity.class));
+                    discountDialog();
             }
         });
 
-        conclusion.setOnClickListener(new View.OnClickListener() {
+        spinnerPaymentstype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                sale.setPaymentType(spinnerPaymentstype.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                sale.setPaymentType(spinnerPaymentstype.getSelectedItem().toString());
+            }
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void createParcelDialog() {
+        AlertDialog alertDialog;
+        View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_divided_buy,null);
+
+        TextView textViewValueDividedTextView = mDialogView.findViewById(R.id.textViewValueDivided);
+        TextView textViewTotalValueOfDivided = mDialogView.findViewById(R.id.textViewTotalValueOfDivided);
+        Button imageButtonCancelParcelSelect = mDialogView.findViewById(R.id.imageButtonCancelParcelSelect);
+        Button imageButtonAcceptParcelSelect = mDialogView.findViewById(R.id.imageButtonAcceptParcelSelect);
+        Spinner spinnerParcelValue = mDialogView.findViewById(R.id.spinnerParcelValue);
+
+        textViewTotalValueOfDivided.setText(formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()));
+
+        imageButtonAcceptParcelSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                discountDialog();
+                sale.setDividedSale(true);
+                sale.setDividedQuantity(Integer.parseInt(cleanFormat(spinnerParcelValue.getSelectedItem().toString())));
+                sale.setParcelValue(valuedivided);
+                closeSeal();
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        imageButtonCancelParcelSelect.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {}
+            public void onClick(View view) {
+
+            }
         });
 
+
+        spinnerParcelValue.setAdapter(new ArrayAdapter(getApplicationContext(), R.layout.item_spinner,listOfParcelOptions));
+        spinnerParcelValue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                valuedivided = sale.getTotalValueFromProductsAndDiscount()/Double.parseDouble(cleanFormat(spinnerParcelValue.getSelectedItem().toString()));
+                textViewValueDividedTextView.setText(spinnerParcelValue.getSelectedItem().toString()+formatMonetaryValue(valuedivided));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView);
+        alertDialog=builder.create();
+        alertDialog.show();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        this.finish();
+    protected void onResume() {
+        super.onResume();
+        paymentTypeList.clear();
+        setListPaymentsTypes();
     }
 
     private void setFinalValue(){
@@ -131,11 +188,28 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         recyclerView.setAdapter(adapterEconomicOperationForSaleVo);
     }
 
-    private void setListPaymentsTypes(Sale sale){
-        String[] listOfPaymentsType = {"DEBITO","CREDITO","DINHEIRO","CHEQUE","BOLETO","TRANSF. BANCARIA","OUTROS"};
+    private void setListPaymentsTypes(){
+        paymentTypeList.clear();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(getIdUser()+"/PaymentsTypes");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            PaymentsTypes post;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                post = dataSnapshot.getValue(PaymentsTypes.class);
+                if (Objects.nonNull(post)){
+                    paymentTypeList.addAll(post.getPaymentTypeList().stream().filter(paymentType -> paymentType.getStatus().booleanValue()==true).collect(Collectors.toList()));
+                } else {
+                    paymentTypeList.add(new PaymentType("Não Especificado",true));
+                }
+                spinnerPaymentstype.setAdapter(new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, paymentTypeList.stream().map(PaymentType::getNome).collect(Collectors.toList())));
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
-        spinnerPaymentstype.setAdapter(new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, listOfPaymentsType));
-        sale.setPaymentType(spinnerPaymentstype.getSelectedItem().toString());
     }
 
     public void discountDialog() {
@@ -145,14 +219,18 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                applyDiscount(sale);
+                applyDiscount();
             }
         });
 
         alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                closeSeal(sale);
+                if (switchIsDivided.isChecked()){
+                    createParcelDialog();
+                } else {
+                    closeSeal();
+                }
             }
         });
 
@@ -160,13 +238,19 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         alertDialog.show();
     }
 
-    private void closeSeal(Sale sale){
+    private void closeSeal(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("Deseja concluir a venda?\n Total: R$ "+ sale.getTotalValueFromProductsAndDiscount());
+        if (switchIsDivided.isChecked()){
+            alertDialog.setMessage("Deseja concluir a venda?\n Total: " + sale.getDividedQuantity().toString() + "x " + formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()/sale.getDividedQuantity()));
+        } else {
+            alertDialog.setMessage("Deseja concluir a venda?\n Total:  "+ formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()));
+        }
+
         alertDialog.setPositiveButton("sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                saveSale(sale);
+                saveSale();
+                finish();
             }
         });
 
@@ -190,17 +274,43 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         sale.setEconomicOperationForSaleVoList(economicOperationForSaleVoList);
     }
 
-    private void saveSale(Sale sale) {
+    private void saveSale() {
         addListToSale();
-        CashFlowItem cashFlowItem = new CashFlowItem(1,sale.getTotalValueFromProductsAndDiscount(),"Compra de produtos");
-        cashFlowItem.save();
+        List<CashFlowItem> cashFlowItems = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        LocalDate currentdate = LocalDate.now();
+
+        if (switchIsDivided.isChecked()){
+            double parcelValue = formatMonetaryValueDouble(sale.getTotalValueFromProductsAndDiscount()/sale.getDividedQuantity());
+
+            for (int i=0; i <= (sale.getDividedQuantity()-1); i++){
+                calendar.set(currentdate.getYear(),currentdate.getMonth().getValue()+i,currentdate.getDayOfMonth());
+                cashFlowItems.add(new CashFlowItem(1,parcelValue,calendar.getTime(),currentdate.getYear(),currentdate.getMonth().getValue()+i,currentdate.getDayOfMonth(),"Compra Parcelada em "+sale.getDividedQuantity().toString()+"x"+formatMonetaryValue(sale.getTotalValueFromProductsAndDiscount()/sale.getDividedQuantity())));
+            }
+            cashFlowItems.forEach(CashFlowItem::save);
+        } else {
+            CashFlowItem cashFlowItem = new CashFlowItem(1,sale.getTotalValueFromProductsAndDiscount(),"Compra de produtos");
+            cashFlowItem.save();
+        }
+
+
         sale.save();
+        reduceFromBuyProducts();
         Toast.makeText(CalcSellValueActivity.this, "Adicionado", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getApplicationContext(), SealsFragment.class));
+        //startActivity(new Intent(getApplicationContext(), SealsFragment.class));
+        this.finish();
+    }
+
+
+    private void reduceFromBuyProducts() {
+        sale.getEconomicOperationForSaleVoList().forEach(productForSaleVo -> {
+            productForSaleVo.getProduct().save();
+        });
     }
 
     @Override
     public void onEconomicOperationForSaleVoClick(int position) {
+        AlertDialog alertDialog;
         ProductForSaleVo economicOperationForSaleVo = set.iterator().next();
         View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_select_item,null);
 
@@ -212,6 +322,9 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         seekBar.setProgress(Integer.parseInt(String.valueOf(economicOperationForSaleVo.getQuantitySelect())));
         seekBar.setMax(economicOperationForSaleVo.getProduct().getQuantity());
         counter.setText(String.valueOf(economicOperationForSaleVo.getQuantitySelect()));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("Quantidade");
+        alertDialog=builder.create();
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -226,8 +339,13 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }});
-        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("Quantidade");
-        alertDialog=builder.create();
+
+        buttonDeleteEconomicOperation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
 
         buttonAddQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,16 +375,15 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
     }
 
-    private void applyDiscount(Sale sale){
+    private void applyDiscount(){
+        AlertDialog alertDialog;
         View mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_discount,null);
 
         Button butttonCancel = mDialogView.findViewById(R.id.buttonDeleteDiscountClosingSale);
         Button buttonAddDiscount = mDialogView.findViewById(R.id.buttonAddDiscountClosingSale);
         TextInputLayout editText = mDialogView.findViewById(R.id.editTextDiscountClosingSale);
 
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("DESCONTO");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView);
         alertDialog=builder.create();
         editText.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
 
@@ -280,29 +397,44 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         buttonAddDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sale.setTotalDiscountFromSeal(Double.valueOf(editText.getEditText().getText().toString()));
-
-                if (sale.getTotalDiscountFromSeal().equals(0)){
+                String discout=editText.getEditText().getText().toString();
+                if (discout.equals(0)){
                     Toast.makeText(CalcSellValueActivity.this, "Adicione um valor", Toast.LENGTH_SHORT).show();
 
-                }if (sale.getTotalValueFromProductsAndDiscount().equals(sale.getTotalDiscountFromSeal())) {
+                }if (discout.equals(sale.getTotalValueFromProducts())) {
                     Toast.makeText(CalcSellValueActivity.this, "O desconto esta iqual ao total", Toast.LENGTH_SHORT).show();
 
                 }else{
                     sale.setTotalDiscountFromSeal(Double.parseDouble(editText.getEditText().getText().toString()));
-                    closeSeal(sale);
+                    if (switchIsDivided.isChecked()) {
+                        alertDialog.dismiss();
+                        createParcelDialog();
+                    } else {
+                        closeSeal();
+                    }
                 }
-
                 alertDialog.dismiss();
             }});
-        butttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                closeSeal(sale);
-            }
-        });
         alertDialog.show();
     }
 
+    private void setActionForCancelButton() {
+        Button cancelButton = findViewById(R.id.imageButtonConclusionSaleCancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+    private void setActionForImageButtonSealConfig() {
+        ImageButton imageButtonSealConfig = findViewById(R.id.imageButtonSealConfig);
+        imageButtonSealConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PaymentsConfigActivity.class));
+            }
+        });
+    }
 
 }

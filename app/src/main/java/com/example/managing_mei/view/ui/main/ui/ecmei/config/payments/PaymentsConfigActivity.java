@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
@@ -79,8 +80,10 @@ public class PaymentsConfigActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PaymentsTypes post = dataSnapshot.getValue(PaymentsTypes.class);
-                System.out.println(post);
-                paymentTypeList.addAll(post.getPaymentTypeList());
+                if (Objects.nonNull(post)) {
+                    paymentTypeList.addAll(post.getPaymentTypeList());
+                }
+
                 reloadChipGroup();
             }
 
@@ -143,7 +146,7 @@ public class PaymentsConfigActivity extends AppCompatActivity {
             chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    paymentType.setStatus(true);
+                    paymentType.setStatus(b);
                 }
             });
             chips.add(chip);
@@ -157,8 +160,10 @@ public class PaymentsConfigActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 PaymentsTypes paymentsTypes = new PaymentsTypes(paymentTypeList);
-                Toast toast=Toast. makeText(getApplicationContext(),paymentsTypes.save(),Toast. LENGTH_SHORT);
+                paymentsTypes.save();
+                Toast toast=Toast. makeText(getApplicationContext(),"Cadastrado",Toast. LENGTH_SHORT);
                 toast. show();
+                finish();
             }
         });
 

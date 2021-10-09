@@ -269,7 +269,9 @@ public class CashFlowFragment extends Fragment implements AdapterCashFlowItem.On
         reloadSpinnerDYears(dates);
         reloadSpinnerMonths(dates);
         reloadSpinnerDays(dates);
-        setValuesForListInRecicler(dateFullFormat.format(dates.iterator().next()));
+        if (!dates.isEmpty()){
+            setValuesForListInRecicler(dateFullFormat.format(dates.iterator().next()));
+        }
     }
 
     public void setValuesForListInRecicler(String dateSelect){

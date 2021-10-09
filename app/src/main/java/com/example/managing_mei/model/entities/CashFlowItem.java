@@ -37,6 +37,17 @@ public class CashFlowItem {
         this.description = description;
     }
 
+    public CashFlowItem(Integer type, Double value, Date date, Integer year, Integer month, Integer dayOfMonth, String description) {
+        this.id = firebaseDbReference.push().getKey();
+        this.type = type;
+        this.value = value;
+        this.date = date;
+        this.year = year;
+        this.month = month;
+        this.dayOfMonth = dayOfMonth;
+        this.description = description;
+    }
+
     public CashFlowItem() {}
 
     public void save(){

@@ -55,6 +55,13 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        providerList.clear();
+        reloadRecyclerClient();
+    }
+
     private void callAddProvider(){
         imageButtonAddProvider.setOnClickListener(new View.OnClickListener() {
             @Override

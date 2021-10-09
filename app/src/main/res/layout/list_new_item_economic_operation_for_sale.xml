@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp">
 
     <TextView
         android:id="@+id/nameItemNew"
@@ -24,6 +28,7 @@
         android:id="@+id/qtdItemNew"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="3dp"
         android:layout_weight="1"
         android:fontFamily="serif"
         android:gravity="center"
@@ -40,7 +45,7 @@
 
     <View
         android:id="@+id/divider39"
-        android:layout_width="3dp"
+        android:layout_width="1.5dp"
         android:layout_height="0dp"
         android:background="@color/IntermediateDMBlue"
         app:layout_constraintBottom_toBottomOf="@+id/textViewValueOfEconomicOperationNew"
@@ -54,6 +59,7 @@
         android:id="@+id/textViewValueOfEconomicOperationNew"
         android:layout_width="0dp"
         android:layout_height="33dp"
+        android:layout_marginTop="3dp"
         android:layout_weight="1"
         android:fontFamily="serif"
         android:gravity="center"
@@ -70,6 +76,7 @@
         android:id="@+id/imageView8"
         android:layout_width="33dp"
         android:layout_height="33dp"
+        android:layout_marginTop="3dp"
         android:tint="@color/DarkBlue"
         app:layout_constraintBottom_toBottomOf="@+id/divider39"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +87,7 @@
         android:id="@+id/imageView7"
         android:layout_width="33dp"
         android:layout_height="33dp"
+        android:layout_marginTop="3dp"
         android:tint="@color/DarkBlue"
         app:layout_constraintBottom_toBottomOf="@+id/divider39"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +97,7 @@
     <View
         android:id="@+id/divider40"
         android:layout_width="0dp"
-        android:layout_height="3dp"
+        android:layout_height="1.5dp"
         android:background="@color/IntermediateDMBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/nameItemNew"
