@@ -91,8 +91,7 @@ public class Sale {
     //valores calculados com base na lista de produtos da venda
 
     public Double getTotalValueFromProducts() {
-        economicOperationForSaleVoList.forEach(economicOperationForSaleVo -> {
-            totalValueFromProducts =(economicOperationForSaleVo.getProduct().getSealValue()*economicOperationForSaleVo.getQuantitySelect());
+        economicOperationForSaleVoList.forEach(economicOperationForSaleVo -> { totalValueFromProducts =(economicOperationForSaleVo.getProduct().getSealValue()*economicOperationForSaleVo.getQuantitySelect());
         });
         return totalValueFromProducts;
     }
@@ -109,7 +108,7 @@ public class Sale {
     }
 
     public Double getGain() {
-        gain=(getTotalValueFromProducts()+getTotalValueFromExpenseValue()) - getTotalDiscountFromSeal();
+        gain=(getTotalValueFromProducts()-getTotalValueFromExpenseValue()) - getTotalDiscountFromSeal();
         return gain;
     }
 

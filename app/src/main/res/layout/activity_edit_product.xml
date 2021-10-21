@@ -7,124 +7,159 @@
     tools:context=".view.ui.main.ui.product.EditProduct.EditProductActivity">
 
     <View
-        android:id="@+id/divider21"
+        android:id="@+id/divider29"
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:background="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewTypeProduct" />
+        app:layout_constraintTop_toBottomOf="@+id/divider17Edit" />
 
     <TextView
-        android:id="@+id/TextViewTypeProduct"
+        android:id="@+id/textView11"
         android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:background="@color/IntermediateDMBlue"
+        android:layout_height="49dp"
+        android:background="#0A4159"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="EDITAR PRODUTO"
+        android:text="Editar Produtos"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerProviderProduct"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextExpenseValueProductEdit"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextExpenseValueProductEdit"
-        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseValueProductEdit" />
-
     <TextView
-        android:id="@+id/textViewTitleQuantity"
+        android:id="@+id/textViewTitleQuantityEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
+        android:gravity="center"
         android:text="Quantidade"
         android:textColor="@color/gray"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBarProduct"
-        app:layout_constraintEnd_toEndOf="@+id/seekBarProduct"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarProductEdit"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarProductEdit"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/seekBarProduct" />
+        app:layout_constraintStart_toStartOf="@+id/seekBarProductEdit" />
 
-
-    <TextView
-        android:id="@+id/textViewCounterProductEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSaveProductEdit"
+        android:layout_width="139dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="serif"
-        android:text="TextView"
-        android:textColor="@color/IntermediateDMBlue"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/seekBarProduct"
-        app:layout_constraintStart_toStartOf="@+id/seekBarProduct"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarProduct" />
+        android:text="Salvar"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <SeekBar
-        android:id="@+id/seekBarProduct"
-        style="@android:style/Widget.Material.SeekBar"
-        android:layout_width="363dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="28dp"
-        android:elevation="5dp"
-        android:max="500"
-        android:progress="1"
-        app:layout_constraintEnd_toEndOf="@+id/switchWhioutProvider"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/switchWhioutProvider"
-        app:layout_constraintTop_toBottomOf="@+id/switchWhioutProvider" />
-
-
-    <Spinner
-        android:id="@+id/spinnerTypeOfQuantityProductEdit"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewCounterProductEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewCounterProductEdit"
-        app:layout_constraintTop_toTopOf="@+id/textViewCounterProductEdit" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDeleteProductEdit"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
+        android:text="Deletar"
+        android:textColor="@color/vermelho"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
-        android:id="@+id/switchWhioutProvider"
+        android:id="@+id/switchWhioutProviderEdit"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginTop="3dp"
         android:elevation="5dp"
         android:gravity="center|left"
-        android:text="Sem Fornecedor"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProduct"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/spinnerProviderProduct"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerProviderProduct"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        android:text="Sem fornecedor"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProductEdit"
+        app:layout_constraintStart_toStartOf="@+id/spinnerProviderProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerProviderProductEdit"
+        tools:ignore="TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonDeleteProduct"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+    <Spinner
+        android:id="@+id/spinnerTypeOfQuantityProductEdit"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintStart_toEndOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintTop_toTopOf="@+id/textViewCounterProductEdit"
+        app:layout_constraintVertical_bias="0.529"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textViewCounterProductEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="APAGAR"
+        android:text="0"
         android:textColor="@color/IntermediateDMBlue"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCancelProductEdit"
-        app:layout_constraintEnd_toEndOf="@+id/seekBarProduct"
-        app:layout_constraintStart_toStartOf="@+id/seekBarProduct"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeOfQuantityProductEdit" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteProductEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarProductEdit" />
+
+    <SeekBar
+        android:id="@+id/seekBarProductEdit"
+        style="@android:style/Widget.Material.SeekBar"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="24dp"
+        android:elevation="5dp"
+        android:max="500"
+        android:progress="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchWhioutProviderEdit" />
+
+    <Spinner
+        android:id="@+id/spinnerProviderProductEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextExpenseValueProductEdit"
+        app:layout_constraintStart_toStartOf="@+id/editTextExpenseValueProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseValueProductEdit"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeProductEdit"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider17Edit"
+        app:layout_constraintVertical_bias="0.01999998" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextSealValueProductEdit"
+        android:id="@+id/editTextSellValueInAddProductEdit"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:elevation="5dp"
-        android:hint="VALOR DE VENDA"
+        android:hint="Valor de Venda"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextNameProductEdit"
         app:layout_constraintStart_toStartOf="@+id/editTextNameProductEdit"
@@ -137,7 +172,6 @@
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextExpenseValueProductEdit"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -145,11 +179,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:elevation="5dp"
-        android:hint="DESPESAS TOTAL"
+        android:hint="Total de Custos"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/editTextSealValueProductEdit"
-        app:layout_constraintStart_toStartOf="@+id/editTextSealValueProductEdit"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSealValueProductEdit">
+        app:layout_constraintEnd_toEndOf="@+id/editTextSellValueInAddProductEdit"
+        app:layout_constraintStart_toStartOf="@+id/editTextSellValueInAddProductEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSellValueInAddProductEdit">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -161,66 +195,59 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextNameProductEdit"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:elevation="5dp"
-        android:hint="NOME"
+        android:hint="Nome"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider21"
-        app:layout_constraintVertical_bias="0.04000002">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeProductEdit">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
-            android:inputType="textEmailAddress" />
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonAddProductEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="serif"
-        android:text="Salvar"
-        app:backgroundTint="@color/verdeClaro"
-        app:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonCancelProductEdit"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="serif"
-        android:text="Cancelar"
-        android:textColor="@color/vermelho"
-        app:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
-        android:id="@+id/textViewTitleProviderEditProduct"
+        android:id="@+id/textViewTitleSpinerProviderEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FORNECEDOR"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerProviderProduct"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProduct"
+        android:fontFamily="serif"
+        android:text="Fornecedor"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerProviderProductEdit"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerProviderProductEdit"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/spinnerProviderProduct" />
+        app:layout_constraintStart_toStartOf="@+id/spinnerProviderProductEdit" />
+
+    <View
+        android:id="@+id/divider17Edit"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/Azul_mais_claro"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <ImageButton
+        android:id="@+id/imageButtonConfigProductEditEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:srcCompat="@drawable/ic_baseline_settings_24"
+        app:tint="#FFFFFF" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

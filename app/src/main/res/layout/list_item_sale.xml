@@ -3,54 +3,115 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp">
 
 
-    <TextView
-        android:id="@+id/textViewpaymentType"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/IntermediateDMBlue"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+        app:layout_constraintTop_toBottomOf="@+id/divider34">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="37dp"
-        android:layout_height="0dp"
-        android:tint="@color/DarkBlue"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewpaymentType"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:srcCompat="@drawable/ic_baseline_payment_24" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="37dp"
+            android:layout_height="24dp"
+            android:tint="@color/DarkBlue"
+            app:srcCompat="@drawable/ic_baseline_payment_24" />
+
+        <TextView
+            android:id="@+id/textViewpaymentType"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/IntermediateDMBlue"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/divider33"
+        tools:layout_editor_absoluteX="5dp">
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="37dp"
+            android:layout_height="24dp"
+            android:tint="@color/DarkBlue"
+            app:srcCompat="@drawable/ic_baseline_attach_money_24" />
+
+        <TextView
+            android:id="@+id/textViewLucroListSale"
+            android:layout_width="113dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
+            android:gravity="left"
+            android:text="TextView"
+            android:textColor="@color/IntermediateDMBlue"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/divider15"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/DarkBlue" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="37dp"
+            android:layout_height="24dp"
+            android:tint="@color/DarkBlue"
+            app:srcCompat="@drawable/ic_baseline_payments_24" />
+
+        <TextView
+            android:id="@+id/textViewTotalListSale"
+            android:layout_width="136dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
+            android:gravity="left"
+            android:text="TextView"
+            android:textColor="@color/IntermediateDMBlue"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Forma de pagamento"
         android:textColor="@color/IntermediateDMBlue"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewpaymentType"
-        app:layout_constraintTop_toBottomOf="@+id/textViewpaymentType" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout9" />
 
     <View
         android:id="@+id/divider33"
         android:layout_width="0dp"
         android:layout_height="0.8dp"
-        android:background="@color/IntermediateDMBlue"
-        app:layout_constraintEnd_toEndOf="@+id/textViewpaymentType"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textViewpaymentType"
-        app:layout_constraintTop_toBottomOf="@+id/textViewpaymentType" />
+        android:background="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="@+id/textViewClientNameListSale"
+        app:layout_constraintStart_toStartOf="@+id/textViewClientNameListSale"
+        app:layout_constraintTop_toBottomOf="@+id/textViewClientNameListSale" />
 
     <TextView
         android:id="@+id/textViewClientNameListSale"
@@ -62,112 +123,68 @@
         android:textColor="@color/IntermediateDMBlue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="37dp"
-        android:layout_height="0dp"
-        android:tint="@color/DarkBlue"
-        app:layout_constraintBottom_toBottomOf="@+id/divider34"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21"
-        app:srcCompat="@drawable/ic_baseline_payments_24" />
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <View
-        android:id="@+id/divider34"
-        android:layout_width="0dp"
-        android:layout_height="0.8dp"
-        android:background="@color/IntermediateDMBlue"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTotalListSale"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textViewTotalListSale"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalListSale" />
-
-    <TextView
-        android:id="@+id/textViewTotalListSale"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/IntermediateDMBlue"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        tools:layout_editor_absoluteY="15dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="serif"
-        android:gravity="center"
+        android:gravity="center|right"
         android:text="Lucro"
         android:textColor="@color/IntermediateDMBlue"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTotalListSale"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalListSale" />
-
-    <TextView
-        android:id="@+id/textViewLucroListSale"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/IntermediateDMBlue"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView13"
-        app:layout_constraintTop_toBottomOf="@+id/textViewClientNameListSale" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout8" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="serif"
-        android:gravity="center"
+        android:gravity="right"
         android:text="Valor Total"
         android:textColor="@color/IntermediateDMBlue"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewLucroListSale"
-        app:layout_constraintTop_toBottomOf="@+id/divider35" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout8" />
 
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="37dp"
-        android:layout_height="0dp"
+    <View
+        android:id="@+id/divider34"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
         android:layout_marginTop="8dp"
-        android:tint="@color/DarkBlue"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLucroListSale"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewClientNameListSale"
-        app:srcCompat="@drawable/ic_baseline_attach_money_24" />
+        android:background="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
 
     <View
         android:id="@+id/divider35"
         android:layout_width="0dp"
-        android:layout_height="0.8dp"
-        android:background="@color/IntermediateDMBlue"
-        app:layout_constraintEnd_toEndOf="@+id/textViewLucroListSale"
+        android:layout_height="0.5dp"
+        android:background="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout9"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout9"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
+
+    <View
+        android:id="@+id/divider21"
+        android:layout_width="0dp"
+        android:layout_height="0.777dp"
+        android:background="@color/DarkBlue"
+        app:layout_constraintBottom_toTopOf="@+id/textViewClientNameListSale"
+        app:layout_constraintEnd_toEndOf="@+id/textViewClientNameListSale"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textViewLucroListSale"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLucroListSale" />
+        app:layout_constraintStart_toStartOf="@+id/textViewClientNameListSale" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

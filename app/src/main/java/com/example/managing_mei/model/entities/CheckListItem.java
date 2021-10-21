@@ -21,10 +21,18 @@ public class CheckListItem {
     private Boolean status;
     private Date date;
 
-    public CheckListItem(String name, Boolean status) {
+    public CheckListItem(String id, String name, Boolean status, Date date) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.date = date;
+    }
+
+    public CheckListItem(String name, Boolean status, Date date) {
         this.id = firebaseDbReference.push().getKey();
         this.name = name;
         this.status = status;
+        this.date = date;
     }
 
     public CheckListItem() {}
@@ -48,7 +56,6 @@ public class CheckListItem {
     }
 
     public void delete(){
-        //this.setId(firebaseDbReference.push().getKey());
         firebaseInstance.getReference()
                         .child(getIdUser())
                         .child("CheckListItem")

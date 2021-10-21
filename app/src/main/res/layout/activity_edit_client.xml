@@ -130,7 +130,7 @@
         android:layout_marginTop="44dp"
         android:fontFamily="serif"
         android:text="APAGAR"
-        android:textColor="@color/IntermediateDMBlue"
+        android:textColor="@color/vermelho"
         app:iconTint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/editTextPhoneEditClient"
         app:layout_constraintHorizontal_bias="0.498"

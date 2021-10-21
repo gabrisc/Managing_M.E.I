@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.managing_mei.R;
@@ -15,14 +14,11 @@ import com.example.managing_mei.model.entities.Business;
 import com.example.managing_mei.model.entities.CheckListItem;
 import com.example.managing_mei.model.entities.PaymentType;
 import com.example.managing_mei.model.entities.PaymentsTypes;
-import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.login.MainActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -134,7 +130,6 @@ public class BusinessSingUpActivity extends AppCompatActivity {
     }
 
     private void SingUpUser(Business business) {
-
         business.setUid(firebaseAuth.getUid());
         business.save();
         createBasicPayments();
@@ -144,33 +139,25 @@ public class BusinessSingUpActivity extends AppCompatActivity {
         toast.show();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
     }
 
     private void createBasicCheckListItem() {
-        CheckListItem checkListItem= new CheckListItem("Limpar Ponto de venda",true);
+        CheckListItem checkListItem= new CheckListItem("Limpar Ponto de venda",false,new Date());
         checkListItem.save();
     }
 
     private void createBasicPayments() {
         Set<PaymentType> paymentTypeSet = new HashSet<>();
-        paymentTypeSet.add(new PaymentType("À vista",true));
-        paymentTypeSet.add(new PaymentType("Debito",true));
-        paymentTypeSet.add(new PaymentType("Credito",true));
-        paymentTypeSet.add(new PaymentType("PIX",true));
-        PaymentsTypes paymentsTypes = new PaymentsTypes(paymentTypeSet);
-        paymentsTypes.save();
+        paymentTypeSet.add(new PaymentType(firebaseDbReference.push().getKey(),"À VISTA",true));
+        paymentTypeSet.add(new PaymentType(firebaseDbReference.push().getKey(),"PIX",true));
+        paymentTypeSet.forEach(PaymentType::save);
     }
 
     private void createBasicQuantities() {
         Set<QuantityType> quantityTypes = new HashSet<>();
-        quantityTypes.add(new QuantityType("Und",true));
-        quantityTypes.add(new QuantityType("Caixas",true));
-        quantityTypes.add(new QuantityType("M²",true));
-        quantityTypes.add(new QuantityType("metros",true));
-        quantityTypes.add(new QuantityType("Kg",true));
-        QuantitiesTypes quantitiesTypes = new QuantitiesTypes(quantityTypes);
-        quantitiesTypes.save();
+        quantityTypes.add(new QuantityType(firebaseDbReference.push().getKey(),"UND",true));
+        quantityTypes.add(new QuantityType(firebaseDbReference.push().getKey(),"KG",true));
+        quantityTypes.forEach(QuantityType::save);
     }
 
 

@@ -12,7 +12,7 @@ public class Contants {
 
     public final static String[] listOfParcelOptions = {"1x","2x","3x","4x","5x","6x","7x","8x","9x","10x","11x","12x"};
 
-    public final static String[] listOfTypeDebt = {TypeOfDebts.UNICA.toString(),TypeOfDebts.RECORRENTE.toString(),TypeOfDebts.PARCELADA.toString()};
+    public final static String[] listOfTypeDebt = {TypeOfDebts.UNICA.toString(),TypeOfDebts.PARCELADA.toString()};
 
     public final static String[] listOfFrequencyType = {FrequencyDebts.DIARIA.toString(),FrequencyDebts.SEMANAL.toString(),FrequencyDebts.MENSAL.toString(),FrequencyDebts.TRIMESTRAL.toString(), FrequencyDebts.SEMESTRAL.toString(), FrequencyDebts.ANUAL.toString()};
 

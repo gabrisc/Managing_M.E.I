@@ -9,24 +9,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Managing_MEI">
-        <activity android:name=".ActivityAddNewDebt"></activity>
-        <activity android:name=".view.ui.main.ui.ecmei.config.productQuantity.ProductConfigActivity" />
-        <activity android:name=".view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity" />
-        <activity android:name=".view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity" />
-        <activity android:name=".view.ui.main.ui.client.addClient.AddClientActivity" />
-        <activity android:name=".view.ui.main.ui.client.editClient.EditClientActivity" />
-        <activity android:name=".view.ui.main.ui.seals.addSell.AddSellActivity" />
-        <activity android:name=".view.ui.main.ui.seals.calcSellValue.CalcSellValueActivity" />
-        <activity android:name=".view.ui.main.ui.providers.editProviders.EditProvidersActivity" />
-        <activity android:name=".view.ui.main.ui.providers.addProviders.AddProvidersActivity" />
-        <activity android:name=".view.ui.main.ui.product.EditProduct.EditProductActivity" />
-        <activity android:name=".view.ui.main.ui.product.addProduct.AddProductActivity" />
-        <activity
-            android:name=".view.ui.login.signUp.BusinessSingUpActivity"
-            android:theme="@style/Theme.Managing_MEI.NoActionBar" />
-        <activity
-            android:name=".view.ui.login.signUp.SingUpActivity"
-            android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".ActivityAddNewDebt"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.ecmei.config.productQuantity.ProductConfigActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.client.addClient.AddClientActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.client.editClient.EditClientActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.seals.addSell.AddSellActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.seals.calcSellValue.CalcSellValueActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.providers.editProviders.EditProvidersActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.providers.addProviders.AddProvidersActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.product.EditProduct.EditProductActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.main.ui.product.addProduct.AddProductActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+        <activity android:name=".view.ui.login.signUp.BusinessSingUpActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+
+        <activity android:name=".view.ui.login.signUp.SingUpActivity"
+                  android:theme="@style/Theme.Managing_MEI.NoActionBar" />
+
         <activity
             android:name=".view.ui.main.ui.ManagementActivity"
             android:label="@string/title_activity_management"

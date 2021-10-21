@@ -2,82 +2,54 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/AddnewPaymentType"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity">
 
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/IntermediateDMBlue"
+        app:layout_constraintBottom_toTopOf="@+id/divider36"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/textView18"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_medium"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="FORMAS DE PAGAMENTO"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:text="Configuração das Formas De Pagamento"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintStart_toStartOf="@+id/view7"
+        app:layout_constraintTop_toTopOf="@+id/view7" />
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_semibold"
-        android:gravity="center"
-        android:text="Nessa tela e possivel cadastrar as formas de pagamentos utilizadas pela sua empresa. Tambem e  possivel habilitar ou desabilitar as formas de pagamento quando for "
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/divider36"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextAddNewPaymentType"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="312dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="52dp"
-        android:elevation="5dp"
-        android:hint="NOVA FORMA DE PAGAMENTO"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCancelNewPaymentForm"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonAddPaymentType"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageButton
-        android:id="@+id/imageButtonAddPaymentType"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/rouded_edit_text"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextAddNewPaymentType"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Essa funcionalidade visa permitir uma customização dos tipos de pagamentos, facilitando assim sua organização."
+        android:textColor="@color/IntermediateDMBlue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCancelNewPaymentForm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextAddNewPaymentType"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/PaymentTypeChipGroup"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextAddNewPaymentType"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider36"
-        app:singleLine="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/divider36" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSaveNewPaymentsTypes"
@@ -88,6 +60,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:text="Salvar"
+        app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -105,32 +78,50 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <View
-        android:id="@+id/divider15"
-        android:layout_width="411dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        tools:layout_editor_absoluteY="24dp" />
-
     <TextView
         android:id="@+id/textView53"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Formas de pagamento cadastradas"
-        app:layout_constraintBottom_toTopOf="@+id/PaymentTypeChipGroup"
-        app:layout_constraintEnd_toEndOf="@+id/PaymentTypeChipGroup"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/PaymentTypeChipGroup" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewListOfPaymentTypes"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewListOfPaymentTypes" />
 
     <View
         android:id="@+id/divider36"
         android:layout_width="0dp"
         android:layout_height="4dp"
-        android:background="@color/IntermediateDMBlue"
+        android:background="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintVertical_bias="0.65" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewListOfPaymentTypes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/white_backgroud_rouded"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNewFormaPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <Button
+        android:id="@+id/buttonNewFormaPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/intermediateMLBlue"
+        android:text="NOVA FORMA DE PAGAMENTO"
+        app:layout_constraintBottom_toBottomOf="@+id/view7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

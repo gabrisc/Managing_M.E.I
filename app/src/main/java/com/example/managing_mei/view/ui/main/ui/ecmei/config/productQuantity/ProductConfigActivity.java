@@ -1,23 +1,24 @@
 package com.example.managing_mei.view.ui.main.ui.ecmei.config.productQuantity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.managing_mei.R;
-import com.example.managing_mei.model.entities.PaymentsTypes;
-import com.example.managing_mei.model.entities.QuantitiesTypes;
+import com.example.managing_mei.adapters.AdapterClient;
+import com.example.managing_mei.adapters.AdapterConfigElement;
+import com.example.managing_mei.model.entities.Client;
 import com.example.managing_mei.model.entities.QuantityType;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,130 +27,153 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
+import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
+import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 
-public class ProductConfigActivity extends AppCompatActivity {
+public class ProductConfigActivity extends AppCompatActivity implements AdapterConfigElement.OnClickListener {
 
-    private Set<QuantityType> mainListOfQuantityTypes = new HashSet<>();
-    private Set<Chip> chipsToShow= new HashSet<>();
-    private Button buttonSaveProductConfig,buttonCancelProductConfiig;
-    private ImageButton imageButtonAddNewType;
-    private Switch switchHoursOnly;
-    private ChipGroup chipGroupForProductConfig;
-    private TextInputLayout editTextNewTypeForProductConfig;
+    private List<QuantityType> mainListOfQuantityTypes = new ArrayList<>();
+    private Button botaoSalvar,botaoCancelar,botaoAdicionarUnidade;
+    private RecyclerView recyclerView;
+    private AdapterConfigElement adapterConfigElement;
+    private AlertDialog alertDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_config);
 
-        buttonSaveProductConfig = findViewById(R.id.buttonSaveProductConfig);
-        buttonCancelProductConfiig = findViewById(R.id.buttonCancelProductConfiig);
-        imageButtonAddNewType = findViewById(R.id.imageButtonAddNewType);
-        //switchHoursOnly = findViewById(R.id.switchHoursOnly);
-        chipGroupForProductConfig = findViewById(R.id.chipGroupForProductConfig);
-        editTextNewTypeForProductConfig = findViewById(R.id.editTextNewTypeForProductConfig);
+        recyclerView = findViewById(R.id.recyclerViewConfigUnitMeds);
+        botaoSalvar = findViewById(R.id.buttonSaveProductConfig);
+        botaoCancelar = findViewById(R.id.buttonCancelProductConfigjsdpogfbnasdoi);
+        botaoAdicionarUnidade = findViewById(R.id.buttonNewMeds2);
 
-        mainListOfQuantityTypes.clear();
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("QuantitiesTypes")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            QuantityType post = ds.getValue(QuantityType.class);
+                            mainListOfQuantityTypes.add(post);
+                            reloadRecyclerView();
+                        }
+                        adapterConfigElement.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        String x = String.valueOf(error);
+                    }
+                });
 
-        buttonCancelProductConfiig.setOnClickListener(new View.OnClickListener() {
+
+        botaoCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    this.finalize();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+             finish();
+            }
+        });
+
+        botaoSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mainListOfQuantityTypes.stream().filter(quantityType -> quantityType.getStatus().equals(true)).collect(Collectors.toList())).size() == 0) {
+                    Toast.makeText(getApplicationContext(),"No minimo um item deve estar ativado",Toast. LENGTH_LONG).show();
+                } else {
+                    salvarElementos();
                 }
             }
         });
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(getIdUser()+"/QuantitiesTypes");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuantitiesTypes post = dataSnapshot.getValue(QuantitiesTypes.class);
-                System.out.println(post);
-                mainListOfQuantityTypes.addAll(post.getQuantityTypeArrayList());
-                reloadChipGroup();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
-        imageButtonAddNewType.setOnClickListener(new View.OnClickListener() {
+        botaoAdicionarUnidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                QuantityType quantityType = new QuantityType();
-                quantityType.setNome(editTextNewTypeForProductConfig.getEditText().getText().toString());
-                quantityType.setStatus(false);
-                mainListOfQuantityTypes.add(quantityType);
-                reloadChipGroup();
+                callDialog();
             }
         });
-        savePaymentsTypes();
+
+
     }
 
-    private void reloadChipGroup(){
-        chipsToShow.clear();
-        createChipList(mainListOfQuantityTypes).stream().forEach(chip -> {
-            if (!chipsToShow.contains(chip)){
-                chipsToShow.add(chip);
-            }
-        });
-        editTextNewTypeForProductConfig.getEditText().setText("");
-        chipGroupForProductConfig.removeAllViews();
-        chipsToShow.stream().forEach(chip -> chipGroupForProductConfig.addView(chip));
-    }
-    private List<Chip> createChipList(Set<QuantityType> mainListOfQuantityTypes){
-        List<Chip> chips = new ArrayList<>();
+    private void callDialog() {
+        View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_new_config_element,null);
 
-        mainListOfQuantityTypes.stream().forEach(quantityType -> {
-            Chip chip = new Chip(this);
-            chip.setId(ViewCompat.generateViewId());
-            chip.setText(quantityType.getNome());
-            chip.setCheckable(true);
-            chip.setChipIconVisible(true);
-            chip.setCheckedIconVisible(true);
-            chip.setCloseIconVisible(true);
-            if (quantityType.getStatus()){
-                chip.setChecked(true);
-            }else {
-                chip.setChecked(false);
-            }
-            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    chipGroupForProductConfig.removeView(chip);
-                    mainListOfQuantityTypes.removeIf(quantityType1 -> quantityType1.getNome().equals(quantityType.getNome()));
-                }
-            });
-            chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    quantityType.setStatus(true);
-                }
-            });
-            chips.add(chip);
-        });
-        return chips;
-    }
-    private void savePaymentsTypes(){
-        buttonSaveProductConfig.setOnClickListener(new View.OnClickListener() {
+        TextInputLayout textInputLayout = dialog.findViewById(R.id.editTextNewTypeForProductConfig);
+        Button buttonSalvar = dialog.findViewById(R.id.buttonsave);
+        Switch aSwitch = dialog.findViewById(R.id.switchIsHabilitated);
+
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                QuantitiesTypes quantitiesTypes = new QuantitiesTypes(mainListOfQuantityTypes);
-                Toast toast=Toast. makeText(getApplicationContext(),quantitiesTypes.save(),Toast. LENGTH_SHORT);
-                toast. show();
+                if(textInputLayout.getEditText().getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(),"Preencha o Campo",Toast. LENGTH_LONG).show();
+                } else {
+                    mainListOfQuantityTypes.add(new QuantityType(firebaseDbReference.push().getKey(),
+                                                                 textInputLayout.getEditText().getText().toString(),
+                                                                 aSwitch.isChecked()));
+                    reloadRecyclerView();
+                    textInputLayout.getEditText().setText("");
+                    alertDialog.dismiss();
+                }
+
             }
         });
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialog);
+        alertDialog=builder.create();
+        alertDialog.show();
     }
+
+    private void salvarElementos() {
+        mainListOfQuantityTypes.forEach(QuantityType::save);
+        this.finish();
+    }
+
+
+    private void reloadRecyclerView(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapterConfigElement = new AdapterConfigElement(getApplicationContext(),mainListOfQuantityTypes,this);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterConfigElement);
+    }
+
+    @Override
+    public void onConfigElementClick(int position) {
+        View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_new_config_element,null);
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
+        Switch aSwitch = dialog.findViewById(R.id.switchIsHabilitated);
+        TextInputLayout textInputLayout = dialog.findViewById(R.id.editTextNewTypeForProductConfig);
+        Button buttonSalvar = dialog.findViewById(R.id.buttonsave);
+
+        textInputLayout.getEditText().setText(mainListOfQuantityTypes.get(position).getNome().toUpperCase());
+        aSwitch.setChecked(mainListOfQuantityTypes.get(position).getStatus());
+        buttonSalvar.setText("SALVAR");
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(textInputLayout.getEditText().getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(),"Preencha o Campo",Toast. LENGTH_LONG).show();
+                } else {
+                    mainListOfQuantityTypes.get(position).setNome(textInputLayout.getEditText().getText().toString().toUpperCase());
+                    mainListOfQuantityTypes.get(position).setStatus(aSwitch.isChecked());
+                    reloadRecyclerView();
+                    textInputLayout.getEditText().setText("");
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialog);
+        alertDialog=builder.create();
+        alertDialog.show();
+    }
+
+
 }

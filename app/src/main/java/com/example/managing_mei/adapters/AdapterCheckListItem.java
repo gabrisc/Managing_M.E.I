@@ -17,6 +17,9 @@ import com.example.managing_mei.utils.FormatDataUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterCheckListItem extends RecyclerView.Adapter<AdapterCheckListItem.MyViewHolder> {
@@ -24,6 +27,7 @@ public class AdapterCheckListItem extends RecyclerView.Adapter<AdapterCheckListI
     private List<CheckListItem> checkListItems;
     private Context context;
     private OnCheckListItemListener monCheckListItemListener;
+    private SimpleDateFormat dateFullFormat;
 
     public AdapterCheckListItem(List<CheckListItem> checkListItems, Context context, OnCheckListItemListener onCheckListItemListener) {
         this.checkListItems = checkListItems;
@@ -42,15 +46,26 @@ public class AdapterCheckListItem extends RecyclerView.Adapter<AdapterCheckListI
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         CheckListItem checkListItem = checkListItems.get(position);
         holder.texto.setText(FormatDataUtils.formatTextToUpperOrLowerCase(checkListItem.getName(),true));
+        dateFullFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            if (dateFullFormat.parse(dateFullFormat.format(checkListItem.getDate())).before(dateFullFormat.parse(dateFullFormat.format(new Date())))){
+                checkListItem.setDate(new Date());
+                checkListItem.setStatus(false);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         holder.checkBox.setChecked(checkListItem.getStatus());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                checkListItems.get(position).setStatus(b);
-                checkListItems.get(position).save();
+                checkListItem.setStatus(b);
+                checkListItem.setDate(new Date());
+                checkListItem.save();
             }
         });
-        holder.checkBox.setChecked(checkListItem.getStatus());
+
     }
 
     @Override

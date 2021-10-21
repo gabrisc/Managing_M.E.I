@@ -11,12 +11,14 @@ public class FormatDataUtils {
     public static String formatPhoneNumber(final String phoneNumber) {
         String phoneNumberFormater = cleanFormat(phoneNumber);
 
-        if (!(phoneNumberFormater.length() == 0) && phoneNumberFormater.length()>=11){
+        if ( phoneNumberFormater.length()>=11){
             phoneNumberFormater = ("("+phoneNumberFormater.substring(0,2)+") "+
                     phoneNumberFormater.substring(2,7)+"-"+
                     phoneNumberFormater.substring(7,11));
-        } else {
-            return phoneNumberFormater;
+        } else if ( phoneNumberFormater.length()>=10) {
+            phoneNumberFormater = ("("+phoneNumberFormater.substring(0,2)+") "+
+                    phoneNumberFormater.substring(2,6)+"-"+
+                    phoneNumberFormater.substring(6,10));
         }
         return phoneNumberFormater;
     }
@@ -45,8 +47,9 @@ public class FormatDataUtils {
         phoneNumber = phoneNumber.replaceAll("\\W","");
         return phoneNumber.replaceAll("[a-zA-Z\\s]","");
     }
+
     public static String cleanFormatValues(String phoneNumber){
-        return phoneNumber.replace("R$","");
+        return phoneNumber.replace("R$ ","").replace(",",".");
     }
 
     public static String formatMonetaryValue(Double value) {
@@ -75,7 +78,15 @@ public class FormatDataUtils {
     }
 
     public static double formatMonetaryValueDouble(Double value) {
-        return Double.parseDouble(formatter.format(value));
+
+        return Double.parseDouble(formatter.format(value).replace(",","."));
     }
 
+    public static double formatMonetary(String value) {
+        return Double.parseDouble(formatter.format(Double.parseDouble(value.replace(",",".").replace("R$ ",""))));
+    }
+
+    public static String formatMonetaryParcelSale(Double value,Integer numParcel) {
+        return "R$ " + formatter.format(value) + " x " + numParcel;
+    }
 }

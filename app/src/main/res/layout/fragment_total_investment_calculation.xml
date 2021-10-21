@@ -8,7 +8,7 @@
 
     <View
         android:id="@+id/view8"
-        android:layout_width="426dp"
+        android:layout_width="0dp"
         android:layout_height="173dp"
         android:background="@color/IntermediateDMBlue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInvestiment"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="541dp"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
@@ -62,7 +62,7 @@
 
     <TextView
         android:id="@+id/textView46"
-        android:layout_width="361dp"
+        android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginTop="20dp"
         android:fontFamily="serif"
@@ -76,7 +76,7 @@
 
     <View
         android:id="@+id/divider2"
-        android:layout_width="424dp"
+        android:layout_width="0dp"
         android:layout_height="4dp"
         android:background="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"

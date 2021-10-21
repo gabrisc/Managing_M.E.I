@@ -59,7 +59,12 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
     public void onPause() {
         super.onPause();
         providerList.clear();
-        reloadRecyclerClient();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        providerList.clear();
     }
 
     private void callAddProvider(){

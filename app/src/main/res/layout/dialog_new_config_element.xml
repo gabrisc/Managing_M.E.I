@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/intermediateMLBlue"
+        android:text="ADICIONAR"
+        app:layout_constraintEnd_toEndOf="@+id/switchIsHabilitated"
+        app:layout_constraintStart_toStartOf="@+id/switchIsHabilitated"
+        app:layout_constraintTop_toBottomOf="@+id/switchIsHabilitated" />
+
+    <TextView
+        android:id="@+id/textViewExempleelemente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro_bold"
+        android:text="EXEMPLO : UND, LITROS , KG."
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNewTypeForProductConfig"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNewTypeForProductConfig" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextNewTypeForProductConfig"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:elevation="5dp"
+        android:hint="Nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleNewConfig">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textViewTitleNewConfig"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Nova forma de medida"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switchIsHabilitated"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="HABILITAR"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNewTypeForProductConfig"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextNewTypeForProductConfig"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewTypeForProductConfig" />
+</androidx.constraintlayout.widget.ConstraintLayout>

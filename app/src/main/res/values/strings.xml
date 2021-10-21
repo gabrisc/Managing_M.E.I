@@ -9,14 +9,14 @@
     <string name="title_activity_company_health">MainActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_providers_activity">fornecedores</string>
-    <string name="title_fragment_client">clientes</string>
-    <string name="title_fragment_seals">vendas</string>
-    <string name="title_fragment_produto">produtos</string>
+    <string name="title_providers_activity">Fornecedores</string>
+    <string name="title_fragment_client">Clientes</string>
+    <string name="title_fragment_seals">Vendas</string>
+    <string name="title_fragment_produto">Produtos</string>
     <string name="title_fragment_ec_mei">MEI</string>
-    <string name="cash_flow_activity">caixa</string>
-    <string name="profitability">rentabi</string>
-    <string name="title_total_investment_calculation">invest</string>
-    <string name="title_floating_capital">capital</string>
-    <string name="title_check_list">checkList</string>
+    <string name="cash_flow_activity">Fluxo</string>
+    <string name="profitability">Dividas</string>
+    <string name="title_total_investment_calculation">Investimentos</string>
+    <string name="title_floating_capital">Giro</string>
+    <string name="title_check_list">Afazeres</string>
 </resources>

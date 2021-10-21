@@ -1,8 +1,9 @@
 package com.example.managing_mei.view.ui.main.ui.product.helpToCalc;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -10,95 +11,56 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managing_mei.R;
-import com.example.managing_mei.model.entities.ExpenseFromProducts;
+import com.example.managing_mei.adapters.AdapterDoubleValues;
+import com.example.managing_mei.adapters.AdapterProvider;
+import com.example.managing_mei.utils.FormatDataUtils;
 import com.example.managing_mei.view.ui.main.ui.product.addProduct.AddProductActivity;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
+import com.example.managing_mei.view.ui.main.ui.seals.addSell.AddSellActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
-import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 import static com.example.managing_mei.utils.FormatDataUtils.cleanFormatValues;
 import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
-import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValuePositiveOrNegative;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValueDouble;
 
-public class HelpToCalcSealValueActivity extends AppCompatActivity {
+public class HelpToCalcSealValueActivity extends AppCompatActivity implements AdapterDoubleValues.OnDoubleItemListener{
 
-    private TextView valueWithGain,countOfGainPercent;
-    private SeekBar gainSeekBar;
-    private TextInputLayout editTextExpense;
-    private ImageButton imageButtonAddNewExpense;
-    private Button SaveValuesButton,CancelCalcButton;
-    private ChipGroup chipGroupForCalc;
-    private Set<Chip> chipsToShow= new HashSet<>();
-    private Set<ExpenseFromProducts> mainListOfQuantityTypes = new HashSet<>();
+    private TextView textViewValorCalculado,contador;
+    private SeekBar seekbar;
+    private Button botaoSalvar, botaoCancelar,botaoAdicionar;
+    private RecyclerView recyclerView;
+    private List<Double> listOfValoresAgregados = new ArrayList<>();
+    private AdapterDoubleValues adapterDoubleValues;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_to_calc_seal_value);
 
-        chipGroupForCalc = findViewById(R.id.chipGroupForCal);
-        valueWithGain = findViewById(R.id.textViewValueWithGain);
-        countOfGainPercent = findViewById(R.id.textViewCountValue);
-        gainSeekBar = findViewById(R.id.seekBar);
-        editTextExpense = findViewById(R.id.editTextNumberDecimal);
-        imageButtonAddNewExpense = findViewById(R.id.imageButtonAddNewExpense);
-        SaveValuesButton = findViewById(R.id.SaveValuesButton);
-        CancelCalcButton = findViewById(R.id.CancelCalcButton);
-        mainListOfQuantityTypes.clear();
+        contador = findViewById(R.id.textViewCountValue);
+        textViewValorCalculado = findViewById(R.id.textViewValueWithGain);
+        recyclerView = findViewById(R.id.recyclerViewElementosDeDespesas);
+        botaoAdicionar = findViewById(R.id.buttonNovaDespesa);
+        seekbar = findViewById(R.id.seekBar);
+        botaoSalvar = findViewById(R.id.SaveValuesButton);
+        botaoCancelar = findViewById(R.id.CancelCalcButton);
 
-
-        SaveValuesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               if(calcTotalExpenses().isNaN() || calcTotalExpenses().equals(0.0)){
-                   Toast.makeText(getApplicationContext(),"Adicione as suas despesas",Toast. LENGTH_SHORT).show();
-               }else{
-                   Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
-                   Bundle bundle = new Bundle();
-                   bundle.putDouble("expenses",calcTotalExpenses());
-                   bundle.putDouble("SealValue",Double.parseDouble(cleanFormatValues(valueWithGain.getText().toString())));
-                   intent.putExtras(bundle);
-                   startActivity(intent);
-               }
-            }
-        });
-
-        editTextExpense.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b){
-                    editTextExpense.getEditText().setText(cleanFormatValues(editTextExpense.getEditText().getText().toString()));
-                } else {
-                    editTextExpense.getEditText().setText(formatMonetaryValue(Double.valueOf(editTextExpense.getEditText().getText().toString())));
-                }
-            }
-        });
-
-
-        setActionForSeekBar();
-        cancelCalcValue();
-        AddNewExpense();
-    }
-
-    private void setActionForSeekBar() {
-        gainSeekBar.setMin(1);
-        gainSeekBar.setMax(300);
-        gainSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekbar.setMax(1000);
+        seekbar.setMin(1);
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                countOfGainPercent.setText(""+i);
-                calcValue();
+                contador.setText(""+i);
+                atualizarValorCalculado();
             }
 
             @Override
@@ -111,80 +73,107 @@ public class HelpToCalcSealValueActivity extends AppCompatActivity {
 
             }
         });
-    }
 
-    private void AddNewExpense(){
-        imageButtonAddNewExpense.setOnClickListener(new View.OnClickListener() {
+        botaoAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExpenseFromProducts expenseFromProducts = new ExpenseFromProducts();
-                if (editTextExpense.getEditText().getText().toString().equals("") || editTextExpense.getEditText().getText().toString().equals(null)){
-                    expenseFromProducts.setExpenseValue(0.0);
+                callDialogAddValue();
+            }
+        });
+
+        botaoCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             finish();
+            }
+        });
+
+        botaoSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(textViewValorCalculado.getText().toString().equals(0.0)){
+                    Toast.makeText(getApplicationContext(),"Adicione as suas despesas",Toast. LENGTH_SHORT).show();
                 }else{
-                    expenseFromProducts.setExpenseValue(Double.valueOf(editTextExpense.getEditText().getText().toString()));
+                    Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("expenses",calcularDespesasTotais());
+                    bundle.putDouble("SealValue",calcularValorComLucro());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
                 }
-                expenseFromProducts.setExpenseId(firebaseDbReference.push().getKey());
-                editTextExpense.getEditText().setText("");
-                mainListOfQuantityTypes.add(expenseFromProducts);
-                reloadChipGroup();
+
             }
         });
     }
 
-    private void calcValue() {
-        Double value = calcTotalExpenses()+((Double.parseDouble(countOfGainPercent.getText().toString())/100)*calcTotalExpenses());
-        valueWithGain.setText(formatMonetaryValue(value));
+    private double calcularDespesasTotais() {
+        return formatMonetaryValueDouble(listOfValoresAgregados.stream().mapToDouble(Double::doubleValue).sum());
     }
 
-
-    private Double calcTotalExpenses(){
-        return mainListOfQuantityTypes.stream().mapToDouble(ExpenseFromProducts::getExpenseValue).sum();
+    private double calcularValorComLucro() {
+        return formatMonetaryValueDouble((calcularDespesasTotais()*(Double.parseDouble(String.valueOf(seekbar.getProgress()))/100))+calcularDespesasTotais());
     }
 
-    private void cancelCalcValue(){
-        CancelCalcButton.setOnClickListener(new View.OnClickListener() {
+    private void callDialogAddValue() {
+        View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_new_calc_seal_item,null);
+
+        TextInputLayout editTextValorAgregado = dialog.findViewById(R.id.editTextNumberDecimalValorAgregado);
+        Button butaoAdicionarValor =  dialog.findViewById(R.id.buttonAddNewValueInHelp);
+
+        butaoAdicionarValor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
-            }
-        });
-    }
-
-    private void reloadChipGroup(){
-        chipsToShow.clear();
-        createChipList(mainListOfQuantityTypes).stream().forEach(chip -> {
-            if (!chipsToShow.contains(chip)){
-                chipsToShow.add(chip);
-            }
-        });
-        editTextExpense.getEditText().setText("");
-        chipGroupForCalc.removeAllViews();
-        chipsToShow.stream().forEach(chip -> chipGroupForCalc.addView(chip));
-        calcValue();
-    }
-
-    private List<Chip> createChipList(Set<ExpenseFromProducts> mainListOfQuantityTypes){
-        List<Chip> chips = new ArrayList<>();
-
-        mainListOfQuantityTypes.stream().forEach(expenseFromProducts -> {
-            Chip chip = new Chip(this);
-            chip.setId(ViewCompat.generateViewId());
-            chip.setText(formatMonetaryValuePositiveOrNegative(expenseFromProducts.getExpenseValue(),false));
-            chip.setTextColor(Color.parseColor("#FF0000"));
-            chip.setCheckable(true);
-            chip.setChipIconVisible(true);
-            chip.setCheckedIconVisible(true);
-            chip.setCloseIconVisible(true);
-            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    chipGroupForCalc.removeView(chip);
-                    mainListOfQuantityTypes.removeIf(expense -> expense.getExpenseId().equals(expenseFromProducts.getExpenseId()));
+                if (editTextValorAgregado.getEditText().getText().toString().isEmpty()) {
+                    Toast.makeText(HelpToCalcSealValueActivity.this, "Adicione um valor", Toast.LENGTH_SHORT).show();
+                } else {
+                    listOfValoresAgregados.add(Double.parseDouble(editTextValorAgregado.getEditText().getText().toString()));
+                    atualizarValorCalculado();
+                    atualizarRecyclerView();
+                    alertDialog.dismiss();
                 }
-            });
-            chips.add(chip);
+            }
         });
-        return chips;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialog);
+        alertDialog=builder.create();
+        alertDialog.show();
     }
 
+    private void atualizarRecyclerView() {
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapterDoubleValues = new AdapterDoubleValues(listOfValoresAgregados,getApplicationContext(),this);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterDoubleValues);
+
+    }
+
+    private void atualizarValorCalculado() {
+        textViewValorCalculado.setText(FormatDataUtils.formatMonetaryValue(calcularValorComLucro()));
+    }
+
+
+    @Override
+    public void OnDoubleItemClick(int position) {
+        View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_new_calc_seal_item,null);
+
+        TextInputLayout editTextValorAgregado = dialog.findViewById(R.id.editTextNumberDecimalValorAgregado);
+        Button butaoAdicionarValor =  dialog.findViewById(R.id.buttonAddNewValueInHelp);
+        butaoAdicionarValor.setText("DELETE");
+        editTextValorAgregado.getEditText().setText(String.valueOf(formatMonetaryValueDouble(listOfValoresAgregados.get(position))));
+        butaoAdicionarValor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listOfValoresAgregados.remove(position);
+                atualizarValorCalculado();
+                atualizarRecyclerView();
+                alertDialog.dismiss();
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialog);
+        alertDialog=builder.create();
+        alertDialog.show();
+    }
 }

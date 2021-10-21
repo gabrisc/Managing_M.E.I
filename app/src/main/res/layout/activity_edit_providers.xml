@@ -202,7 +202,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="serif"
         android:text="APAGAR"
-        android:textColor="@color/IntermediateDMBlue"
+        android:textColor="@color/vermelho"
         app:elevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/ratingBarForProvider"
         app:layout_constraintStart_toStartOf="@+id/ratingBarForProvider"

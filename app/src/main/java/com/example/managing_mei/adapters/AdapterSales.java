@@ -72,7 +72,7 @@ public AdapterSales(List<Sale> saleList, Context context, OnSaleListerner monSal
 
                 @Override
                 public void onClick(View v) {
-
+                        onSaleListerner.onSaleListenerClick(getAdapterPosition());
                 }
         }
         public interface OnSaleListerner{

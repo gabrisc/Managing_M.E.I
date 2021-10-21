@@ -58,6 +58,7 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="serif"
         android:text="Salvar"
+        android:textColor="@color/white"
         app:backgroundTint="@color/verdeClaro"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"

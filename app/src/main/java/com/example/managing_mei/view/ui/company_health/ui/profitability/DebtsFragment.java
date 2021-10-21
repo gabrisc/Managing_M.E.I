@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -24,12 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 
-
-public class ProfitabilityFragment extends Fragment implements AdapterDebts.OnDebtsItemListener {
+public class DebtsFragment extends Fragment implements AdapterDebts.OnDebtsItemListener {
     //Tipos para o Spinner de tipo divida: valor divida unica, recorrente, fixa
     //spinnerTypeDebt :: Divida Unica, Recorrente
     //spinnerOccurrence :: valor Fixo , parcelado
@@ -40,33 +37,34 @@ public class ProfitabilityFragment extends Fragment implements AdapterDebts.OnDe
     private ImageButton imageButtonAddNewDebt;
     private AdapterDebts adapterDebts;
     private Set<DebtsItem> debtsItems = new HashSet<>();
-    public ProfitabilityFragment() {
+    public DebtsFragment() {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_debt, container, false);
-
-        recyclerView          = root.findViewById(R.id.reciclerViewNewDebts);
+        recyclerView = root.findViewById(R.id.reciclerViewNewDebts);
         imageButtonAddNewDebt = root.findViewById(R.id.imageButtonAddNewDebt);
-
         imageButtonAddNewDebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            startActivity(new Intent(getContext(), ActivityAddNewDebt.class));
+                startActivity(new Intent(getContext(), ActivityAddNewDebt.class));
             }
         });
-
         loadList();
         reloadRecyclerClient();
-
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        debtsItems.clear();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         debtsItems.clear();
-        reloadRecyclerClient();
     }
 
     private void reloadRecyclerClient(){
@@ -74,12 +72,10 @@ public class ProfitabilityFragment extends Fragment implements AdapterDebts.OnDe
         adapterDebts = new AdapterDebts(debtsItems,this.getContext().getApplicationContext(),this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterDebts);
-
     }
 
     private void loadList(){
         debtsItems.clear();
-
         firebaseInstance.getReference()
                 .child(getIdUser())
                 .child("debts")
@@ -106,7 +102,5 @@ public class ProfitabilityFragment extends Fragment implements AdapterDebts.OnDe
     }
 
     @Override
-    public void OnCheckListItemClick(int position) {
-
-    }
+    public void OnCheckListItemClick(int position) {}
 }

@@ -67,7 +67,7 @@ public class EditClientActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (validarCampos()){
                     client.save();
-                    startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
+                    finish();
                 }
             }
         });

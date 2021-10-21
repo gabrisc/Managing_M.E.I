@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.managing_mei.R;
 import com.example.managing_mei.adapters.AdapterProduct;
 import com.example.managing_mei.model.entities.Product;
+import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.main.ui.product.EditProduct.EditProductActivity;
 import com.example.managing_mei.view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
@@ -35,23 +38,38 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
     private RecyclerView recyclerView;
     private AdapterProduct adapterClient;
     private int positionEconomicOperationSelect;
+    private View view;
+
+    public ProductFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        view = inflater.inflate(R.layout.fragment_product, container, false);
 
         imageButtonAddProduct = view.findViewById(R.id.imageButtonAddProduct);
         recyclerView = view.findViewById(R.id.recyclerViewProduct);
 
-
+        callAddProvider();
         loadList();
         reloadRecyclerClient();
-        callAddProvider();
         return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onPause() {
+        super.onPause();
+        clientList.clear();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        clientList.clear();
     }
 
     private void callAddProvider(){
@@ -95,7 +113,6 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
     @Override
     public void onProductListenerClick(int position) {
         Product operation = clientList.get(position);
-        positionEconomicOperationSelect = position;
 
         Intent intent= new Intent(getContext().getApplicationContext(), EditProductActivity.class);
         Bundle bundle = new Bundle();

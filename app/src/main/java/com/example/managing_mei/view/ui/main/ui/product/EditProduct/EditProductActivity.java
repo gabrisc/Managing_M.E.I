@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -19,213 +19,179 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.managing_mei.R;
+import com.example.managing_mei.model.entities.PaymentsTypes;
 import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.Provider;
-import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
-import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
+import com.example.managing_mei.view.ui.main.ui.ecmei.config.productQuantity.ProductConfigActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
-import static com.example.managing_mei.utils.FormatDataUtils.cleanFormat;
 import static com.example.managing_mei.utils.FormatDataUtils.cleanFormatValues;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetary;
 import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
+import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValueDouble;
 
 public class EditProductActivity extends AppCompatActivity {
 
     private Product productRecuperado = new Product();
-    private Product productEditado = new Product();
-    private TextView contadorDoSeekBar, tituloTipoQuantidade,titleSeek;
-    private TextInputLayout nomeProduto, despesasProduto, valorDeVendaProduto;
-    private Spinner spinnerTipoDeQuantidade, spinnerFornecedor;
-    private SeekBar seekBar;
-    private Button buttonAtualizar, buttonCancelar,buttonDeletar;
-    private final LinkedList<Provider> listaDeFornecedoresRecuperada = new LinkedList<>();
-    private Integer fornecedorEscolhido;
-    private Switch switchWhioutProvider;
-    private TextView textViewTitleProviderEditProduct;
+    private TextInputLayout valorDeVenda,despensas,nomeDoProduto;
+    private Spinner spinnerFornecedor,spinnerTipoQuantidade;
+    private Switch aSwitchSemFornececor;
+    private Button botaoDeletar,botaoSalvar;
+    private ImageButton imageButtonConfig;
+    private SeekBar seekBarQuantidade;
+    private TextView tituloQuantidade,tituloFornecedor,textViewContador;
+    private List<Provider> listaDeFornecedores = new ArrayList<>();
+    private List<QuantityType> listaDeTipoDeQuantidade = new ArrayList<>();
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
 
-        recuperarProduto();
+        nomeDoProduto = findViewById(R.id.editTextNameProductEdit);
+        valorDeVenda = findViewById(R.id.editTextSellValueInAddProductEdit);
+        despensas = findViewById(R.id.editTextExpenseValueProductEdit);
 
-        tituloTipoQuantidade = findViewById(R.id.TextViewTypeProduct);
-        nomeProduto = findViewById(R.id.editTextNameProductEdit);
-        valorDeVendaProduto = findViewById(R.id.editTextSealValueProductEdit);
-        despesasProduto = findViewById(R.id.editTextExpenseValueProductEdit);
-        spinnerFornecedor = findViewById(R.id.spinnerProviderProduct);
-        titleSeek = findViewById(R.id.textViewTitleQuantity);
-        seekBar = findViewById(R.id.seekBarProduct);
-        spinnerTipoDeQuantidade = findViewById(R.id.spinnerTypeOfQuantityProductEdit);
-        contadorDoSeekBar = findViewById(R.id.textViewCounterProductEdit);
-        buttonAtualizar = findViewById(R.id.buttonAddProductEdit);
-        buttonCancelar = findViewById(R.id.buttonCancelProductEdit);
-        buttonDeletar = findViewById(R.id.buttonDeleteProduct);
-        switchWhioutProvider = findViewById(R.id.switchWhioutProvider);
-        textViewTitleProviderEditProduct = findViewById(R.id.textViewTitleProviderEditProduct);
+        spinnerFornecedor = findViewById(R.id.spinnerProviderProductEdit);
+        spinnerTipoQuantidade = findViewById(R.id.spinnerTypeOfQuantityProductEdit);
 
-        buttonCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    this.finalize();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
-            }
-        });
+        aSwitchSemFornececor = findViewById(R.id.switchWhioutProviderEdit);
 
-        switchWhioutProvider.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    spinnerFornecedor.setVisibility(View.INVISIBLE);
-                    textViewTitleProviderEditProduct.setVisibility(View.INVISIBLE);
-                } else {
-                    spinnerFornecedor.setVisibility(View.VISIBLE);
-                    textViewTitleProviderEditProduct.setVisibility(View.VISIBLE);
-                    setValuesInSpinnerProviders();
-                }
-            }
-        });
+        botaoDeletar = findViewById(R.id.buttonDeleteProductEdit);
+        botaoSalvar = findViewById(R.id.buttonSaveProductEdit);
 
-        tituloTipoQuantidade.setText(productRecuperado.getType().toUpperCase());
-        nomeProduto.getEditText().setText(productRecuperado.getName().toUpperCase());
-        despesasProduto.getEditText().setText(formatMonetaryValue(productRecuperado.getExpenseValue()));
-        contadorDoSeekBar.setText(productRecuperado.getQuantity().toString());
-        valorDeVendaProduto.getEditText().setText(formatMonetaryValue(productRecuperado.getSealValue()));
+        imageButtonConfig = findViewById(R.id.imageButtonConfigProductEditEdit);
 
-        despesasProduto.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b){
-                    despesasProduto.getEditText().setText(cleanFormatValues(despesasProduto.getEditText().getText().toString()));
-                } else {
-                    despesasProduto.getEditText().setText(formatMonetaryValue(Double.valueOf(despesasProduto.getEditText().getText().toString())));
-                }
-            }
-        });
-        valorDeVendaProduto.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b){
-                    valorDeVendaProduto.getEditText().setText(cleanFormatValues(valorDeVendaProduto.getEditText().getText().toString()));
-                } else {
-                    valorDeVendaProduto.getEditText().setText(formatMonetaryValue(Double.valueOf(valorDeVendaProduto.getEditText().getText().toString())));
-                }
-            }
-        });
+        seekBarQuantidade = findViewById(R.id.seekBarProductEdit);
 
-        setSpinnerQuantitiesType();
-        setValuesInSpinnerProviders();
-        setButtonActions();
-        setSeekBar();
-    }
+        tituloFornecedor = findViewById(R.id.textViewTitleSpinerProviderEdit);
+        tituloQuantidade = findViewById(R.id.textViewTitleQuantityEdit);
+        textViewContador = findViewById(R.id.textViewCounterProductEdit);
 
-    private void recuperarProduto() {
         Bundle bundle = getIntent().getExtras();
-        productRecuperado.setId(bundle.getString("id"));
-        productRecuperado.setType(bundle.getString("type"));
-        productRecuperado.setExpenseValue(Double.valueOf(bundle.getString("ExpenseValue")));
-        productRecuperado.setName(bundle.getString("Name"));
-        productRecuperado.setQuantity(Integer.valueOf(bundle.getString("Quantity")));
-        productRecuperado.setSealValue(Double.valueOf(bundle.getString("SealValue")));
-        productRecuperado.setTypeQuantity(bundle.getString("typeQuantity"));
-        productRecuperado.setProviderId(bundle.getString("ProviderId"));
-    }
-
-    private boolean validarCampos() {
-        if (nomeProduto.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha o nome",Toast. LENGTH_SHORT).show();
-            return false;
-        } else if (valorDeVendaProduto.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha o valor de venda",Toast. LENGTH_SHORT).show();
-            return false;
-        } else if (despesasProduto.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Preencha as despesas",Toast. LENGTH_SHORT).show();
-            return false;
-        } else {
-            productRecuperado.setName(nomeProduto.getEditText().getText().toString());
-            productRecuperado.setExpenseValue(Double.valueOf(cleanFormatValues(despesasProduto.getEditText().getText().toString())));
-            productRecuperado.setSealValue(Double.valueOf(cleanFormatValues(valorDeVendaProduto.getEditText().getText().toString())));
-        }
-        productRecuperado.setTypeQuantity(spinnerTipoDeQuantidade.getSelectedItem().toString());
-        productRecuperado.setType(spinnerTipoDeQuantidade.getSelectedItem().toString());
-        productRecuperado.setProviderId(listaDeFornecedoresRecuperada.get(fornecedorEscolhido).getId());
-        productRecuperado.setQuantity(Integer.parseInt(contadorDoSeekBar.getText().toString()));
-        return true;
-    }
-
-
-
-    private void setValuesInSpinnerProviders() {
         firebaseInstance.getReference()
                 .child(getIdUser())
-                .child("providers")
+                .child("product")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        listaDeFornecedoresRecuperada.clear();
-                        for (DataSnapshot ds:snapshot.getChildren()){
-                            Provider provider = ds.getValue(Provider.class);
-                            listaDeFornecedoresRecuperada.add(provider);
+                        Product provider = null;
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            provider = ds.getValue(Product.class);
+                            if (provider.getId().equals(bundle.getString("id"))) {
+                                break;
+                            }
                         }
-                        if (productRecuperado.getProviderId().equals("SEM FORNECEDOR")){
-                            switchWhioutProvider.setChecked(true);
-                            switchWhioutProvider.setClickable(false);
-                        } else {
-                            Provider providerToMove = listaDeFornecedoresRecuperada.stream().filter(provider -> provider.getId().equals(productRecuperado.getProviderId())).findAny().orElse(null);
-                            listaDeFornecedoresRecuperada.remove(providerToMove);
-                            listaDeFornecedoresRecuperada.addFirst(providerToMove);
-                            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, listaDeFornecedoresRecuperada.stream().map(Provider::getFantasyName).collect(Collectors.toList()));
-                            spinnerFornecedor.setAdapter(adapter);
-                            spinnerFornecedor.setSelection(listaDeFornecedoresRecuperada.indexOf(providerToMove));
-                        }
-
+                        productRecuperado.setType(provider.getType());
+                        productRecuperado.setExpenseValue(provider.getExpenseValue());
+                        productRecuperado.setId(provider.getId());
+                        productRecuperado.setName(provider.getName());
+                        productRecuperado.setSealValue(provider.getSealValue());
+                        productRecuperado.setTypeQuantity(provider.getTypeQuantity());
+                        productRecuperado.setQuantity(provider.getQuantity());
+                        setValuesInSeekBar();
+                        productRecuperado.setProviderId(provider.getProviderId());
+                        fillFields();
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        String x =String.valueOf(error);
+                        String x = String.valueOf(error);
                     }
                 });
 
-        spinnerFornecedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        valorDeVenda.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                listaDeFornecedoresRecuperada.stream().forEach(p -> {
-                    if (p.getFantasyName().equals(spinnerFornecedor.getSelectedItem().toString())){
-                        fornecedorEscolhido = listaDeFornecedoresRecuperada.indexOf(p);
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    valorDeVenda.getEditText().setText(cleanFormatValues(valorDeVenda.getEditText().getText().toString()));
+                }else{
+                    if (!valorDeVenda.getEditText().getText().toString().isEmpty()){
+                        valorDeVenda.getEditText().setText(formatMonetaryValue(Double.parseDouble(valorDeVenda.getEditText().getText().toString())));
                     }
-                });
+                }
             }
+        });
+
+        despensas.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}});
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    despensas.getEditText().setText(cleanFormatValues(despensas.getEditText().getText().toString()));
+                }else{
+                    if (!despensas.getEditText().getText().toString().isEmpty()) {
+                        despensas.getEditText().setText(formatMonetaryValue(Double.parseDouble(despensas.getEditText().getText().toString())));
+                    }
+                }
+            }
+        });
+
+        botaoDeletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletarProduto();
+            }
+        });
+
+        botaoSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvarProduto();
+            }
+        });
+
+        imageButtonConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listaDeTipoDeQuantidade.clear();
+                startActivity(new Intent(getApplicationContext(), ProductConfigActivity.class));
+            }
+        });
+
+        aSwitchSemFornececor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    tituloFornecedor.setVisibility(View.INVISIBLE);
+                    spinnerFornecedor.setVisibility(View.INVISIBLE);
+                } else {
+                    tituloFornecedor.setVisibility(View.VISIBLE);
+                    spinnerFornecedor.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        setValuesInSpinnerFornecedor();
     }
 
-    private void setSeekBar() {
-        seekBar.setMax(1000);
-        seekBar.setMin(1);
-        seekBar.setProgress(productRecuperado.getQuantity());
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        listaDeTipoDeQuantidade.clear();
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setValuesInSeekBar() {
+        seekBarQuantidade.setMax(1000);
+        seekBarQuantidade.setMin(1);
+        seekBarQuantidade.setProgress(productRecuperado.getQuantity());
+        textViewContador.setText(productRecuperado.getQuantity().toString());
+        seekBarQuantidade.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                contadorDoSeekBar.setText(""+i);
-                contadorDoSeekBar.addTextChangedListener(new TextWatcher() {
+                textViewContador.setText(""+i);
+                textViewContador.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -250,76 +216,109 @@ public class EditProductActivity extends AppCompatActivity {
             }});
     }
 
-    private void setSpinnerQuantitiesType() {
-        List<QuantityType> quantitiesTypes = new ArrayList<>();
+    private void setValuesInSpinnerTipoQuantidade() {
+        listaDeTipoDeQuantidade.clear();
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("QuantitiesTypes")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds:snapshot.getChildren()){
+                            QuantityType provider = ds.getValue(QuantityType.class);
+                            listaDeTipoDeQuantidade.add(provider);
+                        }
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(getIdUser()+"/QuantitiesTypes");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuantitiesTypes post = dataSnapshot.getValue(QuantitiesTypes.class);
-                System.out.println(post);
-                quantitiesTypes.addAll(post.getQuantityTypeArrayList());
+                        QuantityType quantityTypeToMove = listaDeTipoDeQuantidade.stream().filter(quantityType -> quantityType.getNome().equals(productRecuperado.getTypeQuantity())).findFirst().orElse(null);
+                        if (quantityTypeToMove.getStatus().equals(false)) {
+                            quantityTypeToMove.setStatus(true);
+                        }
 
-                List<String> listOfQuantitiesNames = new ArrayList<>();
-                quantitiesTypes.stream().forEach(quantityType ->{
-                    listOfQuantitiesNames.add(quantityType.getNome().toUpperCase());
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, listaDeTipoDeQuantidade.stream().filter(quantityType -> quantityType.getStatus().equals(true)).map(QuantityType::getNome).collect(Collectors.toList()));
+                        spinnerTipoQuantidade.setAdapter(adapter);
+                        Integer position = listaDeTipoDeQuantidade.stream().filter(quantityType -> quantityType.getStatus().equals(true)).collect(Collectors.toList()).indexOf(quantityTypeToMove);
+                        spinnerTipoQuantidade.setSelection(position);
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        String x =String.valueOf(error);
+                    }
                 });
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_spinner,listOfQuantitiesNames);
-                spinnerTipoDeQuantidade.setAdapter(arrayAdapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
-
-        spinnerTipoDeQuantidade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
     }
 
-    private void setButtonActions() {
-        buttonAtualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validarCampos()){
-                    productRecuperado.save();
-                    startActivity(new Intent(getApplicationContext(),ManagementActivity.class));
-                }
-            }
-        });
+    private void setValuesInSpinnerFornecedor() {
 
-        buttonCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("providers")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        listaDeFornecedores.clear();
+                        for (DataSnapshot ds:snapshot.getChildren()){
+                            Provider provider = ds.getValue(Provider.class);
+                            listaDeFornecedores.add(provider);
+                        }
 
-        buttonDeletar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteProduct();
-            }
-        });
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),R.layout.item_spinner,listaDeFornecedores.stream().map(Provider::getFantasyName).collect(Collectors.toList()));
+                        spinnerFornecedor.setAdapter(adapter);
+
+                        if (productRecuperado.getProviderId().equals("SEM FORNECEDOR")){
+                                tituloFornecedor.setVisibility(View.INVISIBLE);
+                                spinnerFornecedor.setVisibility(View.INVISIBLE);
+                                aSwitchSemFornececor.setChecked(true);
+                        } else {
+                            Provider providerToMove = listaDeFornecedores.stream()
+                                    .filter(provider -> provider.getId().equals(productRecuperado.getProviderId()))
+                                    .findAny()
+                                    .orElse(null);
+                            spinnerFornecedor.setSelection(listaDeFornecedores.indexOf(providerToMove));
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        String x =String.valueOf(error);
+                    }
+                });
     }
 
-    private void deleteProduct(){
+    private void deletarProduto() {
         productRecuperado.delete();
-        Toast toast=Toast. makeText(getApplicationContext(),"Produto Deletado",Toast. LENGTH_LONG);
-        toast.show();
+        Toast.makeText(getApplicationContext(),"Produto Deletado",Toast. LENGTH_LONG).show();
         finish();
+    }
+
+    private void salvarProduto() {
+        if (nomeDoProduto.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Produto Deletado",Toast. LENGTH_LONG).show();
+        }else if (valorDeVenda.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Produto Deletado",Toast. LENGTH_LONG).show();
+        } else if (despensas.getEditText().getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Produto Deletado",Toast. LENGTH_LONG).show();
+        } else {
+            productRecuperado.setName(nomeDoProduto.getEditText().getText().toString().toUpperCase());
+            productRecuperado.setSealValue(formatMonetary(valorDeVenda.getEditText().getText().toString()));
+            productRecuperado.setExpenseValue(formatMonetary(despensas.getEditText().getText().toString()));
+            productRecuperado.setQuantity(Integer.parseInt(textViewContador.getText().toString()));
+            productRecuperado.setTypeQuantity(spinnerTipoQuantidade.getSelectedItem().toString());
+            if (aSwitchSemFornececor.isChecked()){
+                productRecuperado.setProviderId("SEM FORNECEDOR");
+            } else {
+                productRecuperado.setProviderId(listaDeFornecedores.stream().filter(provider -> provider.getFantasyName().equals(spinnerFornecedor.getSelectedItem().toString())).map(Provider::getId).collect(Collectors.joining()));
+            }
+            productRecuperado.save();
+            finish();
+        }
+    }
+
+    private void fillFields() {
+        nomeDoProduto.getEditText().setText(productRecuperado.getName().toUpperCase());
+        valorDeVenda.getEditText().setText(formatMonetaryValue(productRecuperado.getSealValue()));
+        despensas.getEditText().setText(formatMonetaryValue(productRecuperado.getExpenseValue()));
+        setValuesInSpinnerTipoQuantidade();
+        setValuesInSpinnerFornecedor();
+
     }
 
 }

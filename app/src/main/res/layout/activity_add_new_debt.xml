@@ -14,7 +14,7 @@
         android:background="@color/IntermediateDMBlue"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Nova divida"
+        android:text="NOVA DÍVIDA"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +36,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:hint="Nome Divida"
-        android:textColorHint="@color/gray"
+        android:hint="Descrição da Divida"
+        android:textColorHint="@color/DarkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider6">
@@ -51,16 +51,19 @@
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextValorDaDivida"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:hint="Valor da Divida"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNomeDivida"
-        app:layout_constraintStart_toStartOf="@+id/editTextNomeDivida"
+        android:textColorHint="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNomeDivida">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -70,25 +73,26 @@
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <Spinner
         android:id="@+id/spinnerTypeDebt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/switchIsPaid"
-        app:layout_constraintStart_toStartOf="@+id/switchIsPaid"
-        app:layout_constraintTop_toBottomOf="@+id/switchIsPaid" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextValorDaDivida" />
 
     <TextView
         android:id="@+id/textView58"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="serif"
         android:text="Tipo de Divida"
+        android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerTypeDebt"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerTypeDebt"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/spinnerTypeDebt" />
 
 
@@ -96,11 +100,11 @@
         android:id="@+id/textViewTitleFormDebtsParcel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="serif"
         android:text="Numero de Parcelas "
+        android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
 
     <com.google.android.material.button.MaterialButton
@@ -110,7 +114,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="serif"
         android:text="Salvar"
         app:backgroundTint="@color/verdeClaro"
@@ -124,7 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="serif"
         android:text="Cancelar"
         android:textColor="@color/vermelho"
@@ -136,11 +140,13 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerOccurence"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerOccurence"
-        app:layout_constraintStart_toStartOf="@+id/spinnerOccurence"
-        app:layout_constraintTop_toTopOf="@+id/spinnerOccurence">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeDebt">
 
         <Spinner
             android:id="@+id/spinnerParcelDebt"
@@ -153,29 +159,62 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="serif"
             android:gravity="center"
             android:text="TextView"
+            android:textColor="@color/DarkBlue"
             android:textSize="20sp" />
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinnerOccurence"
+    <RadioGroup
+        android:id="@+id/RadioGroupStatusDebts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerTypeDebt"
-        app:layout_constraintStart_toStartOf="@+id/spinnerTypeDebt"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeDebt" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView37"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView37"
+        app:layout_constraintTop_toBottomOf="@+id/textView37">
 
-    <Switch
-        android:id="@+id/switchIsPaid"
+        <RadioButton
+            android:id="@+id/radioButtonPedenteStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="PEDENTE"
+            android:textColor="@color/DarkBlue" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAtrasadaStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="ATRASADA"
+            android:textColor="@color/DarkBlue" />
+
+        <RadioButton
+            android:id="@+id/radioButtonQuitadaStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="QUITADA"
+            android:textColor="@color/DarkBlue" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView37"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:text="Divida Quitada"
-        app:layout_constraintEnd_toEndOf="@+id/editTextValorDaDivida"
-        app:layout_constraintStart_toStartOf="@+id/editTextValorDaDivida"
-        app:layout_constraintTop_toBottomOf="@+id/editTextValorDaDivida" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Status da divida"
+        android:textColor="@color/DarkBlue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

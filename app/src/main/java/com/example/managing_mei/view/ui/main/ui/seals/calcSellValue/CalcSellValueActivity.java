@@ -31,6 +31,7 @@ import com.example.managing_mei.model.entities.PaymentType;
 import com.example.managing_mei.model.entities.PaymentsTypes;
 import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.ProductForSaleVo;
+import com.example.managing_mei.model.entities.Provider;
 import com.example.managing_mei.model.entities.Sale;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.example.managing_mei.view.ui.main.ui.ecmei.config.payments.PaymentsConfigActivity;
@@ -41,6 +42,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -75,7 +78,6 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
     private Double valuedivided;
     private Switch switchIsDivided;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +100,7 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         loadList();
         setFinalValue();
         setActionForImageButtonSealConfig();
+        setListPaymentsTypes();
 
         conclusionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +176,12 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
     protected void onResume() {
         super.onResume();
         paymentTypeList.clear();
-        setListPaymentsTypes();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        paymentTypeList.clear();
     }
 
     private void setFinalValue(){
@@ -190,27 +198,32 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
     private void setListPaymentsTypes(){
         paymentTypeList.clear();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(getIdUser()+"/PaymentsTypes");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            PaymentsTypes post;
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                post = dataSnapshot.getValue(PaymentsTypes.class);
-                if (Objects.nonNull(post)){
-                    paymentTypeList.addAll(post.getPaymentTypeList().stream().filter(paymentType -> paymentType.getStatus().booleanValue()==true).collect(Collectors.toList()));
-                } else {
-                    paymentTypeList.add(new PaymentType("Não Especificado",true));
-                }
-                spinnerPaymentstype.setAdapter(new ArrayAdapter(getApplicationContext(), R.layout.item_spinner, paymentTypeList.stream().map(PaymentType::getNome).collect(Collectors.toList())));
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("PaymentsType")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds:snapshot.getChildren()){
+                            PaymentType provider = ds.getValue(PaymentType.class);
+                            paymentTypeList.add(provider);
+                        }
+                        if (paymentTypeList.stream().filter(paymentType -> paymentType.getStatus().equals(true)).map(PaymentType::getNome).collect(Collectors.toList()).size()==0){
+                            paymentTypeList.add(new PaymentType(firebaseDbReference.push().getKey(),"Não Especificado",true));
+                        }
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),
+                                                                     R.layout.item_spinner,
+                                                                     paymentTypeList.stream().filter(paymentType -> paymentType.getStatus().equals(true)).map(PaymentType::getNome).collect(Collectors.toList()));
+                        spinnerPaymentstype.setAdapter(arrayAdapter);
 
-    }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
 
     public void discountDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -320,10 +333,11 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         TextView counter = mDialogView.findViewById(R.id.textViewCounterAddQuantity);
 
         seekBar.setProgress(Integer.parseInt(String.valueOf(economicOperationForSaleVo.getQuantitySelect())));
+        seekBar.setMin(1);
         seekBar.setMax(economicOperationForSaleVo.getProduct().getQuantity());
         counter.setText(String.valueOf(economicOperationForSaleVo.getQuantitySelect()));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView).setTitle("Quantidade");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView);
         alertDialog=builder.create();
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -385,7 +399,7 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(mDialogView);
         alertDialog=builder.create();
-        editText.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+
 
         butttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override

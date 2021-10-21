@@ -62,7 +62,12 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
     public void onPause() {
         super.onPause();
         clientList.clear();
-        reloadRecyclerClient();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        clientList.clear();
     }
 
     private void callAddFragment() {

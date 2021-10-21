@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
@@ -35,6 +36,7 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
     private RecyclerView recyclerView;
     private ImageButton imageButtonAddNewCheckList;
     private List<CheckListItem> checkListItems = new ArrayList<>();
+    private Date actualDate = new Date();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,8 +79,6 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
             }
         });
 
-
-
         return view;
     }
 
@@ -116,9 +116,9 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
             buttonAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CheckListItem checkListItem = new CheckListItem(editTextCheckListItem.getEditText().getText().toString(),false);
+                    CheckListItem checkListItem = new CheckListItem(editTextCheckListItem.getEditText().getText().toString(),false, new Date());
                     checkListItem.save();
-                    reloadRecyclerClient();
+                    checkListItems.clear();
                     dialog.dismiss();
                 }
             });
@@ -128,9 +128,9 @@ public class CheckListFragment extends Fragment implements AdapterCheckListItem.
             buttonAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CheckListItem checkListItem = new CheckListItem(editTextCheckListItem.getEditText().getText().toString(),false);
+                    CheckListItem checkListItem = new CheckListItem(editTextCheckListItem.getEditText().getText().toString(),false, new Date());
                     checkListItem.save();
-                    reloadRecyclerClient();
+                    checkListItems.clear();
                     dialog.dismiss();
                 }
             });

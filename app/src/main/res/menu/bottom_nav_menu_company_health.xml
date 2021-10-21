@@ -4,11 +4,6 @@
     <item
         android:id="@+id/total_investment_calculation_fragment"
         android:icon="@drawable/ic_baseline_calculate_24"
-        android:title="@string/title_total_investment_calculation" />
-
-    <item
-        android:id="@+id/profitability_fragment"
-        android:icon="@drawable/ic_baseline_trending_up_24"
         android:title="@string/profitability" />
 
     <item

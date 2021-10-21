@@ -73,7 +73,7 @@ public class EditProvidersActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (validarCampos()){
                     provider.save();
-                    startActivity(new Intent(getApplicationContext(), ManagementActivity.class));
+                    finish();
                 }
             }
         });

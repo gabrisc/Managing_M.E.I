@@ -23,12 +23,12 @@ public class DebtsItem {
     private FrequencyDebts frequencyDebts;
     private Boolean itsDebtsParcels;
     private Integer numberOfParcels;
-    private Boolean itsPaid;
+    private String status;
 
     public DebtsItem() {
     }
 
-    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, FrequencyDebts frequencyDebts, Boolean itsDebtsParcels, Integer numberOfParcels, Boolean itsPaid) {
+    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, FrequencyDebts frequencyDebts, Boolean itsDebtsParcels, Integer numberOfParcels,String status) {
         this.id = id;
         this.nameDebts = nameDebts;
         this.debtsValue = debtsValue;
@@ -36,34 +36,33 @@ public class DebtsItem {
         this.frequencyDebts = frequencyDebts;
         this.itsDebtsParcels = itsDebtsParcels;
         this.numberOfParcels = numberOfParcels;
-        this.itsPaid = itsPaid;
+        this.status = status;
     }
 
-    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, Boolean itsPaid) {
+    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts,String status) {
         this.id = id;
         this.nameDebts = nameDebts;
         this.debtsValue = debtsValue;
         this.typeOfDebts = typeOfDebts;
-        this.itsPaid = itsPaid;
+        this.status = status;
     }
 
-    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, Boolean itsDebtsParcels, Integer numberOfParcels, Boolean itsPaid) {
+    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, Boolean itsDebtsParcels, Integer numberOfParcels, String status) {
         this.id = id;
         this.nameDebts = nameDebts;
         this.debtsValue = debtsValue;
         this.typeOfDebts = typeOfDebts;
         this.itsDebtsParcels = itsDebtsParcels;
         this.numberOfParcels = numberOfParcels;
-        this.itsPaid = itsPaid;
+        this.status = status;
     }
 
-    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, FrequencyDebts frequencyDebts, Boolean itsPaid) {
+    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, FrequencyDebts frequencyDebts) {
         this.id = id;
         this.nameDebts = nameDebts;
         this.debtsValue = debtsValue;
         this.typeOfDebts = typeOfDebts;
         this.frequencyDebts = frequencyDebts;
-        this.itsPaid = itsPaid;
     }
 
     public void save(){
@@ -141,11 +140,11 @@ public class DebtsItem {
         this.numberOfParcels = numberOfParcels;
     }
 
-    public Boolean getItsPaid() {
-        return itsPaid;
+    public String getStatus() {
+        return status;
     }
 
-    public void setItsPaid(Boolean itsPaid) {
-        this.itsPaid = itsPaid;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

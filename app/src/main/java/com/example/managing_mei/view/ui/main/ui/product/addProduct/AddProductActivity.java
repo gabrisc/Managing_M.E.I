@@ -22,7 +22,6 @@ import com.example.managing_mei.R;
 import com.example.managing_mei.model.entities.CashFlowItem;
 import com.example.managing_mei.model.entities.Product;
 import com.example.managing_mei.model.entities.Provider;
-import com.example.managing_mei.model.entities.QuantitiesTypes;
 import com.example.managing_mei.model.entities.QuantityType;
 import com.example.managing_mei.view.ui.main.ui.ManagementActivity;
 import com.example.managing_mei.view.ui.main.ui.ecmei.config.productQuantity.ProductConfigActivity;
@@ -34,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -58,9 +58,10 @@ public class AddProductActivity extends AppCompatActivity {
     private TextView textViewTitleSpinerProvider;
     private final LinkedList<Provider> listaDeFornecedoresRecuperada = new LinkedList<>();
     private Integer fornecedorEscolhido;
-
     private final LinkedList<String> tipoDoProduto = new LinkedList<>();
     private Integer tipoProdutoEscolhido;
+    private LinkedList<QuantityType> quantitiesTypes = new LinkedList<>();
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -117,11 +118,7 @@ public class AddProductActivity extends AppCompatActivity {
         botaoCancelarCadastroDeProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    this.finalize();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
+               finish();
             }
         });
 
@@ -149,6 +146,8 @@ public class AddProductActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProductConfigActivity.class));
             }
         });
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -249,31 +248,38 @@ public class AddProductActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}});
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        quantitiesTypes.clear();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        quantitiesTypes.clear();
+    }
+
     private void setValuesInSpinnerUnidadeDeMedida() {
-        LinkedList<QuantityType> quantitiesTypes = new LinkedList<>();
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(getIdUser()+"/QuantitiesTypes");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuantitiesTypes post = dataSnapshot.getValue(QuantitiesTypes.class);
-                System.out.println(post);
-                quantitiesTypes.addAll(post.getQuantityTypeArrayList());
-
-                List<String> listOfQuantitiesNames = new ArrayList<>();
-                quantitiesTypes.stream().forEach(quantityType ->{
-                    listOfQuantitiesNames.add(quantityType.getNome().toUpperCase());
+        quantitiesTypes.clear();
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("QuantitiesTypes")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            QuantityType post = ds.getValue(QuantityType.class);
+                            quantitiesTypes.add(post);
+                        }
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_spinner,quantitiesTypes.stream().filter(quantityType -> quantityType.getStatus().equals(true)).map(QuantityType::getNome).collect(Collectors.toList()));
+                        spinnerUnidadeDeMedida.setAdapter(arrayAdapter);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        String x = String.valueOf(error);
+                    }
                 });
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_spinner,listOfQuantitiesNames);
-                spinnerUnidadeDeMedida.setAdapter(arrayAdapter);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
     }
 
     private void setValuesInSpinnerProductType() {

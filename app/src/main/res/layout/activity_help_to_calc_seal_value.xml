@@ -7,50 +7,65 @@
     android:background="@color/white"
     tools:context=".view.ui.main.ui.product.helpToCalc.HelpToCalcSealValueActivity">
 
+
     <View
         android:id="@+id/view5"
-        android:layout_width="411dp"
-        android:layout_height="134dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/IntermediateDMBlue"
+        app:layout_constraintBottom_toTopOf="@+id/divider37"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonNovaDespesa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/intermediateMLBlue"
+        android:elevation="4dp"
+        android:text="Nova despesa"
+        app:layout_constraintBottom_toTopOf="@+id/divider37"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="361dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Calculo do valor do\nProduto/Serviço"
+        android:text="VALOR DE VENDA"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Porcentagem de Lucro"
-        android:textColor="@color/gray"
-        android:textSize="10sp"
+        android:textColor="@color/IntermediateDMBlue"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/seekBar"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider37" />
 
     <TextView
         android:id="@+id/textViewCountValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:fontFamily="serif"
         android:gravity="center"
@@ -60,7 +75,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/seekBar"
         app:layout_constraintStart_toStartOf="@+id/seekBar"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -68,64 +83,15 @@
         android:layout_width="0dp"
         android:layout_height="29dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:elevation="5dp"
         android:foregroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCountValue" />
-
-    <ImageButton
-        android:id="@+id/imageButtonAddNewExpense"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/rouded_edit_text"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroupForCal"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextNumberDecimal"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="5dp"
-        android:hint="VALOR AGREGADO"
-        app:layout_constraintBottom_toTopOf="@+id/CancelCalcButton"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonAddNewExpense"
-        app:layout_constraintStart_toStartOf="@+id/chipGroupForCal">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupForCal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/white_backgroud_rouded"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider37">
-
-    </com.google.android.material.chip.ChipGroup>
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/CancelCalcButton"
@@ -160,8 +126,9 @@
         android:id="@+id/textViewValueWithGain"
         android:layout_width="363dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_weight="1"
+        android:elevation="4dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="0.0"
@@ -169,7 +136,7 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
@@ -177,6 +144,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:elevation="4dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Valor Com lucro"
@@ -192,35 +160,52 @@
         android:id="@+id/textView73"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="4dp"
         android:fontFamily="serif"
-        android:text="Despesas"
-        app:layout_constraintBottom_toTopOf="@+id/chipGroupForCal"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroupForCal"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="@+id/chipGroupForCal" />
+        android:text="Todas as Despesas"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewElementosDeDespesas"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewElementosDeDespesas" />
 
     <View
         android:id="@+id/divider37"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="4dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/IntermediateDMBlue"
+        android:background="@color/purple_200"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text=" %  "
+        android:text=" %"
         android:textColor="@color/IntermediateDMBlue"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCountValue"
         app:layout_constraintEnd_toStartOf="@+id/textViewCountValue"
         app:layout_constraintTop_toTopOf="@+id/textViewCountValue" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewElementosDeDespesas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:elevation="5dp"
+        android:background="@drawable/white_backgroud_rouded"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNovaDespesa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewValueWithGain" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

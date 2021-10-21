@@ -7,13 +7,7 @@
 
     <fragment
         android:id="@+id/total_investment_calculation_fragment"
-        android:name="com.example.managing_mei.view.ui.company_health.ui.totalInvestmentCalculation.TotalInvestmentCalculationFragment"
-        android:label="@string/title_total_investment_calculation"
-        tools:layout="@layout/fragment_total_investment_calculation" />
-
-    <fragment
-        android:id="@+id/profitability_fragment"
-        android:name="com.example.managing_mei.view.ui.company_health.ui.profitability.ProfitabilityFragment"
+        android:name="com.example.managing_mei.view.ui.company_health.ui.profitability.DebtsFragment"
         android:label="@string/profitability"
         tools:layout="@layout/fragment_debt" />
 

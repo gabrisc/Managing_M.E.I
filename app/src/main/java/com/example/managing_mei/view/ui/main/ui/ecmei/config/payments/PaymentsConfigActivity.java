@@ -1,173 +1,180 @@
 package com.example.managing_mei.view.ui.main.ui.ecmei.config.payments;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.managing_mei.R;
+import com.example.managing_mei.adapters.AdapterConfigElement;
 import com.example.managing_mei.model.entities.PaymentType;
 import com.example.managing_mei.model.entities.PaymentsTypes;
-import com.example.managing_mei.model.entities.Provider;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
+import com.example.managing_mei.model.entities.QuantityType;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
+
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseDbReference;
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
 
-public class PaymentsConfigActivity extends AppCompatActivity {
+public class PaymentsConfigActivity extends AppCompatActivity implements AdapterConfigElement.OnClickListener{
 
-    private ChipGroup chipGroup;
-
-    private Set<PaymentType> paymentTypeList = new HashSet<>();
-    private Set<Chip> chipsToSave = new HashSet<Chip>();
-    private TextView groupTitle;
-    private ImageButton imageButtonAddPaymentType;
-    private TextInputLayout editTextAddNewPaymentType;
-    private Button buttonSaveNewPaymentsTypes,buttonCancelPaymentsTypes;
+    private List<PaymentType> paymentTypeList = new ArrayList<>();
+    private Button butaoSalvar, botaoCancelar, butaoNovo;
+    private RecyclerView recyclerView;
+    private AdapterConfigElement adapterConfigElement;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payments_config);
 
-        editTextAddNewPaymentType = findViewById(R.id.editTextAddNewPaymentType);
-        chipGroup = findViewById(R.id.PaymentTypeChipGroup);
-        imageButtonAddPaymentType = findViewById(R.id.imageButtonAddPaymentType);
-        buttonSaveNewPaymentsTypes = findViewById(R.id.buttonSaveNewPaymentsTypes);
-        buttonCancelPaymentsTypes = findViewById(R.id.buttonCancelNewPaymentForm);
+        recyclerView = findViewById(R.id.recyclerViewListOfPaymentTypes);
+        butaoNovo = findViewById(R.id.buttonNewFormaPagamento);
+        butaoSalvar = findViewById(R.id.buttonSaveNewPaymentsTypes);
+        botaoCancelar = findViewById(R.id.buttonCancelNewPaymentForm);
 
-        buttonCancelPaymentsTypes.setOnClickListener(new View.OnClickListener() {
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("PaymentsType")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            PaymentType post = ds.getValue(PaymentType.class);
+                            paymentTypeList.add(post);
+                            reloadRecyclerView();
+                        }
+                        adapterConfigElement.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        String x = String.valueOf(error);
+                    }
+                });
+
+
+        botaoCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    this.finalize();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
-            }
-        });
-
-        paymentTypeList.clear();
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(getIdUser()+"/PaymentsTypes");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                PaymentsTypes post = dataSnapshot.getValue(PaymentsTypes.class);
-                if (Objects.nonNull(post)) {
-                    paymentTypeList.addAll(post.getPaymentTypeList());
-                }
-
-                reloadChipGroup();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
-
-        imageButtonAddPaymentType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PaymentType newPaymentType = new PaymentType();
-                newPaymentType.setNome(editTextAddNewPaymentType.getEditText().getText().toString());
-                newPaymentType.setStatus(false);
-                paymentTypeList.add(newPaymentType);
-                reloadChipGroup();
-            }
-        });
-
-        savePaymentsTypes();
-    }
-
-    private void reloadChipGroup() {
-        chipsToSave.clear();
-        createChipList(paymentTypeList).stream().forEach(chip -> {
-            if (!chipsToSave.contains(chip)){
-                chipsToSave.add(chip);
-            }
-        });
-        editTextAddNewPaymentType.getEditText().setText("");
-        chipGroup.removeAllViews();
-        chipsToSave.stream().forEach(chip -> chipGroup.addView(chip));
-    }
-
-    private List<Chip> createChipList(Set<PaymentType> paymentTypeList) {
-        List<Chip> chips = new ArrayList<>();
-
-        paymentTypeList.stream().forEach(paymentType -> {
-            Chip chip = new Chip(this);
-            chip.setId(ViewCompat.generateViewId());
-            chip.setText(paymentType.getNome());
-            chip.setCheckable(true);
-            chip.setChipIconVisible(true);
-            chip.setCheckedIconVisible(true);
-            chip.setCloseIconVisible(true);
-            if (paymentType.getStatus()){
-                chip.setChecked(true);
-            }else {
-                chip.setChecked(false);
-            }
-            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    chipGroup.removeView(chip);
-                    paymentTypeList.removeIf(paymentType1 -> paymentType1.getNome()==paymentType.getNome());
-                }
-            });
-            chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    paymentType.setStatus(b);
-                }
-            });
-            chips.add(chip);
-        });
-
-        return chips;
-    }
-
-    private void savePaymentsTypes(){
-        buttonSaveNewPaymentsTypes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PaymentsTypes paymentsTypes = new PaymentsTypes(paymentTypeList);
-                paymentsTypes.save();
-                Toast toast=Toast. makeText(getApplicationContext(),"Cadastrado",Toast. LENGTH_SHORT);
-                toast. show();
                 finish();
             }
         });
 
+        butaoSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvarElementos();
+            }
+        });
+
+        butaoNovo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDialog();
+            }
+        });
+
+    }
+
+    private void callDialog() {
+        View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_new_config_element,null);
+
+        TextInputLayout textInputLayout = dialog.findViewById(R.id.editTextNewTypeForProductConfig);
+        Button buttonSalvar = dialog.findViewById(R.id.buttonsave);
+        Switch aSwitch = dialog.findViewById(R.id.switchIsHabilitated);
+        TextView textView  = dialog.findViewById(R.id.textViewExempleelemente);
+        TextView title = dialog.findViewById(R.id.textViewTitleNewConfig);
+
+        textView.setText("Exemplo:Dinheiro,Cheque");
+        title.setText("Nova Forma de Pagamento");
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(textInputLayout.getEditText().getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(),"Preencha o Campo",Toast. LENGTH_LONG).show();
+                } else {
+                    paymentTypeList.add(new PaymentType(firebaseDbReference.push().getKey(),
+                                                        textInputLayout.getEditText().getText().toString(),
+                                                        aSwitch.isChecked()));
+                    reloadRecyclerView();
+                    textInputLayout.getEditText().setText("");
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialog);
+        alertDialog=builder.create();
+        alertDialog.show();
+    }
+
+    private void salvarElementos() {
+        paymentTypeList.forEach(PaymentType::save);
+        this.finish();
     }
 
 
+    private void reloadRecyclerView(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapterConfigElement = new AdapterConfigElement(getApplicationContext(),paymentTypeList,this);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterConfigElement);
+    }
+
+
+    @Override
+    public void onConfigElementClick(int position) {
+        View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_new_config_element,null);
+
+        TextInputLayout textInputLayout = dialog.findViewById(R.id.editTextNewTypeForProductConfig);
+        Button buttonSalvar = dialog.findViewById(R.id.buttonsave);
+        Switch aSwitch = dialog.findViewById(R.id.switchIsHabilitated);
+        TextView textView  = dialog.findViewById(R.id.textViewExempleelemente);
+        TextView title = dialog.findViewById(R.id.textViewTitleNewConfig);
+
+        title.setText("Nova Forma de Pagamento");
+        textInputLayout.getEditText().setText(paymentTypeList.get(position).getNome().toUpperCase());
+        aSwitch.setChecked(paymentTypeList.get(position).getStatus());
+
+        textView.setText("Exemplo:Dinheiro,Cheque");
+        buttonSalvar.setText("SALVAR");
+
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(textInputLayout.getEditText().getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(),"Preencha o Campo",Toast. LENGTH_LONG).show();
+                } else {
+                    paymentTypeList.get(position).setNome(textInputLayout.getEditText().getText().toString().toUpperCase());
+                    paymentTypeList.get(position).setStatus(aSwitch.isChecked());
+                    reloadRecyclerView();
+                    textInputLayout.getEditText().setText("");
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialog);
+        alertDialog=builder.create();
+        alertDialog.show();
+
+    }
 }
