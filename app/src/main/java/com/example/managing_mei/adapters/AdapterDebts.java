@@ -50,16 +50,12 @@ public class AdapterDebts extends RecyclerView.Adapter<AdapterDebts.MyViewHolder
         DebtsItem debtsItem = debtsItems.get(position);
         holder.textViewDescriptionDebts.setText(debtsItem.getNameDebts());
         holder.textViewDebtsItemType.setText("Divida "+debtsItem.getTypeOfDebts().toString());
-
+       
         if (debtsItem.getTypeOfDebts().toString().equals(TypeOfDebts.PARCELADA.toString())) {
-            holder.textViewValueFromDebts.setText(debtsItem.getNumberOfParcels().toString()+"x "+ FormatDataUtils.formatMonetaryValue(debtsItem.getNumberOfParcels()/debtsItem.getDebtsValue()));
+            holder.textViewValueFromDebts.setText(debtsItem.getNumberOfParcels().toString()+"x "+ FormatDataUtils.formatMonetaryValue(debtsItem.getDebtsValue()/debtsItem.getNumberOfParcels()));
         }
         if (debtsItem.getTypeOfDebts().toString().equals(TypeOfDebts.UNICA.toString())) {
             holder.textViewValueFromDebts.setText(FormatDataUtils.formatMonetaryValue(debtsItem.getDebtsValue()));
-        }
-        if (debtsItem.getTypeOfDebts().toString().equals(TypeOfDebts.RECORRENTE.toString())) {
-            holder.textViewValueFromDebts.setText(FormatDataUtils.formatMonetaryValue(debtsItem.getDebtsValue()));
-            holder.textViewFrequencyDebts.setText(debtsItem.getFrequencyDebts().toString());
         }
     }
 

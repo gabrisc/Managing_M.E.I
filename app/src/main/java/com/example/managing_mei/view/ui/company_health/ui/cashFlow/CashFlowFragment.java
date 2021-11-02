@@ -1,10 +1,7 @@
 package com.example.managing_mei.view.ui.company_health.ui.cashFlow;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,18 +31,17 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.NavigableSet;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static com.example.managing_mei.utils.FireBaseConfig.firebaseInstance;
 import static com.example.managing_mei.utils.FireBaseConfig.getIdUser;
-import static com.example.managing_mei.utils.FormatDataUtils.formatDateToStringFormated;
 import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValue;
 import static com.example.managing_mei.utils.FormatDataUtils.formatMonetaryValuePositiveOrNegative;
 
@@ -235,7 +231,7 @@ public class CashFlowFragment extends Fragment implements AdapterCashFlowItem.On
     }
 
     private void setSpinnerDayValue() {
-        Deque<String> daySet  = new ArrayDeque<>();
+        Set<String> daySet  = new LinkedHashSet<>();
         daySet.add("Selecione...");
         dates.forEach(s -> { if (monthFormat.format(s).equals(spinnerMonth.getSelectedItem())) { daySet.add(dayFormat.format(s)); }});
         ArrayAdapter dayAdapter = new ArrayAdapter(getContext(),R.layout.item_spinner,daySet.toArray());
@@ -243,11 +239,12 @@ public class CashFlowFragment extends Fragment implements AdapterCashFlowItem.On
     }
 
     private void setSpinnerMonthValue() {
-        Deque<String> monthSet  = new ArrayDeque<>();
+        Set<String> monthSet  = new LinkedHashSet<>();
+        monthSet.add("Selecione...");
         dates.forEach(s -> {
             if (yearFormat.format(s).equals(spinnerYear.getSelectedItem())) { monthSet.add(monthFormat.format(s)); }
         });
-        monthSet.addFirst("Selecione...");
+
         ArrayAdapter monthAdapter = new ArrayAdapter(getContext(),R.layout.item_spinner,monthSet.toArray());
         spinnerMonth.setAdapter(monthAdapter);
     }

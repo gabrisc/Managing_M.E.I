@@ -64,14 +64,16 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
     public void onPause() {
         super.onPause();
         clientList.clear();
+        loadList();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        clientList.clear();
-    }
-
+    /*
+        @Override
+        public void onStop() {
+            super.onStop();
+            clientList.clear();
+        }
+    */
     private void callAddProvider(){
         imageButtonAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override

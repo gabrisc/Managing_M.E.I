@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="PRODUTO SELECIONADO"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDeletarEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="deletar"
+        app:layout_constraintStart_toStartOf="@+id/radioGroupStatusDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupStatusDividaEdit" />
+
+    <TextView
+        android:id="@+id/textView54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descrição da Divida"
+        android:textColor="@color/DarkBlue"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDescricaoDividaEdit"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewDescricaoDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoDividaEdit" />
+
+    <TextView
+        android:id="@+id/textViewDescricaoDividaEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="TextView"
+        android:textColor="@color/DarkBlue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/textViewValorDividaEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/DarkBlue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDescricaoDividaEdit"
+        app:layout_constraintStart_toStartOf="@+id/textViewDescricaoDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+    <TextView
+        android:id="@+id/textView62"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor da Divida"
+        android:textColor="@color/DarkBlue"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewValorDividaEdit"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewValorDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textViewValorDividaEdit" />
+
+    <TextView
+        android:id="@+id/textView63"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo de Divida"
+        android:textColor="@color/DarkBlue"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/TextViewTipoDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTipoDividaEdit" />
+
+    <TextView
+        android:id="@+id/TextViewTipoDividaEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/DarkBlue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewValorDividaEdit"
+        app:layout_constraintStart_toStartOf="@+id/textViewValorDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+    <TextView
+        android:id="@+id/textView69"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="Status da divida"
+        android:textColor="@color/DarkBlue"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupStatusDividaEdit"
+        android:layout_width="0dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView69"
+        app:layout_constraintStart_toStartOf="@+id/textView69"
+        app:layout_constraintTop_toBottomOf="@+id/textView69">
+
+        <RadioButton
+            android:id="@+id/radioButtonPedenteEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PEDENTE"
+            android:textColor="@color/DarkBlue" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAtrasadaEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATRASADA"
+            android:textColor="@color/DarkBlue" />
+
+        <RadioButton
+            android:id="@+id/radioButtonQuitadaEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QUITADA"
+            android:textColor="@color/DarkBlue" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonSalvarEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Salvar"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroupStatusDividaEdit"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupStatusDividaEdit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

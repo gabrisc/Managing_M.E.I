@@ -28,23 +28,31 @@ public class DebtsItem {
     public DebtsItem() {
     }
 
-    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, FrequencyDebts frequencyDebts, Boolean itsDebtsParcels, Integer numberOfParcels,String status) {
-        this.id = id;
-        this.nameDebts = nameDebts;
-        this.debtsValue = debtsValue;
-        this.typeOfDebts = typeOfDebts;
-        this.frequencyDebts = frequencyDebts;
-        this.itsDebtsParcels = itsDebtsParcels;
-        this.numberOfParcels = numberOfParcels;
-        this.status = status;
-    }
-
     public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts,String status) {
         this.id = id;
         this.nameDebts = nameDebts;
         this.debtsValue = debtsValue;
         this.typeOfDebts = typeOfDebts;
         this.status = status;
+    }
+
+    public void delete(){
+        //this.setId(firebaseDbReference.push().getKey());
+        firebaseInstance.getReference()
+                .child(getIdUser())
+                .child("debts")
+                .child(this.getId())
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                    }
+                });
     }
 
     public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, Boolean itsDebtsParcels, Integer numberOfParcels, String status) {
@@ -55,14 +63,6 @@ public class DebtsItem {
         this.itsDebtsParcels = itsDebtsParcels;
         this.numberOfParcels = numberOfParcels;
         this.status = status;
-    }
-
-    public DebtsItem(String id, String nameDebts, Double debtsValue, TypeOfDebts typeOfDebts, FrequencyDebts frequencyDebts) {
-        this.id = id;
-        this.nameDebts = nameDebts;
-        this.debtsValue = debtsValue;
-        this.typeOfDebts = typeOfDebts;
-        this.frequencyDebts = frequencyDebts;
     }
 
     public void save(){
