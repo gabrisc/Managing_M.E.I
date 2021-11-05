@@ -38,7 +38,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:hint="Descrição da Divida"
+        android:hint="DESCRIÇÃO"
         android:textColorHint="@color/DarkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:hint="Valor da Divida"
+        android:hint="VALOR"
         android:textColorHint="@color/DarkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="Tipo de Divida"
+        android:text="TIPO DA DIVIDA"
         android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerTypeDebt"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="Numero de Parcelas "
+        android:text="NUMERO DE PARCELAS"
         android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -172,6 +172,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
+            android:gravity="center|right"
+            android:paddingRight="10dp"
             android:text="PEDENTE"
             android:textColor="@color/DarkBlue" />
 
@@ -180,6 +182,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
+            android:gravity="center|right"
+            android:paddingRight="10dp"
             android:text="ATRASADA"
             android:textColor="@color/DarkBlue" />
 
@@ -188,6 +192,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
+            android:gravity="center|right"
+            android:paddingRight="10dp"
             android:text="QUITADA"
             android:textColor="@color/DarkBlue" />
 
@@ -200,7 +206,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Status da divida"
+        android:text="STATUS DA DIVIDA"
         android:textColor="@color/DarkBlue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"

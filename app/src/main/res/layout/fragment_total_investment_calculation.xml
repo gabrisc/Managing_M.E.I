@@ -9,8 +9,9 @@
     <View
         android:id="@+id/view8"
         android:layout_width="0dp"
-        android:layout_height="173dp"
+        android:layout_height="0dp"
         android:background="@color/IntermediateDMBlue"
+        app:layout_constraintBottom_toBottomOf="@+id/textView44"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +21,9 @@
         android:id="@+id/textView44"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Itens do Investimento Total"
+        android:text="INVESTIMENTO TOTAL"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInvestiment"
         android:layout_width="0dp"
-        android:layout_height="541dp"
+        android:layout_height="0dp"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
         app:layout_constraintVertical_bias="0.99" />
 
     <ImageButton
@@ -59,20 +59,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recyclerViewInvestiment"
         app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView46"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:text="Use  esse  ambiente para manter o controle sobre os investimentos  que  ainda vão ser feitos e os que foram realizados."
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
     <View
         android:id="@+id/divider2"

@@ -55,18 +55,23 @@ public class ProductFragment extends Fragment implements AdapterProduct.OnProduc
         recyclerView = view.findViewById(R.id.recyclerViewProduct);
 
         callAddProvider();
-        loadList();
         reloadRecyclerClient();
         return view;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        clientList.clear();
+    public void onStart() {
+        super.onStart();
         loadList();
     }
 
+    /*
+        @Override
+        public void onPause() {
+            super.onPause();
+            loadList();
+        }
+    */
     /*
         @Override
         public void onStop() {

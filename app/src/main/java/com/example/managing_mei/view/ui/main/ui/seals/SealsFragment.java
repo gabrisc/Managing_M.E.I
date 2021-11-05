@@ -45,12 +45,9 @@ public class SealsFragment extends Fragment implements AdapterSales.OnSaleLister
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sales, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerViewSales);
         imageButtonAddNewSells = view.findViewById(R.id.imageButtonAddNewSells);
-
         callAddProvider();
-        loadList();
         reloadRecyclerClient();
         return view;
     }
@@ -65,11 +62,9 @@ public class SealsFragment extends Fragment implements AdapterSales.OnSaleLister
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        clientList.clear();
-        reloadRecyclerClient();
-
+    public void onStart() {
+        super.onStart();
+        loadList();
     }
 
     @Override

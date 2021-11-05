@@ -45,26 +45,17 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_providers, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerViewProviders);
         imageButtonAddProvider = view.findViewById(R.id.imageButtonAddProvider);
-
         callAddProvider();
-        loadList();
         reloadRecyclerClient();
         return view;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        providerList.clear();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        providerList.clear();
+    public void onStart() {
+        super.onStart();
+        loadList();
     }
 
     private void callAddProvider(){
@@ -74,7 +65,6 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
                 startActivity(new Intent(getContext(), AddProvidersActivity.class));
             }
         });
-
     }
 
     private void loadList(){
@@ -98,8 +88,7 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
                 });
     }
 
-    private void reloadRecyclerClient(){
-
+    private void reloadRecyclerClient() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext().getApplicationContext()));
         adapterClient = new AdapterProvider(providerList,this.getContext().getApplicationContext(),this);
         recyclerView.setHasFixedSize(true);
@@ -111,7 +100,6 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
         Provider provider = providerList.get(position);
         Intent intent = new Intent(getContext().getApplicationContext(), EditProvidersActivity.class);
         Bundle bundle = new Bundle();
-
         bundle.putString("id",provider.getId());
         bundle.putString("fantasyName",provider.getFantasyName());
         bundle.putString("Address",provider.getAddress());
@@ -119,7 +107,6 @@ public class ProvidersFragment extends Fragment implements AdapterProvider.OnPro
         bundle.putString("email",provider.getEmail());
         bundle.putString("evaluation",provider.getEvaluation().toString());
         bundle.putString("phone",provider.getPhoneNumber());
-
         intent.putExtras(bundle);
         startActivity(intent);
     }

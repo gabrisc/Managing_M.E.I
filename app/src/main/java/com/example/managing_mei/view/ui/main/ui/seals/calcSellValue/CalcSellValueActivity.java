@@ -88,14 +88,14 @@ public class CalcSellValueActivity extends AppCompatActivity implements AdapterP
         switchIsDivided = findViewById(R.id.switchIsDivided);
         TextView clientNameTextView = findViewById(R.id.textViewClientNameClosingSale);
         Button conclusionButton = findViewById(R.id.imageButtonConclusionSaleAddButton);
-        TextView dateTextView = findViewById(R.id.TextViewDateOfBuyClosingSale);
+
 
         setActionForCancelButton();
 
         sale = new Sale(firebaseDbReference.push().getKey(), formatDateToStringFormated(System.currentTimeMillis()),clientSelected);
         set.addAll(economicOperationForSaleVoArrayList);
         clientNameTextView.setText(sale.getClient().getNome().toUpperCase());
-        dateTextView.setText(formatDateToStringFormated(System.currentTimeMillis()));
+
         addListToSale();
         loadList();
         setFinalValue();

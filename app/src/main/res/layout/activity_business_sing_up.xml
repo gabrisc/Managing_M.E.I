@@ -126,12 +126,12 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:background="#0A4159"
         android:fontFamily="serif"
         android:gravity="center"
 
-        android:text="Inscreva-se"
+        android:text="INSCREVA-SE"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

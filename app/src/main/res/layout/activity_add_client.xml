@@ -24,7 +24,7 @@
         android:background="#0A4159"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Novo Cliente"
+        android:text="NOVO CLIENTE"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

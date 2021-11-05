@@ -9,8 +9,10 @@
         android:id="@+id/textView38"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="PRODUTO SELECIONADO"
+        android:textColor="@color/DarkBlue"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +31,7 @@
         android:id="@+id/textView54"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descrição da Divida"
+        android:text="DESCRIÇÃO DA DIVIDA"
         android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewDescricaoDividaEdit"
@@ -67,7 +69,7 @@
         android:id="@+id/textView62"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valor da Divida"
+        android:text="VALOR DA DIVIDA"
         android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewValorDividaEdit"
@@ -79,7 +81,7 @@
         android:id="@+id/textView63"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tipo de Divida"
+        android:text="TIPO DA DIVIDA"
         android:textColor="@color/DarkBlue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/TextViewTipoDividaEdit"
@@ -105,7 +107,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
-        android:text="Status da divida"
+        android:text="STATUS DA DIVIDA"
         android:textColor="@color/DarkBlue"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +127,8 @@
             android:id="@+id/radioButtonPedenteEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|right"
+            android:paddingRight="10dp"
             android:text="PEDENTE"
             android:textColor="@color/DarkBlue" />
 
@@ -132,6 +136,8 @@
             android:id="@+id/radioButtonAtrasadaEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|right"
+            android:paddingRight="10dp"
             android:text="ATRASADA"
             android:textColor="@color/DarkBlue" />
 
@@ -139,6 +145,8 @@
             android:id="@+id/radioButtonQuitadaEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|right"
+            android:paddingRight="10dp"
             android:text="QUITADA"
             android:textColor="@color/DarkBlue" />
     </RadioGroup>
@@ -149,6 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Salvar"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/radioGroupStatusDividaEdit"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupStatusDividaEdit" />
 

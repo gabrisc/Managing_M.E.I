@@ -9,8 +9,10 @@
         android:id="@+id/textView24"
         android:layout_width="405dp"
         android:layout_height="31dp"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="NOVA DIVIDA"
+        android:textColor="@color/DarkBlue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,11 +24,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
-        android:hint="Divida"
+        android:hint="DIVIDA"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView24">
 
@@ -42,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Valor da Divida"
+        android:hint="VALOR DA DIVIDA"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextdfgdfggsdhsd"
         app:layout_constraintStart_toStartOf="@+id/editTextdfgdfggsdhsd"
@@ -68,15 +71,19 @@
             android:id="@+id/radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:gravity="center|right"
-            android:text="Custo Fixo" />
+            android:text="CUSTO FIXO"
+            android:textColor="@color/DarkBlue" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:gravity="center|right"
-            android:text="Custo Variavel" />
+            android:text="CUSTO VARIAVEL"
+            android:textColor="@color/DarkBlue" />
 
     </RadioGroup>
 
@@ -85,9 +92,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="Frequência"
-        android:textColor="#000000"
+        android:text="FREQUÊNCIA"
+        android:textColor="@color/DarkBlue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="@+id/radioGroup"
@@ -101,6 +109,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
         android:text="Cadastrar"
         android:textColor="@color/white"
         app:backgroundTint="@color/verdeClaro"

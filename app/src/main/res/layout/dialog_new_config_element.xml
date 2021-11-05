@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/buttonsave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/intermediateMLBlue"
+        android:backgroundTint="@color/PrimaryColor"
+        android:fontFamily="serif"
         android:text="ADICIONAR"
         app:layout_constraintEnd_toEndOf="@+id/switchIsHabilitated"
         app:layout_constraintStart_toStartOf="@+id/switchIsHabilitated"
@@ -20,8 +21,9 @@
         android:id="@+id/textViewExempleelemente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro_bold"
+        android:fontFamily="serif"
         android:text="EXEMPLO : UND, LITROS , KG."
+        android:textColor="@color/DarkBlue"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextNewTypeForProductConfig"
         app:layout_constraintEnd_toEndOf="@+id/editTextNewTypeForProductConfig" />
@@ -35,7 +37,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:elevation="5dp"
-        android:hint="Nome"
+        android:hint="NOME"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitleNewConfig">
@@ -52,8 +54,11 @@
         android:id="@+id/textViewTitleNewConfig"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="serif"
         android:gravity="center"
-        android:text="Nova forma de medida"
+        android:text="NOVA FORMA DE MEDIDA"
+        android:textColor="@color/DarkBlue"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +68,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="serif"
         android:text="HABILITAR"
+        android:textColor="@color/DarkBlue"
         app:layout_constraintEnd_toEndOf="@+id/editTextNewTypeForProductConfig"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextNewTypeForProductConfig"

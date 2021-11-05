@@ -72,14 +72,14 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="404dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="210dp"
         android:background="#0A4159"
         android:elevation="5dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Managing  MEI"
+        android:text="MANAGING  MEI"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

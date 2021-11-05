@@ -111,7 +111,7 @@
         android:elevation="5dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Cadastre-se"
+        android:text="CADASTRAR-SE"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

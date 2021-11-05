@@ -48,26 +48,17 @@ public class ClientFragment extends Fragment  implements AdapterClient.OnClientL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_client, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerViewClient);
         imageButtonAddClient = view.findViewById(R.id.imageButtonAddClient);
-
         callAddFragment();
-        loadList();
         reloadRecyclerClient();
         return view;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        clientList.clear();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        clientList.clear();
+    public void onStart() {
+        super.onStart();
+        loadList();
     }
 
     private void callAddFragment() {

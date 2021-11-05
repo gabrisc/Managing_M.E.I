@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/DarkBlue"
-    android:backgroundTint="@color/DarkBlue">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textViewNomeClientShowSale"
@@ -14,7 +12,7 @@
         android:fontFamily="serif"
         android:gravity="center"
         android:text="nome cliente"
-        android:textColor="@color/white"
+        android:textColor="@color/DarkBlue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +37,7 @@
         android:fontFamily="serif"
         android:gravity="center"
         android:text="ITENS DO PEDIDO"
-        android:textColor="@color/white"
+        android:textColor="@color/DarkBlue"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewNomeClientShowSale"
         app:layout_constraintHorizontal_bias="0.0"
@@ -55,16 +53,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNomeClientShowSale" />
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonVoltarShowSale"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="serif"
         android:text="VOLTAR"
-        android:textColor="@color/DarkBlue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/verdeClaro"
+        app:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/tableLayout"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
     <TableLayout
@@ -88,7 +93,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="VALOR FINAL:"
-                android:textColor="@color/white"
+                android:textColor="@color/DarkBlue"
                 android:textSize="12sp" />
 
             <TextView
@@ -96,9 +101,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:text="TextView"
-                android:textColor="@color/white" />
+                android:textColor="@color/DarkBlue" />
 
         </TableRow>
 
@@ -113,7 +119,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="DESCONTO:"
-                android:textColor="@color/white"
+                android:textColor="@color/DarkBlue"
                 android:textSize="12sp" />
 
             <TextView
@@ -121,9 +127,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:text="TextView"
-                android:textColor="@color/white" />
+                android:textColor="@color/DarkBlue" />
         </TableRow>
 
         <TableRow
@@ -137,7 +144,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="LUCRO:"
-                android:textColor="@color/white"
+                android:textColor="@color/DarkBlue"
                 android:textSize="12sp" />
 
             <TextView
@@ -145,9 +152,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:text="TextView"
-                android:textColor="@color/white" />
+                android:textColor="@color/DarkBlue" />
         </TableRow>
 
         <TableRow
@@ -160,8 +168,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="FORMA DE PAGAMENTO:"
-                android:textColor="@color/white"
+                android:text="PAGAMENTO:"
+                android:textColor="@color/DarkBlue"
                 android:textSize="12sp" />
 
             <TextView
@@ -169,9 +177,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:text="TextView"
-                android:textColor="@color/white" />
+                android:textColor="@color/DarkBlue" />
 
         </TableRow>
 
@@ -184,7 +193,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="serif"
         android:text="data venda"
-        android:textColor="@color/white"
+        android:textColor="@color/DarkBlue"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewShowSale"
         app:layout_constraintTop_toBottomOf="@+id/textView61" />
@@ -196,7 +205,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/white"
+        android:background="@color/Azul_mais_claro"
         app:layout_constraintEnd_toEndOf="@+id/textView61"
         app:layout_constraintStart_toStartOf="@+id/textView61"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewShowSale" />

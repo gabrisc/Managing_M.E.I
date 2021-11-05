@@ -22,7 +22,7 @@
         android:background="@color/IntermediateDMBlue"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Novo Investimento"
+        android:text="NOVO INVESTIMENTO"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="Pagamento"
-        android:textColor="@color/gray"
+        android:text="PAGAMENTO"
+        android:textColor="@color/DarkBlue"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnertipoPagamento"
         app:layout_constraintEnd_toEndOf="@+id/spinnertipoPagamento"
@@ -108,8 +108,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="Tipo de investimento"
-        android:textColor="@color/gray"
+        android:text="TIPO DE INVESTIMENTO"
+        android:textColor="@color/DarkBlue"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnertimeOfInvestiment"
         app:layout_constraintEnd_toEndOf="@+id/spinnertimeOfInvestiment"
@@ -148,7 +148,8 @@
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnertimeOfInvestiment" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnertimeOfInvestiment"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

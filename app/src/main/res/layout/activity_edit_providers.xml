@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/textView34"
-        android:layout_width="411dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/IntermediateDMBlue"
         android:fontFamily="serif"
         android:gravity="center"
@@ -158,7 +158,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:text="QUALIDADE"
-        android:textColor="@color/gray"
+        android:textColor="@color/DarkBlue"
         android:textColorHint="@color/Azul_mais_claro"
         app:layout_constraintBottom_toTopOf="@+id/ratingBarForProvider"
         app:layout_constraintEnd_toEndOf="@+id/ratingBarForProvider"
